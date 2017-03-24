@@ -21,3 +21,8 @@
 mvn clean install
 java -cp target/asystem-1.0-SNAPSHOT.jar com.xxx.sys.App
 ```
+# webapp
+```
+- mvn archetype:generate -DgroupId=com.xxx.webapp -DartifactId=asystem -DpackageName=com.xxx.webapp.asystem -DarchetypeArtifactId=maven-archetype-webapp -DinteractivMode=false
+- mvn package
+```
