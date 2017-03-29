@@ -3915,11 +3915,12 @@ body.modal-open {
   padding: 100px 20px 20px 20px;
 }
 .logo-name {
-  color: #e6e6e6;
-  font-size: 180px;
+  color: #868686;
+  font-size: 50px;
   font-weight: 800;
   letter-spacing: -10px;
-  margin-bottom: 0px;
+  margin-top: 70px;
+  margin-bottom: 20px;
 }
 .middle-box h1 {
   font-size: 170px;
