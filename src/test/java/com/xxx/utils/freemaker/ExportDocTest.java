@@ -32,6 +32,21 @@ public class ExportDocTest {
 		}
 	}
 
+	@Test
+	public void exportResultTest() {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		String fileName = "/tmp/Result.doc";
+		String template = "Result.doc.ftl";
+		dataMap.put("word", "hello");
+
+		try {
+			mExportDoc.createDoc(dataMap, fileName, template);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@After
 	public void after() {
 		System.out.println("after");
