@@ -1,5 +1,7 @@
 package com.xxx.webapp.asystem.service;
 
+import java.util.List;
+
 import com.xxx.webapp.asystem.dao.CourseDao;
 import com.xxx.webapp.asystem.mybatis.mapper.CourseMapper;
 import com.xxx.webapp.asystem.pojo.Course;
@@ -30,5 +32,9 @@ public class CourseImpl implements CourseMapper {
 
     public int updateByPrimaryKey(Course record) {
     	return mCourseDao.updateByPrimaryKey(record);
+	}
+
+    public List<Course> selectAll() {
+    	return mCourseDao.selectAll();
 	}
 }

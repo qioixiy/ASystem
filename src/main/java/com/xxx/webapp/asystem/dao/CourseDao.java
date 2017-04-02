@@ -1,10 +1,11 @@
 package com.xxx.webapp.asystem.dao;
 
+import java.util.List;
+
 import com.xxx.utils.mybatis.MyBatisDao;
 import com.xxx.webapp.asystem.pojo.Course;
 
 public class CourseDao extends MyBatisDao {
-
 	public CourseDao() {
 		super("com.xxx.webapp.asystem.mybatis.mapper.CourseMapper");
 	}
@@ -33,6 +34,11 @@ public class CourseDao extends MyBatisDao {
 	public int insertSelective(Course record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public List<Course> selectAll() {
+		CourseDaoCustom tCourseDaoCustom = getSqlSession().getMapper(CourseDaoCustom.class);
+		return tCourseDaoCustom.selectAll();
 	}
 
 }

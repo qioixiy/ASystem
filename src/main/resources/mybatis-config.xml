@@ -29,6 +29,7 @@
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/TeacherMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/testPaperMapper.xml"/>
     <!-- <package name="com.xxx.webapp.asystem.mybatis.mapper"/> -->
+    <mapper class="com.xxx.webapp.asystem.dao.CourseDaoCustom"/>
   </mappers>
 
 </configuration>

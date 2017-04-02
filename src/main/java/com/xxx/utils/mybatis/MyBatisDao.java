@@ -61,7 +61,7 @@ public class MyBatisDao {
 		return null;
 	}
 
-	private SqlSession getSqlSession() {
+	protected SqlSession getSqlSession() {
 		return session;
 	}
 	

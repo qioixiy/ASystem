@@ -1,6 +1,7 @@
 package com.xxx.webapp.asystem.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -77,7 +78,6 @@ public class CourseImplTest {
 
 	@Test
 	public void CourseSelectByPrimaryKeyTest() {
-		CourseImpl tCourseImpl = new CourseImpl();
 		Course tCourse = tCourseImpl.selectByPrimaryKey(1111111);
 
 		System.out.println("CourseSelectByPrimaryKeyTest");
@@ -94,6 +94,21 @@ public class CourseImplTest {
 		}
 	}
 
+	@Test
+	public void CourseSelectAll() {
+		List<Course> tCourses = tCourseImpl.selectAll();
+		
+		for(Course tCourse : tCourses) {
+			System.out.println("item");
+			System.out.println("  id " + tCourse.getId());
+			System.out.println("  name " + tCourse.getName());
+			System.out.println("  title " + tCourse.getTitle());
+			System.out.println("  detail " + tCourse.getDetail());
+			System.out.println("  creater " + tCourse.getCreater());
+			System.out.println("  createTimestamp " + tCourse.getCreateTimestamp());
+		}
+	}
+	
 	@After
 	public void after() {
 		System.out.println("after");
