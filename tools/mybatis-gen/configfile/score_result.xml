@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
     <javaClientGenerator type="XMLMAPPER"
-		         targetPackage="com.xxx.webapp.asystem.mybatis.dao"
+		         targetPackage="com.xxx.webapp.asystem.mybatis.mapper"
                          targetProject="../../src/main/java">
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>

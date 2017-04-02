@@ -1,4 +1,4 @@
-package com.xxx.webapp.asystem.mybatis.dao;
+package com.xxx.webapp.asystem.mybatis.mapper;
 
 import com.xxx.webapp.asystem.pojo.testPaper;
 
