@@ -1,6 +1,8 @@
 package com.xxx.webapp.servlet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xxx.misc.json.ResponseJsonUtils;
+import com.xxx.utils.url.UrlUtils;
 import com.xxx.webapp.asystem.pojo.Course;
 import com.xxx.webapp.asystem.service.CourseImpl;
 
@@ -34,19 +37,31 @@ public class ApiJson extends HttpServlet {
 
     	Map<String, Object> data = new HashMap<String, Object>();
     	
-    	String function = request.getParameter("function");
-        data.put("function", function);
+    	String func = request.getParameter("func");
+        data.put("func", func);
         
-        switch(function) {
+        switch(func) {
         case "course":
-        	functionFunc(request, response, data);
+        	Course(request, response, data);
         	break;
         default:
         	break;
         }
+
+        ResponseJsonUtils.json(response, data);
     }
-    
-    protected void functionFunc(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    protected void Course(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	switch(request.getParameter("param1")) {
+    	case "viewall":
+    		CourseViewAll(request, response, data);
+    		break;
+    	case "create":
+    		CourseCreate(request, response, data);
+    		break;
+    	}
+    }
+    protected void CourseViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
 
     	ArrayList<Object> arrayTHead = new ArrayList<Object>();
     	ArrayList<Object> detailTHead = new ArrayList<Object>();
@@ -78,7 +93,44 @@ public class ApiJson extends HttpServlet {
 			arrayList.add(item);
 		}
 		data.put("items", arrayList);
+    }
 
-        ResponseJsonUtils.json(response, data);
+    protected void CourseCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+        Map<String, String> params = UrlUtils.toMap(param2);
+
+		String result = "error";
+		Course tCourse = new Course();
+		try {
+			String name = params.get("name");
+			String title = params.get("title");
+			String detail = params.get("detail");
+			if (name != null && title != null && detail != null) {
+				tCourse.setName(name);
+				tCourse.setTitle(title);
+				tCourse.setDetail(detail);
+				tCourse.setCreater(Integer.parseInt(params.get("creater")));
+				tCourse.setCreateTimestamp(new Date());
+	
+				CourseImpl tCourseImpl = new CourseImpl();
+				int ret = tCourseImpl.insert(tCourse);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
     }
 }
