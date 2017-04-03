@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.xxx.misc.json.ResponseJsonUtils;
 import com.xxx.utils.url.UrlUtils;
 import com.xxx.webapp.asystem.pojo.Course;
@@ -58,6 +60,9 @@ public class ApiJson extends HttpServlet {
     		break;
     	case "create":
     		CourseCreate(request, response, data);
+    		break;
+    	case "delete":
+    		CourseDelete(request, response, data);
     		break;
     	}
     }
@@ -125,6 +130,39 @@ public class ApiJson extends HttpServlet {
 					result = "ok";
 				} else {
 					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void CourseDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+        Map<String, String> params = UrlUtils.toMap(param2);
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			CourseImpl tCourseImpl = new CourseImpl();
+			for (Object i : objs.toArray()) {
+				int ret = tCourseImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
 				}
 			}
 		} catch(Exception e) {
