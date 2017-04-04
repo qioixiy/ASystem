@@ -22,8 +22,10 @@ import com.xxx.misc.json.ResponseJsonUtils;
 import com.xxx.utils.url.UrlUtils;
 import com.xxx.webapp.asystem.pojo.Course;
 import com.xxx.webapp.asystem.pojo.Student;
+import com.xxx.webapp.asystem.pojo.TestPaper;
 import com.xxx.webapp.asystem.service.CourseImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
+import com.xxx.webapp.asystem.service.TestPaperImpl;
 
 @WebServlet("/api/json.do")
 public class ApiJson extends HttpServlet {
@@ -51,6 +53,9 @@ public class ApiJson extends HttpServlet {
         	break;
         case "user":
         	User(request, response, data);
+        	break;
+        case "paper":
+        	Paper(request, response, data);
         	break;
         default:
         	break;
@@ -354,6 +359,153 @@ public class ApiJson extends HttpServlet {
 				tStudent.setTelphone(obj.getString("telphone"));
 
 				int ret = tStudentImpl.updateByPrimaryKey(tStudent);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    
+    protected void Paper(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	switch(request.getParameter("param1")) {
+    	case "viewall":
+    		PaperViewAll(request, response, data);
+    		break;
+    	case "create":
+    		PaperCreate(request, response, data);
+    		break;
+    	case "delete":
+    		PaperDelete(request, response, data);
+    		break;
+    	case "modify":
+    		PaperModify(request, response, data);
+    		break;
+    	}
+    }
+    protected void PaperViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    	ArrayList<Object> arrayTHead = new ArrayList<Object>();
+    	ArrayList<Object> detailTHead = new ArrayList<Object>();
+    	arrayTHead.add("id");
+    	arrayTHead.add("name");
+    	arrayTHead.add("desc");
+    	arrayTHead.add("course_id");
+		data.put("thead", arrayTHead);
+		detailTHead.add("序号");
+		detailTHead.add("试卷名");
+		detailTHead.add("描述");
+		detailTHead.add("课程ID");
+		data.put("detailTHead", detailTHead);
+	    
+        ArrayList<Object> arrayList=new ArrayList<Object>();
+        TestPaperImpl tTestPaperImpl = new TestPaperImpl();
+		for(TestPaper tTestPaper : tTestPaperImpl.selectAll()) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("id", tTestPaper.getId());
+			item.put("name", tTestPaper.getName());
+			item.put("desc", tTestPaper.getDesc());
+			item.put("course_id", tTestPaper.getCourseId());
+			arrayList.add(item);
+		}
+		data.put("items", arrayList);
+    }
+
+    protected void PaperCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+        Map<String, String> params = UrlUtils.toMap(param2);
+
+		String result = "error";
+		TestPaper tTestPaper = new TestPaper();
+		try {
+			String name = params.get("name");
+			String desc = params.get("desc");
+			String course_id = params.get("course_id");
+			if (name != null && desc != null && course_id != null) {
+				tTestPaper.setName(name);
+				tTestPaper.setDesc(desc);
+				tTestPaper.setCourseId(Integer.parseInt(course_id));
+	
+				TestPaperImpl tTestPaperImpl = new TestPaperImpl();
+				int ret = tTestPaperImpl.insert(tTestPaper);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void PaperDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			StudentImpl tStudentImpl = new StudentImpl();
+			for (Object i : objs.toArray()) {
+				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    protected void PaperModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONObject obj = (JSONObject) JSON.parse(param2);
+			int id = Integer.parseInt(obj.getString("id"));
+			
+			TestPaperImpl tTestPaperImpl = new TestPaperImpl();
+			TestPaper tTestPaper = tTestPaperImpl.selectByPrimaryKey(id);
+			if (tTestPaper != null) {
+				tTestPaper.setName(obj.getString("name"));
+				tTestPaper.setDesc(obj.getString("desc"));
+				tTestPaper.setCourseId(Integer.parseInt(obj.getString("course_id")));
+
+				int ret = tTestPaperImpl.updateByPrimaryKey(tTestPaper);
 				if (ret > 0) {
 					result = "ok";
 				} else {
