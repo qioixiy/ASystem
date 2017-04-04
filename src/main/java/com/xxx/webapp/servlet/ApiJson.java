@@ -21,7 +21,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.xxx.misc.json.ResponseJsonUtils;
 import com.xxx.utils.url.UrlUtils;
 import com.xxx.webapp.asystem.pojo.Course;
+import com.xxx.webapp.asystem.pojo.Student;
 import com.xxx.webapp.asystem.service.CourseImpl;
+import com.xxx.webapp.asystem.service.StudentImpl;
 
 @WebServlet("/api/json.do")
 public class ApiJson extends HttpServlet {
@@ -46,6 +48,9 @@ public class ApiJson extends HttpServlet {
         switch(func) {
         case "course":
         	Course(request, response, data);
+        	break;
+        case "user":
+        	User(request, response, data);
         	break;
         default:
         	break;
@@ -207,5 +212,52 @@ public class ApiJson extends HttpServlet {
 		}
 
     	data.put("result", result);
+    }
+    
+    protected void User(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	switch(request.getParameter("param1")) {
+    	case "viewall":
+    		UserViewAll(request, response, data);
+    		break;
+    	case "create":
+    		CourseCreate(request, response, data);
+    		break;
+    	case "delete":
+    		CourseDelete(request, response, data);
+    		break;
+    	case "modify":
+    		CourseModify(request, response, data);
+    		break;
+    	}
+    }
+    protected void UserViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    	ArrayList<Object> arrayTHead = new ArrayList<Object>();
+    	ArrayList<Object> detailTHead = new ArrayList<Object>();
+    	arrayTHead.add("id");
+    	arrayTHead.add("name");
+    	arrayTHead.add("number");
+    	arrayTHead.add("email");
+    	arrayTHead.add("telphone");
+		data.put("thead", arrayTHead);
+		detailTHead.add("序号");
+		detailTHead.add("名字");
+		detailTHead.add("编号");
+		detailTHead.add("邮箱");
+		detailTHead.add("联系方式");
+		data.put("detailTHead", detailTHead);
+	    
+        ArrayList<Object> arrayList=new ArrayList<Object>();
+        StudentImpl tStudentImpl = new StudentImpl();
+		for(Student tStudent : tStudentImpl.selectAll()) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("id", tStudent.getId());
+			item.put("name", tStudent.getName());
+			item.put("number", tStudent.getNumber());
+			item.put("email", tStudent.getEmail());
+			item.put("telphone", tStudent.getTelphone());
+			arrayList.add(item);
+		}
+		data.put("items", arrayList);
     }
 }
