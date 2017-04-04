@@ -314,9 +314,9 @@ public class ApiJson extends HttpServlet {
 
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
-			CourseImpl tCourseImpl = new CourseImpl();
+			StudentImpl tStudentImpl = new StudentImpl();
 			for (Object i : objs.toArray()) {
-				int ret = tCourseImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
 					result = "ok";
 				} else {
@@ -345,14 +345,15 @@ public class ApiJson extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			CourseImpl tCourseImpl = new CourseImpl();
-			Course tCourse = tCourseImpl.selectByPrimaryKey(id);
-			if (tCourse != null) {
-				tCourse.setName(obj.getString("name"));
-				tCourse.setTitle(obj.getString("title"));
-				tCourse.setDetail(obj.getString("detail"));
+			StudentImpl tStudentImpl = new StudentImpl();
+			Student tStudent = tStudentImpl.selectByPrimaryKey(id);
+			if (tStudent != null) {
+				tStudent.setName(obj.getString("name"));
+				tStudent.setNumber(obj.getString("number"));
+				tStudent.setEmail(obj.getString("email"));
+				tStudent.setTelphone(obj.getString("telphone"));
 
-				int ret = tCourseImpl.updateByPrimaryKey(tCourse);
+				int ret = tStudentImpl.updateByPrimaryKey(tStudent);
 				if (ret > 0) {
 					result = "ok";
 				} else {
