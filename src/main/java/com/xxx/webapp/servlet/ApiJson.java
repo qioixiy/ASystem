@@ -220,13 +220,13 @@ public class ApiJson extends HttpServlet {
     		UserViewAll(request, response, data);
     		break;
     	case "create":
-    		CourseCreate(request, response, data);
+    		UserCreate(request, response, data);
     		break;
     	case "delete":
-    		CourseDelete(request, response, data);
+    		UserDelete(request, response, data);
     		break;
     	case "modify":
-    		CourseModify(request, response, data);
+    		UserModify(request, response, data);
     		break;
     	}
     }
@@ -259,5 +259,110 @@ public class ApiJson extends HttpServlet {
 			arrayList.add(item);
 		}
 		data.put("items", arrayList);
+    }
+
+    protected void UserCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+        Map<String, String> params = UrlUtils.toMap(param2);
+
+		String result = "error";
+		Student tStudent = new Student();
+		try {
+			String name = params.get("name");
+			String number = params.get("number");
+			String email = params.get("email");
+			String telphone = params.get("telphone");
+			if (name != null && number != null && email != null && telphone != null) {
+				tStudent.setName(name);
+				tStudent.setNumber(number);
+				tStudent.setEmail(email);
+				tStudent.setTelphone(telphone);
+	
+				StudentImpl tStudentImpl = new StudentImpl();
+				int ret = tStudentImpl.insert(tStudent);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void UserDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			CourseImpl tCourseImpl = new CourseImpl();
+			for (Object i : objs.toArray()) {
+				int ret = tCourseImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    protected void UserModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONObject obj = (JSONObject) JSON.parse(param2);
+			int id = Integer.parseInt(obj.getString("id"));
+			
+			CourseImpl tCourseImpl = new CourseImpl();
+			Course tCourse = tCourseImpl.selectByPrimaryKey(id);
+			if (tCourse != null) {
+				tCourse.setName(obj.getString("name"));
+				tCourse.setTitle(obj.getString("title"));
+				tCourse.setDetail(obj.getString("detail"));
+
+				int ret = tCourseImpl.updateByPrimaryKey(tCourse);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
     }
 }
