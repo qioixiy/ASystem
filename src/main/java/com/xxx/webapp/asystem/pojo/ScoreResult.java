@@ -1,6 +1,6 @@
 package com.xxx.webapp.asystem.pojo;
 
-public class scoreResult {
+public class ScoreResult {
     private Integer id;
 
     private Integer studentId;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xxx.webapp.asystem.mybatis.mapper.scoreResultMapper">
-  <resultMap id="BaseResultMap" type="com.xxx.webapp.asystem.pojo.scoreResult">
+<mapper namespace="com.xxx.webapp.asystem.mybatis.mapper.ScoreResultMapper">
+  <resultMap id="BaseResultMap" type="com.xxx.webapp.asystem.pojo.ScoreResult">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
-    <result column="test_paper_id" jdbcType="INTEGER" property="testPaperId" />
+    <result column="test_paper_id" jdbcType="INTEGER" property="TestPaperId" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -21,13 +21,13 @@
     delete from score_result
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xxx.webapp.asystem.pojo.scoreResult">
+  <insert id="insert" parameterType="com.xxx.webapp.asystem.pojo.ScoreResult">
     insert into score_result (id, student_id, teacher_id, 
       test_paper_id, desc)
     values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, 
-      #{testPaperId,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR})
+      #{TestPaperId,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xxx.webapp.asystem.pojo.scoreResult">
+  <insert id="insertSelective" parameterType="com.xxx.webapp.asystem.pojo.ScoreResult">
     insert into score_result
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -39,7 +39,7 @@
       <if test="teacherId != null">
         teacher_id,
       </if>
-      <if test="testPaperId != null">
+      <if test="TestPaperId != null">
         test_paper_id,
       </if>
       <if test="desc != null">
@@ -56,15 +56,15 @@
       <if test="teacherId != null">
         #{teacherId,jdbcType=INTEGER},
       </if>
-      <if test="testPaperId != null">
-        #{testPaperId,jdbcType=INTEGER},
+      <if test="TestPaperId != null">
+        #{TestPaperId,jdbcType=INTEGER},
       </if>
       <if test="desc != null">
         #{desc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xxx.webapp.asystem.pojo.scoreResult">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxx.webapp.asystem.pojo.ScoreResult">
     update score_result
     <set>
       <if test="studentId != null">
@@ -73,8 +73,8 @@
       <if test="teacherId != null">
         teacher_id = #{teacherId,jdbcType=INTEGER},
       </if>
-      <if test="testPaperId != null">
-        test_paper_id = #{testPaperId,jdbcType=INTEGER},
+      <if test="TestPaperId != null">
+        test_paper_id = #{TestPaperId,jdbcType=INTEGER},
       </if>
       <if test="desc != null">
         desc = #{desc,jdbcType=VARCHAR},
@@ -82,11 +82,11 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xxx.webapp.asystem.pojo.scoreResult">
+  <update id="updateByPrimaryKey" parameterType="com.xxx.webapp.asystem.pojo.ScoreResult">
     update score_result
     set student_id = #{studentId,jdbcType=INTEGER},
       teacher_id = #{teacherId,jdbcType=INTEGER},
-      test_paper_id = #{testPaperId,jdbcType=INTEGER},
+      test_paper_id = #{TestPaperId,jdbcType=INTEGER},
       desc = #{desc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

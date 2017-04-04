@@ -1,6 +1,6 @@
 package com.xxx.webapp.asystem.pojo;
 
-public class testPaper {
+public class TestPaper {
     private Integer id;
 
     private String name;
