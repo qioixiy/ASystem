@@ -21,9 +21,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.xxx.misc.json.ResponseJsonUtils;
 import com.xxx.utils.url.UrlUtils;
 import com.xxx.webapp.asystem.pojo.Course;
+import com.xxx.webapp.asystem.pojo.ScoreResult;
 import com.xxx.webapp.asystem.pojo.Student;
 import com.xxx.webapp.asystem.pojo.TestPaper;
 import com.xxx.webapp.asystem.service.CourseImpl;
+import com.xxx.webapp.asystem.service.ScoreResultImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
 import com.xxx.webapp.asystem.service.TestPaperImpl;
 
@@ -56,6 +58,9 @@ public class ApiJson extends HttpServlet {
         	break;
         case "paper":
         	Paper(request, response, data);
+        	break;
+        case "score":
+        	Score(request, response, data);
         	break;
         default:
         	break;
@@ -506,6 +511,159 @@ public class ApiJson extends HttpServlet {
 				tTestPaper.setCourseId(Integer.parseInt(obj.getString("course_id")));
 
 				int ret = tTestPaperImpl.updateByPrimaryKey(tTestPaper);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void Score(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	switch(request.getParameter("param1")) {
+    	case "viewall":
+    		ScoreViewAll(request, response, data);
+    		break;
+    	case "create":
+    		ScoreCreate(request, response, data);
+    		break;
+    	case "delete":
+    		ScoreDelete(request, response, data);
+    		break;
+    	case "modify":
+    		ScoreModify(request, response, data);
+    		break;
+    	}
+    }
+    protected void ScoreViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    	ArrayList<Object> arrayTHead = new ArrayList<Object>();
+    	ArrayList<Object> detailTHead = new ArrayList<Object>();
+    	arrayTHead.add("id");
+    	arrayTHead.add("student_id");
+    	arrayTHead.add("teacher_id");
+    	arrayTHead.add("paper_id");
+    	arrayTHead.add("desc");
+		data.put("thead", arrayTHead);
+		detailTHead.add("序号");
+		detailTHead.add("学生");
+		detailTHead.add("老师");
+		detailTHead.add("试卷ID");
+		detailTHead.add("成绩描述");
+		data.put("detailTHead", detailTHead);
+	    
+        ArrayList<Object> arrayList=new ArrayList<Object>();
+        ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
+		for(ScoreResult tScoreResult : tScoreResultImpl.selectAll()) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("id", tScoreResult.getId());
+			item.put("student_id", tScoreResult.getStudentId());
+			item.put("teacher_id", tScoreResult.getTeacherId());
+			item.put("paper_id", tScoreResult.getTestPaperId());
+			item.put("desc", tScoreResult.getDesc());
+			arrayList.add(item);
+		}
+		data.put("items", arrayList);
+    }
+
+    protected void ScoreCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+        Map<String, String> params = UrlUtils.toMap(param2);
+
+		String result = "error";
+		ScoreResult tScoreResult = new ScoreResult();
+		try {
+			String student_id = params.get("student_id");
+			String teacher_id = params.get("teacher_id");
+			String paper_id = params.get("paper_id");
+			String desc = params.get("desc");
+			if (student_id != null && teacher_id != null && paper_id != null && desc != null) {
+				tScoreResult.setStudentId(Integer.parseInt(student_id));
+				tScoreResult.setTeacherId(Integer.parseInt(teacher_id));
+				tScoreResult.setTestPaperId(Integer.parseInt(paper_id));
+				tScoreResult.setDesc(desc);
+	
+				ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
+				int ret = tScoreResultImpl.insert(tScoreResult);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void ScoreDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
+			for (Object i : objs.toArray()) {
+				int ret = tScoreResultImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    protected void ScoreModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONObject obj = (JSONObject) JSON.parse(param2);
+			int id = Integer.parseInt(obj.getString("id"));
+			
+			ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
+			ScoreResult tScoreResult = tScoreResultImpl.selectByPrimaryKey(id);
+			if (tScoreResult != null) {
+				tScoreResult.setStudentId(Integer.parseInt(obj.getString("student_id")));
+				tScoreResult.setTeacherId(Integer.parseInt(obj.getString("teacher_id")));
+				tScoreResult.setTestPaperId(Integer.parseInt(obj.getString("paper_id")));
+				tScoreResult.setDesc(obj.getString("desc"));
+
+				int ret = tScoreResultImpl.updateByPrimaryKey(tScoreResult);
 				if (ret > 0) {
 					result = "ok";
 				} else {
