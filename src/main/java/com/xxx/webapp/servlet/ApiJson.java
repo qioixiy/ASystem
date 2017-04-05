@@ -6,7 +6,6 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -124,7 +123,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -163,7 +161,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -193,7 +190,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -276,7 +272,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -315,7 +310,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -345,7 +339,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -426,7 +419,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -463,7 +455,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -493,7 +484,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -576,7 +566,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -615,7 +604,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -645,7 +633,6 @@ public class ApiJson extends HttpServlet {
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
