@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 2017-04-09 11:20:25
+-- Generation Time: 2017-04-09 12:19:54
 -- 服务器版本： 5.7.17-0ubuntu1
 -- PHP Version: 7.0.15-1ubuntu4
 
@@ -65,14 +65,14 @@ CREATE TABLE `score_result` (
   `student_id` int(11) NOT NULL COMMENT '学生的id',
   `teacher_id` int(11) NOT NULL COMMENT '评分的老师id',
   `test_paper_id` int(11) NOT NULL COMMENT '对应试卷的id',
-  `desc` varchar(10240) NOT NULL DEFAULT '{}' COMMENT '学生试卷的得分分布情况，采用json字符串描述'
+  `detail` varchar(10240) NOT NULL DEFAULT '{}' COMMENT '学生试卷的得分分布情况，采用json字符串描述'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='存放成绩数据\r\n成绩：得分详细情况，具体是某一学生对某一试卷的得分情况详细描述';
 
 --
 -- 转存表中的数据 `score_result`
 --
 
-INSERT INTO `score_result` (`id`, `student_id`, `teacher_id`, `test_paper_id`, `desc`) VALUES
+INSERT INTO `score_result` (`id`, `student_id`, `teacher_id`, `test_paper_id`, `detail`) VALUES
 (1, 1, 1, 1, '{}');
 
 -- --------------------------------------------------------
@@ -130,7 +130,7 @@ INSERT INTO `teacher` (`id`, `name`, `number`, `email`, `telphone`) VALUES
 CREATE TABLE `test_paper` (
   `id` int(11) NOT NULL COMMENT '试卷对应的ID',
   `name` varchar(100) NOT NULL COMMENT '试卷名称，比如：计算机应用基础，期中考试卷1',
-  `desc` varchar(10240) NOT NULL DEFAULT '{}' COMMENT '试卷内容的详细描述',
+  `detail` varchar(10240) NOT NULL DEFAULT '{}' COMMENT '试卷内容的详细描述',
   `course_id` int(11) NOT NULL COMMENT '试卷对应的课程id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='试卷定义';
 
@@ -138,7 +138,7 @@ CREATE TABLE `test_paper` (
 -- 转存表中的数据 `test_paper`
 --
 
-INSERT INTO `test_paper` (`id`, `name`, `desc`, `course_id`) VALUES
+INSERT INTO `test_paper` (`id`, `name`, `detail`, `course_id`) VALUES
 (1, '数学基础期中试卷', '{}', 1),
 (2, '数学基础期末试卷', '{}', 1);
 
