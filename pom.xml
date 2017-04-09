@@ -8,6 +8,16 @@
   <name>asystem Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
+  <properties>
+	<!-- spring版本号 -->
+	<spring.version>4.3.5.RELEASE</spring.version>
+	<!-- mybatis版本号 -->
+	<mybatis.version>3.2.6</mybatis.version>
+	<!-- log4j日志文件管理包版本 -->
+	<slf4j.version>1.7.7</slf4j.version>
+	<log4j.version>1.2.17</log4j.version>
+  </properties>
+
   <dependencies>
 
     <dependency>
@@ -120,29 +130,48 @@
       <version>3.6.5.Final</version>
     </dependency>
 
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.16</version>
-    </dependency>
+	<!-- 日志文件管理包 -->
+	<!-- log start -->
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>${log4j.version}</version>
+	</dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
-    </dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-nop</artifactId>
-      <version>1.6.4</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.9</version>
-    </dependency>
+	<!-- 将现有的jakarta commons logging的调用转换成lsf4j的调用。 -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jcl-over-slf4j</artifactId>
+		<version>1.6.1</version>
+	</dependency>
+
+	<!-- Hack：确保commons-logging的jar包不被引入，否则将和jcl-over-slf4j冲突 -->
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+		<scope>provided</scope>
+	</dependency>
+
+	<!-- slf4j的实现：logback，用来取代log4j。更快、更强！ -->
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>0.9.24</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
 
     <dependency>
       <groupId>javassist</groupId>
