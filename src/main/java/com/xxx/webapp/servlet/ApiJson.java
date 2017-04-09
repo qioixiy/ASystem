@@ -508,7 +508,7 @@ public class ApiJson extends HttpServlet {
 				}
 			}
 		} catch(Exception e) {
-			;
+			System.out.println(e.toString());
 		}
 
     	data.put("result", result);
