@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4deb1
+-- version 4.6.6deb4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 2017-03-30 21:43:59
--- 服务器版本： 5.7.17-0ubuntu0.16.10.1
--- PHP Version: 7.0.15-0ubuntu0.16.10.4
+-- Generation Time: 2017-04-09 11:20:25
+-- 服务器版本： 5.7.17-0ubuntu1
+-- PHP Version: 7.0.15-1ubuntu4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -41,7 +41,19 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`id`, `name`, `title`, `detail`, `creater`, `create_timestamp`) VALUES
 (1, '数学基础', '数学基础知识', '学习数学基础知识', 0, '2017-03-30 13:18:55'),
-(2, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13');
+(2, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(3, '数学基础', '数学基础知识', '学习数学基础知识', 0, '2017-03-30 13:18:55'),
+(4, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(5, '数学基础', '数学基础知识', '学习数学基础知识', 0, '2017-03-30 13:18:55'),
+(6, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(7, '数学基础', '数学基础知识', '学习数学基础知识', 0, '2017-03-30 13:18:55'),
+(8, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(9, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(10, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(11, '数学基础', '数学基础知识', '学习数学基础知识', 0, '2017-03-30 13:18:55'),
+(12, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(13, '计算机基础', '计算机', '计算机基础知识介绍', 1, '2017-03-30 13:19:13'),
+(14, '物理', '物理现象', '物理存在', 1, '2017-04-09 03:18:09');
 
 -- --------------------------------------------------------
 
@@ -83,8 +95,10 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `name`, `number`, `email`, `telphone`) VALUES
-(1, '小周', '001', 'a@b.com', '18000008888'),
-(2, '小张', '002', 'a@b.com', '18000008888');
+(1, '小天', '001', 'a@b.com', '18000008888'),
+(2, '小张', '002', 'a@b.com', '18000008888'),
+(9, '小还', '004', 'z@c.com', '17099999999'),
+(8, '小王', '003', 'c@d.com', '18011111111');
 
 -- --------------------------------------------------------
 
@@ -126,7 +140,8 @@ CREATE TABLE `test_paper` (
 --
 
 INSERT INTO `test_paper` (`id`, `name`, `desc`, `course_id`) VALUES
-(1, '数学基础期中试卷', '{}', 1);
+(1, '数学基础期中试卷', '{}', 1),
+(2, '数学基础期末试卷', '{}', 1);
 
 --
 -- Indexes for dumped tables
@@ -171,7 +186,7 @@ ALTER TABLE `test_paper`
 -- 使用表AUTO_INCREMENT `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '键值', AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '键值', AUTO_INCREMENT=15;
 --
 -- 使用表AUTO_INCREMENT `score_result`
 --
@@ -181,7 +196,7 @@ ALTER TABLE `score_result`
 -- 使用表AUTO_INCREMENT `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=10;
 --
 -- 使用表AUTO_INCREMENT `teacher`
 --
@@ -191,7 +206,7 @@ ALTER TABLE `teacher`
 -- 使用表AUTO_INCREMENT `test_paper`
 --
 ALTER TABLE `test_paper`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '试卷对应的ID', AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '试卷对应的ID', AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
