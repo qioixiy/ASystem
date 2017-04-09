@@ -9,7 +9,7 @@ public class ScoreResult {
 
     private Integer testPaperId;
 
-    private String desc;
+    private String detail;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,11 @@ public class ScoreResult {
         this.testPaperId = testPaperId;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDetail(String detail) {
+        this.detail = detail == null ? null : detail.trim();
     }
 }

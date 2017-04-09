@@ -5,7 +5,7 @@ public class TestPaper {
 
     private String name;
 
-    private String desc;
+    private String detail;
 
     private Integer courseId;
 
@@ -25,12 +25,12 @@ public class TestPaper {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDetail(String detail) {
+        this.detail = detail == null ? null : detail.trim();
     }
 
     public Integer getCourseId() {
