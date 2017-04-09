@@ -26,7 +26,7 @@ public class TestPaperImplTest {
 		TestPaper tTestPaper = new TestPaper();
 		tTestPaper.setId(1111111);
 		tTestPaper.setName("xxx");
-		tTestPaper.setDesc("test");
+		tTestPaper.setDetail("test");
 		tTestPaper.setCourseId(1);
 
 		int ret = tTestPaperImpl.insert(tTestPaper);
@@ -59,7 +59,7 @@ public class TestPaperImplTest {
 		TestPaper tTestPaper = new TestPaper();
 		tTestPaper.setId(1111111);
 		tTestPaper.setName("xxxxx");
-		tTestPaper.setDesc("test");
+		tTestPaper.setDetail("test");
 		tTestPaper.setCourseId(1);
 
 		int ret = tTestPaperImpl.updateByPrimaryKey(tTestPaper);
@@ -80,7 +80,7 @@ public class TestPaperImplTest {
 			System.out.println("item");
 			System.out.println("  id " + tTestPaper.getId());
 			System.out.println("  name " + tTestPaper.getName());
-			System.out.println("  Desc " + tTestPaper.getDesc());
+			System.out.println("  Desc " + tTestPaper.getDetail());
 			System.out.println("  CourseId " + tTestPaper.getCourseId());
 		} else {
 			System.out.println("error");
@@ -95,7 +95,7 @@ public class TestPaperImplTest {
 			System.out.println("item");
 			System.out.println("  id " + tTestPaper.getId());
 			System.out.println("  name " + tTestPaper.getName());
-			System.out.println("  Desc " + tTestPaper.getDesc());
+			System.out.println("  Desc " + tTestPaper.getDetail());
 			System.out.println("  CourseId " + tTestPaper.getCourseId());
 		}
 	}

@@ -28,7 +28,7 @@ public class ScoreResultImplTest {
 		tScoreResult.setStudentId(1);
 		tScoreResult.setTeacherId(1);
 		tScoreResult.setTestPaperId(1);
-		tScoreResult.setDesc("{}");
+		tScoreResult.setDetail("{}");
 
 		int ret = tScoreResultImpl.insert(tScoreResult);
 		if (ret > 0) {
@@ -62,7 +62,7 @@ public class ScoreResultImplTest {
 		tScoreResult.setStudentId(1);
 		tScoreResult.setTeacherId(1);
 		tScoreResult.setTestPaperId(1);
-		tScoreResult.setDesc("");
+		tScoreResult.setDetail("");
 
 		int ret = tScoreResultImpl.updateByPrimaryKey(tScoreResult);
 
@@ -84,7 +84,7 @@ public class ScoreResultImplTest {
 			System.out.println("  StudentId " + tScoreResult.getStudentId());
 			System.out.println("  TeacherId " + tScoreResult.getTeacherId());
 			System.out.println("  TestPaperId " + tScoreResult.getTestPaperId());
-			System.out.println("  Desc " + tScoreResult.getDesc());
+			System.out.println("  Desc " + tScoreResult.getDetail());
 		} else {
 			System.out.println("error");
 		}
@@ -100,7 +100,7 @@ public class ScoreResultImplTest {
 			System.out.println("  StudentId " + tScoreResult.getStudentId());
 			System.out.println("  TeacherId " + tScoreResult.getTeacherId());
 			System.out.println("  TestPaperId " + tScoreResult.getTestPaperId());
-			System.out.println("  Desc " + tScoreResult.getDesc());
+			System.out.println("  Desc " + tScoreResult.getDetail());
 		}
 	}
 	
