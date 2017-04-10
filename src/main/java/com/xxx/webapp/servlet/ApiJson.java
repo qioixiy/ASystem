@@ -31,6 +31,11 @@ import com.xxx.webapp.asystem.service.TestPaperImpl;
 @WebServlet("/api/json.do")
 public class ApiJson extends HttpServlet {
     private static final long serialVersionUID = 7500835936131982864L;
+    
+    private static final CourseImpl tCourseImpl = new CourseImpl();
+    private static final StudentImpl tStudentImpl = new StudentImpl();
+    private static final TestPaperImpl tTestPaperImpl = new TestPaperImpl();
+    private static final ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
 
     /**
      * 返回json格式数据
@@ -104,7 +109,6 @@ public class ApiJson extends HttpServlet {
 		data.put("detailTHead", detailTHead);
     	
         ArrayList<Object> arrayList=new ArrayList<Object>();
-        CourseImpl tCourseImpl = new CourseImpl();
 		for(Course tCourse : tCourseImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put("id", tCourse.getId());
@@ -141,7 +145,6 @@ public class ApiJson extends HttpServlet {
 				tCourse.setCreater(Integer.parseInt(params.get("creater")));
 				tCourse.setCreateTimestamp(new Date());
 	
-				CourseImpl tCourseImpl = new CourseImpl();
 				int ret = tCourseImpl.insert(tCourse);
 				if (ret > 0) {
 					result = "ok";
@@ -169,7 +172,6 @@ public class ApiJson extends HttpServlet {
 
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
-			CourseImpl tCourseImpl = new CourseImpl();
 			for (Object i : objs.toArray()) {
 				int ret = tCourseImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
@@ -199,7 +201,6 @@ public class ApiJson extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			CourseImpl tCourseImpl = new CourseImpl();
 			Course tCourse = tCourseImpl.selectByPrimaryKey(id);
 			if (tCourse != null) {
 				tCourse.setName(obj.getString("name"));
@@ -254,7 +255,6 @@ public class ApiJson extends HttpServlet {
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
-        StudentImpl tStudentImpl = new StudentImpl();
 		for(Student tStudent : tStudentImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put("id", tStudent.getId());
@@ -290,7 +290,6 @@ public class ApiJson extends HttpServlet {
 				tStudent.setEmail(email);
 				tStudent.setTelphone(telphone);
 	
-				StudentImpl tStudentImpl = new StudentImpl();
 				int ret = tStudentImpl.insert(tStudent);
 				if (ret > 0) {
 					result = "ok";
@@ -318,7 +317,6 @@ public class ApiJson extends HttpServlet {
 
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
-			StudentImpl tStudentImpl = new StudentImpl();
 			for (Object i : objs.toArray()) {
 				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
@@ -348,7 +346,6 @@ public class ApiJson extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			StudentImpl tStudentImpl = new StudentImpl();
 			Student tStudent = tStudentImpl.selectByPrimaryKey(id);
 			if (tStudent != null) {
 				tStudent.setName(obj.getString("name"));
@@ -402,7 +399,6 @@ public class ApiJson extends HttpServlet {
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
-        TestPaperImpl tTestPaperImpl = new TestPaperImpl();
 		for(TestPaper tTestPaper : tTestPaperImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put("id", tTestPaper.getId());
@@ -435,7 +431,6 @@ public class ApiJson extends HttpServlet {
 				tTestPaper.setDetail(desc);
 				tTestPaper.setCourseId(Integer.parseInt(course_id));
 	
-				TestPaperImpl tTestPaperImpl = new TestPaperImpl();
 				int ret = tTestPaperImpl.insert(tTestPaper);
 				if (ret > 0) {
 					result = "ok";
@@ -463,7 +458,6 @@ public class ApiJson extends HttpServlet {
 
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
-			StudentImpl tStudentImpl = new StudentImpl();
 			for (Object i : objs.toArray()) {
 				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
@@ -493,7 +487,6 @@ public class ApiJson extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			TestPaperImpl tTestPaperImpl = new TestPaperImpl();
 			TestPaper tTestPaper = tTestPaperImpl.selectByPrimaryKey(id);
 			if (tTestPaper != null) {
 				tTestPaper.setName(obj.getString("name"));
@@ -548,7 +541,6 @@ public class ApiJson extends HttpServlet {
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
-        ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
 		for(ScoreResult tScoreResult : tScoreResultImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put("id", tScoreResult.getId());
@@ -584,7 +576,6 @@ public class ApiJson extends HttpServlet {
 				tScoreResult.setTestPaperId(Integer.parseInt(paper_id));
 				tScoreResult.setDetail(desc);
 	
-				ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
 				int ret = tScoreResultImpl.insert(tScoreResult);
 				if (ret > 0) {
 					result = "ok";
@@ -612,7 +603,6 @@ public class ApiJson extends HttpServlet {
 
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
-			ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
 			for (Object i : objs.toArray()) {
 				int ret = tScoreResultImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
@@ -642,7 +632,6 @@ public class ApiJson extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
 			ScoreResult tScoreResult = tScoreResultImpl.selectByPrimaryKey(id);
 			if (tScoreResult != null) {
 				tScoreResult.setStudentId(Integer.parseInt(obj.getString("student_id")));
