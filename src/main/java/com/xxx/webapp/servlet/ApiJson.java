@@ -22,10 +22,12 @@ import com.xxx.utils.url.UrlUtils;
 import com.xxx.webapp.asystem.pojo.Course;
 import com.xxx.webapp.asystem.pojo.ScoreResult;
 import com.xxx.webapp.asystem.pojo.Student;
+import com.xxx.webapp.asystem.pojo.Teacher;
 import com.xxx.webapp.asystem.pojo.TestPaper;
 import com.xxx.webapp.asystem.service.CourseImpl;
 import com.xxx.webapp.asystem.service.ScoreResultImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
+import com.xxx.webapp.asystem.service.TeacherImpl;
 import com.xxx.webapp.asystem.service.TestPaperImpl;
 
 @WebServlet("/api/json.do")
@@ -34,6 +36,7 @@ public class ApiJson extends HttpServlet {
     
     private static final CourseImpl tCourseImpl = new CourseImpl();
     private static final StudentImpl tStudentImpl = new StudentImpl();
+    private static final TeacherImpl tTeacherImpl = new TeacherImpl();
     private static final TestPaperImpl tTestPaperImpl = new TestPaperImpl();
     private static final ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
 
@@ -115,7 +118,12 @@ public class ApiJson extends HttpServlet {
 			item.put("name", tCourse.getName());
 			item.put("title", tCourse.getTitle());
 			item.put("detail", tCourse.getDetail());
-			item.put("creater", tCourse.getCreater());
+
+			item.put("creater", "unkown");
+			Teacher tTeacher = tTeacherImpl.selectByPrimaryKey(tCourse.getCreater());
+			if (tTeacher != null) {
+				item.put("creater", tTeacher.getName());
+			};
 			item.put("createTimestamp", tCourse.getCreateTimestamp());
 			arrayList.add(item);
 		}
