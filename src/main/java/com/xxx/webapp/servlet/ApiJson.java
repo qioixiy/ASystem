@@ -60,8 +60,8 @@ public class ApiJson extends HttpServlet {
         case "course":
         	Course(request, response, data);
         	break;
-        case "user":
-        	User(request, response, data);
+        case "student":
+        	Student(request, response, data);
         	break;
         case "paper":
         	Paper(request, response, data);
@@ -229,23 +229,23 @@ public class ApiJson extends HttpServlet {
     	data.put("result", result);
     }
     
-    protected void User(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void Student(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	switch(request.getParameter("param1")) {
     	case "viewall":
-    		UserViewAll(request, response, data);
+    		StudentViewAll(request, response, data);
     		break;
     	case "create":
-    		UserCreate(request, response, data);
+    		StudentCreate(request, response, data);
     		break;
     	case "delete":
-    		UserDelete(request, response, data);
+    		StudentDelete(request, response, data);
     		break;
     	case "modify":
-    		UserModify(request, response, data);
+    		StudentModify(request, response, data);
     		break;
     	}
     }
-    protected void UserViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void StudentViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
 
     	ArrayList<Object> arrayTHead = new ArrayList<Object>();
     	ArrayList<Object> detailTHead = new ArrayList<Object>();
@@ -275,7 +275,7 @@ public class ApiJson extends HttpServlet {
 		data.put("items", arrayList);
     }
 
-    protected void UserCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void StudentCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String param2 = request.getParameter("param2");
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
@@ -312,7 +312,7 @@ public class ApiJson extends HttpServlet {
     	data.put("result", result);
     }
 
-    protected void UserDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void StudentDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String param2 = request.getParameter("param2");
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
@@ -340,7 +340,7 @@ public class ApiJson extends HttpServlet {
 
     	data.put("result", result);
     }
-    protected void UserModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void StudentModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String param2 = request.getParameter("param2");
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
