@@ -63,6 +63,9 @@ public class ApiJson extends HttpServlet {
         case "student":
         	Student(request, response, data);
         	break;
+        case "teacher":
+        	Teacher(request, response, data);
+        	break;
         case "paper":
         	Paper(request, response, data);
         	break;
@@ -229,6 +232,152 @@ public class ApiJson extends HttpServlet {
     	data.put("result", result);
     }
     
+    protected void Teacher(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	switch(request.getParameter("param1")) {
+    	case "viewall":
+    		StudentViewAll(request, response, data);
+    		break;
+    	case "create":
+    		StudentCreate(request, response, data);
+    		break;
+    	case "delete":
+    		StudentDelete(request, response, data);
+    		break;
+    	case "modify":
+    		StudentModify(request, response, data);
+    		break;
+    	}
+    }
+    protected void TeacherViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    	ArrayList<Object> arrayTHead = new ArrayList<Object>();
+    	ArrayList<Object> detailTHead = new ArrayList<Object>();
+    	arrayTHead.add("id");
+    	arrayTHead.add("name");
+    	arrayTHead.add("number");
+    	arrayTHead.add("email");
+    	arrayTHead.add("telphone");
+		data.put("thead", arrayTHead);
+		detailTHead.add("序号");
+		detailTHead.add("名字");
+		detailTHead.add("编号");
+		detailTHead.add("邮箱");
+		detailTHead.add("联系方式");
+		data.put("detailTHead", detailTHead);
+	    
+        ArrayList<Object> arrayList=new ArrayList<Object>();
+		for(Student tStudent : tStudentImpl.selectAll()) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("id", tStudent.getId());
+			item.put("name", tStudent.getName());
+			item.put("number", tStudent.getNumber());
+			item.put("email", tStudent.getEmail());
+			item.put("telphone", tStudent.getTelphone());
+			arrayList.add(item);
+		}
+		data.put("items", arrayList);
+    }
+
+    protected void TeacherCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+        Map<String, String> params = UrlUtils.toMap(param2);
+
+		String result = "error";
+		Student tStudent = new Student();
+		try {
+			String name = params.get("name");
+			String number = params.get("number");
+			String email = params.get("email");
+			String telphone = params.get("telphone");
+			if (name != null && number != null && email != null && telphone != null) {
+				tStudent.setName(name);
+				tStudent.setNumber(number);
+				tStudent.setEmail(email);
+				tStudent.setTelphone(telphone);
+	
+				int ret = tStudentImpl.insert(tStudent);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void TeacherDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			for (Object i : objs.toArray()) {
+				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    protected void TeacherModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONObject obj = (JSONObject) JSON.parse(param2);
+			int id = Integer.parseInt(obj.getString("id"));
+			
+			Student tStudent = tStudentImpl.selectByPrimaryKey(id);
+			if (tStudent != null) {
+				tStudent.setName(obj.getString("name"));
+				tStudent.setNumber(obj.getString("number"));
+				tStudent.setEmail(obj.getString("email"));
+				tStudent.setTelphone(obj.getString("telphone"));
+
+				int ret = tStudentImpl.updateByPrimaryKey(tStudent);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+
     protected void Student(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	switch(request.getParameter("param1")) {
     	case "viewall":
