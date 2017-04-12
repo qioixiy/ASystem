@@ -64,14 +64,14 @@
                         </ul>
                     </li>
                     
-                    <li>
+                    <li class="active">
                       <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">老师管理</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level">
                         <li><a href="teacher_viewall.html">查看所有老师</a>
                         </li>
                         <li><a href="teacher_create.html">增加老师</a>
                         </li>
-                        <li><a href="teacher_delete.html">删除老师</a>
+                        <li class="active"><a href="teacher_delete.html">删除老师</a>
                         </li>
                         <li><a href="teacher_modify.html">修改老师</a>
                         </li>
@@ -112,10 +112,10 @@
                         </ul>
                     </li>
 
-                    <li class="active">
+                    <li>
                       <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">成绩分析</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level">
-                        <li class="active"><a href="score_viewall.html">查看所有成绩</a>
+                        <li><a href="score_viewall.html">查看所有成绩</a>
                         </li>
                         <li><a href="score_create.html">上传成绩</a>
                         </li>
@@ -155,16 +155,16 @@
             </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>所有课程</h2>
+                    <h2>删除学生</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="index.html">考试成绩评估分析系统</a>
                         </li>
                         <li>
-                            <a>课程管理</a>
+                            <a>学生管理</a>
                         </li>
                         <li>
-                            <strong>查看所有课程</strong>
+                            <strong>删除学生</strong>
                         </li>
                     </ol>
                 </div>
@@ -176,7 +176,7 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>课程数据 <small>浏览</small></h5>
+                                <h5>学生数据 <small>浏览</small></h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -190,7 +190,9 @@
                                 </div>
                             </div>
                             <div class="ibox-content">
-
+                                <button id="btn-del" type="button" class="btn  btn-danger" data-toggle="modal" data-target="#DeleteForm" onclick="del_item()">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true">删除</span>
+                                </button>
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                         <tr>
@@ -203,6 +205,24 @@
                                 </table>
 
                             </div>
+
+                            <div class="modal inmodal fade" id="myModal-result" tabindex="-1" role="dialog"  aria-hidden="true">
+                              <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">删除课程</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p id="myModal-result-p">失败</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -247,7 +267,7 @@
          dataType: "text",
 
          data: {
-           func: "score",
+           func: "user",
            param1: "viewall"
          },
          timeout: 50000,
@@ -262,7 +282,7 @@
            var thead = table0.children("thead");
            var thead_tr = thead.children("tr");
 
-           var thead_tr_html = "";
+           var thead_tr_html = "<th class=\"check-header hidden-xs\"> <input id=\"checkAll\" name=\"checkAll\" type=\"checkbox\" readonly> </th>";
            $.each(json.detailTHead, function(i, item) {
              thead_tr_html += "<th>" + item + "</th>";
            });
@@ -273,6 +293,7 @@
            var tbody_html = "";
            $.each(json.items, function(i, item) {
              tbody_html += "<tr class=\"gradeX\">";
+             tbody_html += "<td class=\"td-checkbox\"> <input type=\"checkbox\" readonly> </td>";
              $.each(json.thead, function(i, thead_item) {
                tbody_html += "<td>" + item[thead_item] + "</td>"
              });
@@ -285,6 +306,50 @@
          }
        });
      });
+
+     function del_item()
+     {
+       var table = $(".ibox-content").children("table");
+       var table0 = table.eq(0);
+
+       var del_lists = [];
+       var tdcheckbox = $('.td-checkbox');
+       for (var i=0; i < tdcheckbox.length; i++) {
+         if(tdcheckbox.eq(i).children()[0].checked == true) {
+           del_lists.push(tdcheckbox.eq(i).siblings('td')[0].innerText);
+           tdcheckbox.eq(i).parent()[0].style.display="none"
+         }
+       }
+       //alert(del_lists);
+
+       var str = $(":checkbox:checked").map(function() {
+         return $(this).parent().siblings('td').text();
+       }).get().join(", ");
+       //alert(str);
+
+       /* do delete */
+       $.ajax({
+         type: "post",
+         url: "api/json.do",
+         dataType: "text",
+
+         data: {
+           func: "user",
+           param1: "delete",
+           param2: JSON.stringify(del_lists)
+         },
+         timeout: 50000,
+
+         success: function (data) {
+             var json = eval("("+data+")");
+             $("#myModal-result-p").text(json.result);
+             $('#myModal-result').modal('show');
+         },
+         error: function() {
+           alert("网络异常，请稍后重试");
+         }
+       });
+     }
 
     </script>
 
