@@ -235,16 +235,16 @@ public class ApiJson extends HttpServlet {
     protected void Teacher(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	switch(request.getParameter("param1")) {
     	case "viewall":
-    		StudentViewAll(request, response, data);
+    		TeacherViewAll(request, response, data);
     		break;
     	case "create":
-    		StudentCreate(request, response, data);
+    		TeacherCreate(request, response, data);
     		break;
     	case "delete":
-    		StudentDelete(request, response, data);
+    		TeacherDelete(request, response, data);
     		break;
     	case "modify":
-    		StudentModify(request, response, data);
+    		TeacherModify(request, response, data);
     		break;
     	}
     }
@@ -266,13 +266,13 @@ public class ApiJson extends HttpServlet {
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
-		for(Student tStudent : tStudentImpl.selectAll()) {
+		for(Teacher tTeacher : tTeacherImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
-			item.put("id", tStudent.getId());
-			item.put("name", tStudent.getName());
-			item.put("number", tStudent.getNumber());
-			item.put("email", tStudent.getEmail());
-			item.put("telphone", tStudent.getTelphone());
+			item.put("id", tTeacher.getId());
+			item.put("name", tTeacher.getName());
+			item.put("number", tTeacher.getNumber());
+			item.put("email", tTeacher.getEmail());
+			item.put("telphone", tTeacher.getTelphone());
 			arrayList.add(item);
 		}
 		data.put("items", arrayList);
@@ -406,7 +406,7 @@ public class ApiJson extends HttpServlet {
 		data.put("thead", arrayTHead);
 		detailTHead.add("序号");
 		detailTHead.add("名字");
-		detailTHead.add("编号");
+		detailTHead.add("学号");
 		detailTHead.add("邮箱");
 		detailTHead.add("联系方式");
 		data.put("detailTHead", detailTHead);
@@ -552,7 +552,7 @@ public class ApiJson extends HttpServlet {
 		detailTHead.add("序号");
 		detailTHead.add("试卷名");
 		detailTHead.add("描述");
-		detailTHead.add("课程ID");
+		detailTHead.add("课程名称");
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
@@ -561,7 +561,12 @@ public class ApiJson extends HttpServlet {
 			item.put("id", tTestPaper.getId());
 			item.put("name", tTestPaper.getName());
 			item.put("desc", tTestPaper.getDetail());
-			item.put("course_id", tTestPaper.getCourseId());
+
+			item.put("course_id", "unkown");
+			Course tCourse = tCourseImpl.selectByPrimaryKey(tTestPaper.getCourseId());
+			if (tCourse != null) {
+				item.put("course_id", tCourse.getName());
+			}
 			arrayList.add(item);
 		}
 		data.put("items", arrayList);
