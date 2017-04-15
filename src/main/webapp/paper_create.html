@@ -232,8 +232,8 @@
                                     <div class="hr-line-dashed"></div>
                                     <div class="draggable ui-draggable">
                                         <div class="col-sm-12">
-                                            <button id="form-submit" class="btn btn-primary" type="text">保存课程</button>
-                                            <button id="form-cancel" class="btn btn-white" type="text">取消</button>
+                                            <button id="form-submit" class="btn btn-primary">保存课程</button>
+                                            <button id="form-cancel" class="btn btn-white">取消</button>
                                         </div>
                                     </div>
                                 </form>
@@ -362,8 +362,16 @@
              "</div>")
          });
        });
+
        $("#form-submit").click(function(){
          //alert($("form").serialize());
+         get_param2 = function() {
+        	 var paper_desc = "{}";
+             var ret = $("form").serialize()+"&creater=1" + "&desc=" + paper_desc;
+             alert(ret);
+        	 return ret;
+         };
+
          $.ajax({
            url: 'api/json.do',
            type: "POST" ,
@@ -372,7 +380,7 @@
            data: {
              func: "paper",
              param1: "create",
-             param2: $("form").serialize()+"&creater=1",
+             param2: get_param2(),
            },
            success: function(data) {
              //alert(data);
@@ -382,7 +390,7 @@
            }
          });
        });
-       
+
        // 获取课程列表
        $.ajax({
        url: 'api/json.do',
@@ -404,6 +412,7 @@
          }
        }
      });
+
      });
 
     </script>
