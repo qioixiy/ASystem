@@ -191,26 +191,75 @@
                             <div class="ibox-content">
                                 <form role="form" class="form-horizontal m-t">
                                     <div class="form-group draggable ui-draggable">
-                                        <label class="col-sm-3 control-label">试卷名字</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="name" class="form-control" placeholder="请输入课程名字">
+                                        <label class="col-sm-1 control-label">试卷名字</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="paper-name" class="form-control" placeholder="请输入课程名字">
                                         </div>
                                     </div>
                                     <div class="form-group draggable ui-draggable">
-                                        <label class="col-sm-3 control-label">试卷概要</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="desc" class="form-control" placeholder="请输入">
+                                        <label class="col-sm-1 control-label">试卷概要</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" name="paper-desc" class="form-control" placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="form-group draggable ui-draggable">
-                                        <label class="col-sm-3 control-label">所属课程</label>
+                                        <label class="col-sm-1 control-label">所属课程</label>
                                         <div class="col-sm-9">
-                                            <textarea name="course_id" class="form-control" placeholder="请输入" rows="5"></textarea>
+	                                        <div class="input-group">
+		                                        <select class="form-control m-b" name="course_id">
+                                                <option>请选择所属课程</option>
+                                            	</select>
+	                                        </div>
+	                                   </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">试卷内容</label>
+                                        <div class="col-sm-2">
+                                        	<a class="btn btn-white btn-block" id="paper-create-item" href="#"><i class="glyphicon glyphicon-plus"></i>添加题型</a>
+                                        </div>
+                                        <label class="col-sm-1 control-label">总分</label>
+                                        <div class="col-sm-1">
+                                            <input type="text" name="paper-total-score" class="form-control" placeholder="100分">
                                         </div>
                                     </div>
+                                    
+                                    <div class="hr-line-dashed"></div>
+                                    
+                                    <div class="form-group">
+                                        <div class="col-sm-12" id="paper-detail-data">
+	                                        <div class="col-sm-12">
+						                        <div class="ibox float-e-margins">
+						                            <div class="ibox-title">
+						                                <h5>一.选择题</h5>
+						                                <div class="ibox-tools">
+						                                    <a class="collapse-link">
+						                                        <i class="fa fa-chevron-up"></i>
+						                                    </a>
+						                                    <a class="close-link">
+						                                        <i class="fa fa-times"></i>
+						                                    </a>
+						                                </div>
+						                            </div>
+						                            <div class="ibox-content" style="display: block;">
+						                                <div class="alert alert-success alert-dismissable">
+						                                    <span>1</span>
+						                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						                                </div>
+						                                <div class="alert alert-success alert-dismissable">
+						                                    <span>2</span>
+						                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                    
+	                                   </div>
+                                    </div>
+                                    
                                     <div class="hr-line-dashed"></div>
                                     <div class="draggable ui-draggable">
-                                        <div class="col-sm-12 col-sm-offset-3">
+                                        <div class="col-sm-12">
                                             <button id="form-submit" class="btn btn-primary" type="text">保存课程</button>
                                             <button id="form-cancel" class="btn btn-white" type="text">取消</button>
                                         </div>
@@ -273,6 +322,7 @@
      document.forms[0].target="rfFrame";
 
      $(document).ready(function(){
+    		    	 
        $("#form-submit").click(function(){
          //alert($("form").serialize());
          $.ajax({
