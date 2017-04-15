@@ -168,9 +168,9 @@ public class ApiJson extends HttpServlet {
 		String result = "error";
 		Course tCourse = new Course();
 		try {
-			String name = params.get("name");
-			String title = params.get("title");
-			String detail = params.get("detail");
+			String name = params.get("paper-name");
+			String title = params.get("paper-title");
+			String detail = params.get("paper-detail");
 			if (name != null && title != null && detail != null) {
 				tCourse.setName(name);
 				tCourse.setTitle(title);
@@ -607,12 +607,12 @@ public class ApiJson extends HttpServlet {
 		String result = "error";
 		TestPaper tTestPaper = new TestPaper();
 		try {
-			String name = params.get("name");
-			String desc = params.get("desc");
-			String course_id = params.get("course_id");
-			if (name != null && desc != null && course_id != null) {
+			String name = params.get("paper-name");
+			String detail = params.get("paper-detail");
+			String course_id = params.get("paper-course-id");
+			if (name != null && detail != null && course_id != null) {
 				tTestPaper.setName(name);
-				tTestPaper.setDetail(desc);
+				tTestPaper.setDetail(detail);
 				tTestPaper.setCourseId(Integer.parseInt(course_id));
 	
 				int ret = tTestPaperImpl.insert(tTestPaper);
@@ -643,7 +643,7 @@ public class ApiJson extends HttpServlet {
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
 			for (Object i : objs.toArray()) {
-				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				int ret = tTestPaperImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
 					result = "ok";
 				} else {

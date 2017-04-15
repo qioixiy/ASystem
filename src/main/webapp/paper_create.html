@@ -192,21 +192,15 @@
                                 <form role="form" class="form-horizontal m-t">
                                     <div class="form-group draggable ui-draggable">
                                         <label class="col-sm-1 control-label">试卷名字</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-7">
                                             <input type="text" name="paper-name" class="form-control" placeholder="请输入课程名字">
-                                        </div>
-                                    </div>
-                                    <div class="form-group draggable ui-draggable">
-                                        <label class="col-sm-1 control-label">试卷概要</label>
-                                        <div class="col-sm-11">
-                                            <input type="text" name="paper-desc" class="form-control" placeholder="请输入">
                                         </div>
                                     </div>
                                     <div class="form-group draggable ui-draggable">
                                         <label class="col-sm-1 control-label">所属课程</label>
                                         <div class="col-sm-9">
 	                                        <div class="input-group">
-		                                        <select class="form-control m-b" id="course_id">
+		                                        <select  name="paper-course-id" class="form-control m-b" id="course_id">
                                                 <option>请选择所属课程</option>
                                             	</select>
 	                                        </div>
@@ -346,9 +340,9 @@
       	   ibox_content.append(
       	     "<div class=\"alert alert-success alert-dismissable\">" +
       	     "<span>" +
-      	     "<div>" +
+      	     "<div class=\"paper-item\">" +
       	     "<span class=\"label label-primary\">"+"题目"+number+"</span>" +
-	      	 "<select class=\"col-sm-2\" name=\"level\" style=\"height:25px; margin-left:10px\">" +
+	      	 "<select class=\"col-sm-2\" style=\"height:25px; margin-left:10px\">" +
 	      	 "<option value=\"0\">选择难度</option>" +
 	      	 "<option value=\"1\">基础题目</option>" +
 	      	 "<option value=\"2\">中等难度</option>" +
@@ -366,8 +360,53 @@
        $("#form-submit").click(function(){
          //alert($("form").serialize());
          get_param2 = function() {
-        	 var paper_desc = "{}";
-             var ret = $("form").serialize()+"&creater=1" + "&desc=" + paper_desc;
+        	 var class_items = $('#paper-detail-data .form-group');
+        	 var paper_name_v = $('.ibox-content .form-group input')[0].value;
+        	 var paper_total_score_v = $('.ibox-content .form-group input')[1].value;
+        	 if (paper_total_score_v === "") {paper_total_score_v = "100"}
+        	 class_items_result = {
+        			 paper_name:paper_name_v,
+        			 paper_total_score:paper_total_score_v,
+        			 items:[]
+        	 };
+        	 for (var index = 0;  index < class_items.length; index++) {
+        		 if( class_items[index].children[0].children.length == 0) {
+        			 continue;
+        		 }
+            	 var class_item = class_items[index].children[0].children[0].children[0].children;
+            	 // 题目类型
+            	 var item_type = class_item[0].value;
+            	 class_item_result = {type:item_type, data: []};
+            	 
+            	 var array = [].slice.call(class_item);
+            	 // 取出题目项数据
+            	 var arr = array.slice(3);
+            	 for (i in arr) {
+            		 // 题目难度值
+            		 var exam_question_level = arr[i].childNodes[0].childNodes[0].childNodes[1];
+            		 var exam_question_level_index = exam_question_level.value;
+            		 var exam_question_level_str = exam_question_level.selectedOptions[0].text
+            		 // 题目对应的分数
+            		 var exam_question_score = arr[i].childNodes[0].childNodes[0].childNodes[2];
+            		 var exam_question_score_str = exam_question_score.value;
+            		 
+            		 class_item_result.data.push(
+            				 {
+            					 name:1,
+            					 level_index: exam_question_level_index,
+            					 level_str: exam_question_level_str,
+            					 score: exam_question_score_str,
+            				 }
+            		 );
+            	 }
+        		 class_items_result.items.push(class_item_result);
+        	 }
+        	 var detail_class = $('#paper-detail-data .form-group');
+        	 
+        	 var paper_detail = JSON.stringify(class_items_result);
+        	 var creater = 1;
+        	 var form_names_serial = $("form").serialize();
+             var ret = form_names_serial +"&creater=" + creater + "&paper-detail=" + paper_detail;
              alert(ret);
         	 return ret;
          };
