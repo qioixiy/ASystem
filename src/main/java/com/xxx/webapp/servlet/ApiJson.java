@@ -735,6 +735,20 @@ public class ApiJson extends HttpServlet {
 			item.put("teacher_id", tScoreResult.getTeacherId());
 			item.put("paper_id", tScoreResult.getTestPaperId());
 			item.put("desc", tScoreResult.getDetail());
+			
+			Student tStudent = tStudentImpl.selectByPrimaryKey(tScoreResult.getStudentId());
+			if(tStudent != null) {
+				item.put("student_id", tStudent.getName());
+			}
+			Teacher tTeacher = tTeacherImpl.selectByPrimaryKey(tScoreResult.getTeacherId());
+			if(tTeacher != null) {
+				item.put("teacher_id", tTeacher.getName());
+			}
+			TestPaper tTestPaper = tTestPaperImpl.selectByPrimaryKey(tScoreResult.getTestPaperId());
+			if(tTestPaper != null) {
+				item.put("paper_id", tTestPaper.getName());
+			}
+			
 			arrayList.add(item);
 		}
 		data.put("items", arrayList);
