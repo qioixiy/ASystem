@@ -303,13 +303,13 @@
 	   "<div class=\"ibox float-e-margins\">" +
 	   "<div class=\"ibox-title\">" +
 	   "<input type=\"text\" placeholder=\"请输入题型:选择|填空|简答|...\">" +
+	   "<button class=\"btn btn-info btn-sm paper-add-item\" type=\"text\" style=\"margin-left:10px\">添加题目</button>" +
 	   "<div class=\"ibox-tools\">" +
 	   "<a class=\"collapse-link\"> <i class=\"fa fa-chevron-up\"></i> </a>" +
 	   "<a class=\"close-link\"> <i class=\"fa fa-times\"></i> </a>" +
 	   "</div>" +
 	   "</div>" +
 	   "<div class=\"ibox-content\" style=\"display: block;\">" +
-	   "<button class=\"btn btn-info paper-add-item\" type=\"text\">新建项</button>" +
 	   "</div>" +
 	   "</div>" +
 	   "</div>" +
@@ -342,9 +342,22 @@
          $(".paper-add-item").click(function(){
       	   item = $(this);
       	   ibox_content = item.parent();
+      	   var number = ibox_content.find('.alert').size()+1;
       	   ibox_content.append(
       	     "<div class=\"alert alert-success alert-dismissable\">" +
-      	     "<span>2</span>" +
+      	     "<span>" +
+      	     "<div>" +
+      	     "<span class=\"label label-primary\">"+"题目"+number+"</span>" +
+	      	 "<select class=\"col-sm-2\" name=\"level\" style=\"height:25px; margin-left:10px\">" +
+	      	 "<option value=\"0\">选择难度</option>" +
+	      	 "<option value=\"1\">基础题目</option>" +
+	      	 "<option value=\"2\">中等难度</option>" +
+	      	 "<option value=\"3\">高难度题目</option>" +
+	      	 "</select>" +
+	      	 "<input type=\"text\" placeholder=\"分配分数\" class=\"col-sm-1\" style=\"margin-left:10px\">" +
+         	 "</div>" +
+      	     "</span>" +
+      	     "<span>&nbsp</span>" +
              "<button aria-hidden=\"true\" data-dismiss=\"alert\" class=\"close\" type=\"button\">×</button>" +
              "</div>")
          });
