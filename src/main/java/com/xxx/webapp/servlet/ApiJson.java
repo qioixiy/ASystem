@@ -93,7 +93,29 @@ public class ApiJson extends HttpServlet {
     	case "modify":
     		CourseModify(request, response, data);
     		break;
+    	case "get_list":
+    		CourseGetList(request, response, data);
     	}
+    }
+    protected void CourseGetList(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+        ArrayList<Object> arrayList=new ArrayList<Object>();
+		for(Course tCourse : tCourseImpl.selectAll()) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("id", tCourse.getId());
+			item.put("name", tCourse.getName());
+			item.put("title", tCourse.getTitle());
+			item.put("detail", tCourse.getDetail());
+
+			item.put("creater", "unkown");
+			Teacher tTeacher = tTeacherImpl.selectByPrimaryKey(tCourse.getCreater());
+			if (tTeacher != null) {
+				item.put("creater", tTeacher.getName());
+			};
+			item.put("createTimestamp", tCourse.getCreateTimestamp());
+			arrayList.add(item);
+		}
+		data.put("items", arrayList);
     }
     protected void CourseViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
 

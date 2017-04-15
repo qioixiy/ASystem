@@ -206,7 +206,7 @@
                                         <label class="col-sm-1 control-label">所属课程</label>
                                         <div class="col-sm-9">
 	                                        <div class="input-group">
-		                                        <select class="form-control m-b" name="course_id">
+		                                        <select class="form-control m-b" id="course_id">
                                                 <option>请选择所属课程</option>
                                             	</select>
 	                                        </div>
@@ -382,6 +382,28 @@
            }
          });
        });
+       
+       // 获取课程列表
+       $.ajax({
+       url: 'api/json.do',
+       type: "POST" ,
+       contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+       //dataType:'json',
+       data: {
+         func: "course",
+         param1: "get_list",
+         param2: $("form").serialize()+"&creater=1",
+       },
+       success: function(data) {
+         //alert(data);
+         var json = eval("("+data+")");
+         for (item in json.items) {
+        	 value = json.items[item].id;
+        	 text = json.items[item].name;
+         	$("#course_id").append("<option value='"+value+"'>"+text+"</option>");
+         }
+       }
+     });
      });
 
     </script>
