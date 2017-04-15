@@ -294,61 +294,61 @@
      document.forms[0].target="rfFrame";
 
      $(document).ready(function(){
-         
-         $("#paper-create-class").click(function(){
-        	 detail = $("#paper-detail-data");
-        	 detail.append(
-"<div class=\"form-group\">" +
-	"<div class=\"col-sm-12\">" +
-		"<div class=\"ibox float-e-margins\">" +
-			"<div class=\"ibox-title\">" +
-				"<input type=\"text\" placeholder=\"请输入题型:选择|填空|简答|...\">" +
-				"<div class=\"ibox-tools\">" +
-					"<a class=\"collapse-link\"> <i class=\"fa fa-chevron-up\"></i> </a>" +
-					"<a class=\"close-link\"> <i class=\"fa fa-times\"></i> </a>" +
-				"</div>" +
-			"</div>" +
-			"<div class=\"ibox-content\" style=\"display: block;\">" +
-				"<button id=\"paper-add-item\" class=\"btn btn-info\" type=\"text\">新建项</button>" +
-			"</div>" +
-		"</div>" +
-	"</div>" +
-     "</div>");
 
-           // Close ibox function
-           $('.close-link').unbind('click');
-           $('.close-link').click( function() {
-             var content = $(this).closest('div.ibox');
-             content.remove();
-           });
+       $("#paper-create-class").click(function(){
+         detail = $("#paper-detail-data");
+         detail.append(
+           "<div class=\"form-group\">" +
+	   "<div class=\"col-sm-12\">" +
+	   "<div class=\"ibox float-e-margins\">" +
+	   "<div class=\"ibox-title\">" +
+	   "<input type=\"text\" placeholder=\"请输入题型:选择|填空|简答|...\">" +
+	   "<div class=\"ibox-tools\">" +
+	   "<a class=\"collapse-link\"> <i class=\"fa fa-chevron-up\"></i> </a>" +
+	   "<a class=\"close-link\"> <i class=\"fa fa-times\"></i> </a>" +
+	   "</div>" +
+	   "</div>" +
+	   "<div class=\"ibox-content\" style=\"display: block;\">" +
+	   "<button class=\"btn btn-info paper-add-item\" type=\"text\">新建项</button>" +
+	   "</div>" +
+	   "</div>" +
+	   "</div>" +
+           "</div>");
 
-           // Collapse ibox function
-           $('.collapse-link').unbind('click');
-           $('.collapse-link').click( function() {
-             var ibox = $(this).closest('div.ibox');
-             var button = $(this).find('i');
-             var content = ibox.find('div.ibox-content');
-             content.slideToggle(200);
-             button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
-             ibox.toggleClass('').toggleClass('border-bottom');
-             setTimeout(function () {
-               ibox.resize();
-               ibox.find('[id^=map-]').resize();
-             }, 50);
-           });
-
-           //js/hplus.js?v=2.2.0
-
-       $("#paper-add-item").click(function(){
-      	 item = $("#paper-add-item");
-      	 ibox_content = item.parent();
-      	 ibox_content.append(
-      			 "<div class=\"alert alert-success alert-dismissable\">" +
-      	 			"<span>2</span>" +
-                  	"<button aria-hidden=\"true\" data-dismiss=\"alert\" class=\"close\" type=\"button\">×</button>" +
-              	 "</div>")
-       });
+         // Close ibox function
+         $('.close-link').unbind('click');
+         $('.close-link').click( function() {
+           var content = $(this).closest('div.ibox');
+           content.remove();
          });
+
+         // Collapse ibox function
+         $('.collapse-link').unbind('click');
+         $('.collapse-link').click( function() {
+           var ibox = $(this).closest('div.ibox');
+           var button = $(this).find('i');
+           var content = ibox.find('div.ibox-content');
+           content.slideToggle(200);
+           button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+           ibox.toggleClass('').toggleClass('border-bottom');
+           setTimeout(function () {
+             ibox.resize();
+             ibox.find('[id^=map-]').resize();
+           }, 50);
+         });
+
+         //js/hplus.js?v=2.2.0
+         $('.paper-add-item').unbind('click');
+         $(".paper-add-item").click(function(){
+      	   item = $(this);
+      	   ibox_content = item.parent();
+      	   ibox_content.append(
+      	     "<div class=\"alert alert-success alert-dismissable\">" +
+      	     "<span>2</span>" +
+             "<button aria-hidden=\"true\" data-dismiss=\"alert\" class=\"close\" type=\"button\">×</button>" +
+             "</div>")
+         });
+       });
        $("#form-submit").click(function(){
          //alert($("form").serialize());
          $.ajax({
