@@ -570,10 +570,12 @@ public class ApiJson extends HttpServlet {
     	arrayTHead.add("name");
     	arrayTHead.add("desc");
     	arrayTHead.add("course_id");
+    	arrayTHead.add("course_str");
 		data.put("thead", arrayTHead);
 		detailTHead.add("序号");
 		detailTHead.add("试卷名");
 		detailTHead.add("描述");
+		detailTHead.add("课程编号");
 		detailTHead.add("课程名称");
 		data.put("detailTHead", detailTHead);
 	    
@@ -583,11 +585,11 @@ public class ApiJson extends HttpServlet {
 			item.put("id", tTestPaper.getId());
 			item.put("name", tTestPaper.getName());
 			item.put("desc", tTestPaper.getDetail());
-
-			item.put("course_id", "unkown");
+			item.put("course_id", tTestPaper.getCourseId());
+			item.put("course_str", "unkown");
 			Course tCourse = tCourseImpl.selectByPrimaryKey(tTestPaper.getCourseId());
 			if (tCourse != null) {
-				item.put("course_id", tCourse.getName());
+				item.put("course_str", tCourse.getName());
 			}
 			arrayList.add(item);
 		}
@@ -670,9 +672,10 @@ public class ApiJson extends HttpServlet {
 
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
-			
+
 			TestPaper tTestPaper = tTestPaperImpl.selectByPrimaryKey(id);
 			if (tTestPaper != null) {
+				
 				tTestPaper.setName(obj.getString("name"));
 				tTestPaper.setDetail(obj.getString("desc"));
 				tTestPaper.setCourseId(Integer.parseInt(obj.getString("course_id")));
