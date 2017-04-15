@@ -314,13 +314,30 @@
 		"</div>" +
 	"</div>" +
      "</div>");
-           
-       // Close ibox function
-       $('.close-link').click( function() {
-         var content = $(this).closest('div.ibox');
-        content.remove();
-       });
-       //js/hplus.js?v=2.2.0
+
+           // Close ibox function
+           $('.close-link').unbind('click');
+           $('.close-link').click( function() {
+             var content = $(this).closest('div.ibox');
+             content.remove();
+           });
+
+           // Collapse ibox function
+           $('.collapse-link').unbind('click');
+           $('.collapse-link').click( function() {
+             var ibox = $(this).closest('div.ibox');
+             var button = $(this).find('i');
+             var content = ibox.find('div.ibox-content');
+             content.slideToggle(200);
+             button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+             ibox.toggleClass('').toggleClass('border-bottom');
+             setTimeout(function () {
+               ibox.resize();
+               ibox.find('[id^=map-]').resize();
+             }, 50);
+           });
+
+           //js/hplus.js?v=2.2.0
 
        $("#paper-add-item").click(function(){
       	 item = $("#paper-add-item");
