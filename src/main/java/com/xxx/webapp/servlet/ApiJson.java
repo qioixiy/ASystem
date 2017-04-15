@@ -560,8 +560,20 @@ public class ApiJson extends HttpServlet {
     	case "modify":
     		PaperModify(request, response, data);
     		break;
+    	case "query_by_id":
+    		PaperQueryById(request, response, data);
     	}
     }
+    protected void PaperQueryById(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    	String param2 = request.getParameter("param2");
+
+    	JSONObject obj = (JSONObject) JSON.parse(param2);
+        
+    	TestPaper tTestPaper = tTestPaperImpl.selectByPrimaryKey(obj.getIntValue("id"));
+		data.put("items", tTestPaper);
+    }
+    
     protected void PaperViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
 
     	ArrayList<Object> arrayTHead = new ArrayList<Object>();

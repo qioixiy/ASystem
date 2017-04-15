@@ -207,6 +207,9 @@
                                         <div class="col-sm-3">
                                             <input type="text" name="paper_id" class="form-control" placeholder="请输入试卷ID"></input>
                                         </div>
+                                        <div class="col-sm-2">
+                                        	<button id="paper-load" class="btn btn-white btn-block"><i class="glyphicon glyphicon-cloud-download"></i>加载试卷信息</button>
+                                    	</div>
                                     </div>
                                     <div class="form-group draggable ui-draggable">
                                         <label class="col-sm-1 control-label"></label>
@@ -276,6 +279,23 @@
     <!-- Page-Level Scripts -->
     <script>
 
+    function load_paper_by_id(_id) {
+    	$.ajax({
+            url: 'api/json.do',
+            type: "POST" ,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: {
+              func: "paper",
+              param1: "query_by_id",
+              param2: JSON.stringify({ id:_id }),
+            },
+            success: function(data) {
+              //alert(data);
+              var json = eval("("+data+")");
+            }
+          });
+    }
+    
      document.forms[0].target="rfFrame";
 
      $(document).ready(function(){
@@ -298,6 +318,11 @@
              $('#myModal-result').modal('show');
            }
          });
+       });
+       
+       $("#paper-load").click(function(){
+    	   id = $("[name='paper_id']").val();
+    	   load_paper_by_id(id);
        });
      });
 
