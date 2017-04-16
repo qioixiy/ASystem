@@ -29,6 +29,7 @@ import com.xxx.webapp.asystem.service.ScoreResultImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
 import com.xxx.webapp.asystem.service.TeacherImpl;
 import com.xxx.webapp.asystem.service.TestPaperImpl;
+import com.xxx.webapp.helper.AnalysisService;
 
 @WebServlet("/api/json.do")
 public class ApiJson extends HttpServlet {
@@ -94,7 +95,8 @@ public class ApiJson extends HttpServlet {
     }
     
     protected void AnalysisMothod1(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
-    	;
+    	AnalysisService tAnalysis = new AnalysisService("", 10);
+    	data.put("result", tAnalysis.getResult());
     }
     
     protected void AnalysisMothod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
