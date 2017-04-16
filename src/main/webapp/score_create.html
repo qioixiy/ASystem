@@ -217,33 +217,37 @@
                                     <div class="form-group draggable ui-draggable">
                                         <label class="col-sm-1 control-label"></label>
                                         <div class="col-sm-9">
-											<table
-												class="table table-striped table-bordered table-hover dataTables-example">
-												<thead>
-													<tr>
-														<th>序号</th>
-														<th>学生</th>
-														<th>老师</th>
-														<th>试卷ID</th>
-														<th>成绩描述</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>10</td>
-														<td>小天</td>
-														<td>蔡元培</td>
-														<td>2017数学期末考试</td>
-														<td>{{}}</td>
-													</tr>
-												</tbody>
-											</table>
+                                        		<div class="form-group col-sm-12" style="margin-buttom:10px;">
+                                        			<label class="col-sm-1">试卷名</label>
+                                                	<input type="text" class="col-sm-2" id="paper-id" readonly="readonly">
+                                        			<label class="col-sm-1">总分</label>
+                                                	<input type="text" class="col-sm-2" id="paper-total-score" readonly="readonly">
+                                                </div>
+		                                        <div class="col-sm-12">
+													<table
+														class="table table-striped table-bordered table-hover dataTables-example">
+														<thead>
+															<tr>
+															<th>题目</th>
+															<th>难度</th>
+															<th>难度系数</th>
+															<th>分数</th>
+															<th>得分</th>
+															<th>评价</th>
+														</tr>
+													</thead>
+													<tbody id="tbody-data">
+													</tbody>
+												</table>
+											</div>
 										</div>
                                     </div>
+                                    
                                     <div class="hr-line-dashed"></div>
+                                    
                                     <div class="draggable ui-draggable">
                                         <div class="col-sm-12 col-sm-offset-1">
-                                            <button id="form-submit" class="btn btn-primary" type="text">保存</button>
+                                            <button id="form-submit" class="btn btn-primary" type="text">上传保存</button>
                                             <button id="form-cancel" class="btn btn-white" type="text">取消</button>
                                         </div>
                                     </div>
@@ -302,9 +306,38 @@
     <!-- Page-Level Scripts -->
     <script>
 
-    function make_paper_templete(paper_detail) {
+    function make_paper_templete(data) {
+    	//alert(data);
+        var paper_detail = eval("("+data+")");
     	paper_detail.items.detail = eval("(" + paper_detail.items.detail + ")");
-    	alert(paper_detail);
+    	
+    	$('#paper-id').val(paper_detail.items.detail.paper_name);
+    	$('#paper-total-score').val(paper_detail.items.detail.paper_total_score);
+    	var tbody = $('#tbody-data');
+    	var tbody_html = "";
+    	
+    	var items = paper_detail.items.detail.items;
+    	$.each(items, function(i, item) {
+    		$.each(item.data, function(j, data) {
+    			tbody_html += "<tr>";
+    	        tbody_html += "<td>" + item.type + (j+1) + "</td>"
+    	        tbody_html += "<td>" + data.level_str + "</td>"
+    	        tbody_html += "<td>" + data.level_index + "</td>"
+    	        tbody_html += "<td>" + data.score + "</td>"
+    	        tbody_html += "<td>" + "<input type=\"text\">" + "</td>"
+    	        tbody_html += "<td>" + "<input type=\"text\" placeholder=\"无\">" + "</td>"
+    	        tbody_html += "</tr>";
+    		});
+    	});
+    	
+        //$.each(json.items, function(i, item) {
+        //  tbody_html += "<tr class=\"gradeX\">";
+        //  $.each(json.thead, function(i, thead_item) {
+         //   tbody_html += "<td>" + item[thead_item] + "</td>"
+        //  });
+        //  tbody_html += "</tr>";
+        //});
+        tbody.html(tbody_html);
     }
     function load_paper_by_id(_id) {
     	$.ajax({
@@ -317,9 +350,7 @@
               param2: JSON.stringify({ id:_id }),
             },
             success: function(data) {
-              //alert(data);
-              var json = eval("("+data+")");
-              make_paper_templete(json);
+              make_paper_templete(data);
             }
           });
     }
