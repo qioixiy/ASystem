@@ -3,36 +3,36 @@ package com.xxx.webapp.helper;
 public class AnalysisService  {
 	public class Result {
 		// 基本信息
-		String course_name; // 课程名称
-		String teaching_team;// 教学区队
-		int number_all;// 考试人数
-		int number_abond;// 缺考人数
-		float score_90_100;// 90-100分
-		float score_90_100_per;// 90-100分
-		float score_80_89;// 80-89分
-		float score_80_89_per;// 80-89分
-		float score_70_79;// 70-79分
-		float score_70_79_per;// 70-79分
-		float score_60_69;// 60-69分
-		float score_60_69_per;// 60-69分
-		float score_l_60;// 60分以下
-		float score_l_60_per;// 60分以下
-		float score_lowest;// 最高分
-		float score_highest;// 最低分
-		float score_avg;// 平均分
+		public String course_name; // 课程名称
+		public String teaching_team;// 教学区队
+		public int number_all;// 考试人数
+		public int number_abond;// 缺考人数
+		public float score_90_100;// 90-100分
+		public float score_90_100_per;// 90-100分
+		public float score_80_89;// 80-89分
+		public float score_80_89_per;// 80-89分
+		public float score_70_79;// 70-79分
+		public float score_70_79_per;// 70-79分
+		public float score_60_69;// 60-69分
+		public float score_60_69_per;// 60-69分
+		public float score_l_60;// 60分以下
+		public float score_l_60_per;// 60分以下
+		public float score_lowest;// 最低分
+		public float score_highest;// 最高分
+		public float score_avg;// 平均分
 		
 		// 考试情况分析
 		// 试题命题类型, 试题百分比
-		float course_per_base;// 基础知识、基本理论、基本技能试题 
-		float course_per_mid;// 中等难度题
-		float course_per_high;// 一定难度和深度难度试题
+		public float course_per_base;// 基础知识、基本理论、基本技能试题 
+		public float course_per_mid;// 中等难度题
+		public float course_per_high;// 一定难度和深度难度试题
 		// 学生得分情况
-		String Score_situation_base;// 基础知识、基本理论、基本技能试题 
-		String Score_situation_low;// 中等难度题
-		String Score_situation_high;// 一定难度和深度难度试题
+		public String Score_situation_base;// 基础知识、基本理论、基本技能试题 
+		public String Score_situation_low;// 中等难度题
+		public String Score_situation_high;// 一定难度和深度难度试题
 		
 		// 综合分析
-		String comprehensive_analysis;
+		public String comprehensive_analysis;
 	}
 	
 	// 试题
