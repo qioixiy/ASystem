@@ -232,6 +232,31 @@
 	<script>
 		$(document).ready(
 				function() {
+					
+					$('#score-analysis-mothed1').click(function(){
+						$.ajax({
+							type : "post",
+							url : "api/json.do",
+							dataType : "text",
+
+							data : {
+								func : "analysis",
+								param1 : "mothod1"
+							},
+							timeout : 50000,
+
+							success : function(data) {
+								//alert(data);
+								var json = eval("(" + data + ")");
+							},
+							error : function() {
+								alert("网络异常，请稍后重试");
+							}
+						});
+					});
+					$('#score-analysis-mothed2').click(function(){
+						;
+					});
 
 					$.ajax({
 						type : "post",
