@@ -275,8 +275,13 @@
            var thead_tr = thead.children("tr");
 
            var thead_tr_html = "";
+           var spec_index = -1;
            $.each(json.detailTHead, function(i, item) {
-             thead_tr_html += "<th>" + item + "</th>";
+        	   if ("成绩描述" == item) {
+        		   spec_index = i;
+        		} else {
+        		   thead_tr_html += "<th>" + item + "</th>";
+        		}
            });
            thead_tr.html(thead_tr_html);
 
@@ -286,7 +291,11 @@
            $.each(json.items, function(i, item) {
              tbody_html += "<tr class=\"gradeX\">";
              $.each(json.thead, function(i, thead_item) {
-               tbody_html += "<td>" + item[thead_item] + "</td>"
+            	 if (spec_index != -1 && spec_index == i) {
+            		 ;
+            	 } else {
+            		tbody_html += "<td>" + item[thead_item] + "</td>"
+            	}
              });
              tbody_html += "</tr>";
            });

@@ -280,8 +280,13 @@
            var thead_tr = thead.children("tr");
 
            var thead_tr_html = "<th class=\"check-header hidden-xs\"> <input id=\"checkAll\" name=\"checkAll\" type=\"checkbox\" readonly> </th>";
+           var spec_index = -1;
            $.each(json.detailTHead, function(i, item) {
-             thead_tr_html += "<th>" + item + "</th>";
+        	   if ("成绩描述" == item) {
+        		   spec_index = i;
+        		} else {
+        		   thead_tr_html += "<th>" + item + "</th>";
+        		}
            });
            thead_tr.html(thead_tr_html);
 
@@ -292,7 +297,11 @@
              tbody_html += "<tr class=\"gradeX\">";
              tbody_html += "<td class=\"td-checkbox\"> <input type=\"checkbox\" readonly> </td>";
              $.each(json.thead, function(i, thead_item) {
-               tbody_html += "<td>" + item[thead_item] + "</td>"
+            	 if (spec_index != -1 && spec_index == i) {
+            		 ;
+            	 } else {
+            		tbody_html += "<td>" + item[thead_item] + "</td>"
+            	}
              });
              tbody_html += "</tr>";
            });
