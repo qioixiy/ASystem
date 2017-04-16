@@ -21,7 +21,7 @@ public class AnalysisServiceTest {
     @Test
     public void AnalysisServiceTester() {
         AnalysisService tAnalysis = new AnalysisService("", 10);
-        AnalysisService.Result tResult =  tAnalysis.getResult();
+        AnalysisService.Result tResult =  tAnalysis.getResultTest();
 
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String fileName = "Result.doc";
