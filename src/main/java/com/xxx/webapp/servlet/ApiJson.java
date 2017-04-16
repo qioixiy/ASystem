@@ -72,6 +72,9 @@ public class ApiJson extends HttpServlet {
         case "score":
         	Score(request, response, data);
         	break;
+        case "analysis":
+        	Analysis(request, response, data);
+        	break;
         default:
         	break;
         }
@@ -79,6 +82,25 @@ public class ApiJson extends HttpServlet {
         ResponseJsonUtils.json(response, data);
     }
 
+    protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	switch(request.getParameter("param1")) {
+    	case "mothod1":
+    		AnalysisMothod1(request, response, data);
+    		break;
+    	case "mothod2":
+    		AnalysisMothod2(request, response, data);
+    		break;
+    	}
+    }
+    
+    protected void AnalysisMothod1(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	;
+    }
+    
+    protected void AnalysisMothod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	;
+    }
+    
     protected void Course(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	switch(request.getParameter("param1")) {
     	case "viewall":
@@ -168,9 +190,9 @@ public class ApiJson extends HttpServlet {
 		String result = "error";
 		Course tCourse = new Course();
 		try {
-			String name = params.get("paper-name");
-			String title = params.get("paper-title");
-			String detail = params.get("paper-detail");
+			String name = params.get("name");
+			String title = params.get("title");
+			String detail = params.get("detail");
 			if (name != null && title != null && detail != null) {
 				tCourse.setName(name);
 				tCourse.setTitle(title);
@@ -311,19 +333,19 @@ public class ApiJson extends HttpServlet {
         Map<String, String> params = UrlUtils.toMap(param2);
 
 		String result = "error";
-		Student tStudent = new Student();
+		Teacher tTeacher = new Teacher();
 		try {
 			String name = params.get("name");
 			String number = params.get("number");
 			String email = params.get("email");
 			String telphone = params.get("telphone");
 			if (name != null && number != null && email != null && telphone != null) {
-				tStudent.setName(name);
-				tStudent.setNumber(number);
-				tStudent.setEmail(email);
-				tStudent.setTelphone(telphone);
+				tTeacher.setName(name);
+				tTeacher.setNumber(number);
+				tTeacher.setEmail(email);
+				tTeacher.setTelphone(telphone);
 	
-				int ret = tStudentImpl.insert(tStudent);
+				int ret = tTeacherImpl.insert(tTeacher);
 				if (ret > 0) {
 					result = "ok";
 				} else {
@@ -351,7 +373,7 @@ public class ApiJson extends HttpServlet {
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
 			for (Object i : objs.toArray()) {
-				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				int ret = tTeacherImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
 					result = "ok";
 				} else {
@@ -379,14 +401,14 @@ public class ApiJson extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			Student tStudent = tStudentImpl.selectByPrimaryKey(id);
-			if (tStudent != null) {
-				tStudent.setName(obj.getString("name"));
-				tStudent.setNumber(obj.getString("number"));
-				tStudent.setEmail(obj.getString("email"));
-				tStudent.setTelphone(obj.getString("telphone"));
+			Teacher tTeacher = tTeacherImpl.selectByPrimaryKey(id);
+			if (tTeacher != null) {
+				tTeacher.setName(obj.getString("name"));
+				tTeacher.setNumber(obj.getString("number"));
+				tTeacher.setEmail(obj.getString("email"));
+				tTeacher.setTelphone(obj.getString("telphone"));
 
-				int ret = tStudentImpl.updateByPrimaryKey(tStudent);
+				int ret = tTeacherImpl.updateByPrimaryKey(tTeacher);
 				if (ret > 0) {
 					result = "ok";
 				} else {
