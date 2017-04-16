@@ -3,297 +3,327 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
 
-    <title>考试成绩评估分析系统</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+<title>考试成绩评估分析系统</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
 
-    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+<link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+<link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
-    <!-- Data Tables -->
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<!-- Data Tables -->
+<link href="css/plugins/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=2.2.0" rel="stylesheet">
 
 </head>
 
 <body>
-    <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
+	<div id="wrapper">
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="nav-header">
 
-                        <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Beaut</strong>
-                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">个人资料</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">
-                            H+
-                        </div>
+						<div class="dropdown profile-element">
+							<span> <img alt="image" class="img-circle"
+								src="img/profile_small.jpg" />
+							</span> <a data-toggle="dropdown" class="dropdown-toggle"
+								href="index.html#"> <span class="clear"> <span
+									class="block m-t-xs"> <strong class="font-bold">Beaut</strong>
+								</span> <span class="text-muted text-xs block">超级管理员 <b
+										class="caret"></b></span>
+							</span>
+							</a>
+							<ul class="dropdown-menu animated fadeInRight m-t-xs">
+								<li><a href="profile.html">个人资料</a></li>
+								<li class="divider"></li>
+								<li><a href="login.html">安全退出</a></li>
+							</ul>
+						</div>
+						<div class="logo-element">H+</div>
 
-                    </li>
-                    <li>
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">课程管理</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="course_viewall.html">查看所有课程</a>
-                            </li>
-                            <li><a href="course_create.html">增加课程</a>
-                            </li>
-                            <li><a href="course_delete.html">删除课程</a>
-                            </li>
-                            <li><a href="course_modify.html">修改课程</a>
-                            </li>
-                            <li><a href="course_query.html">查询课程</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                      <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">老师管理</span> <span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level">
-                        <li><a href="teacher_viewall.html">查看所有老师</a>
-                        </li>
-                        <li><a href="teacher_create.html">增加老师</a>
-                        </li>
-                        <li><a href="teacher_delete.html">删除老师</a>
-                        </li>
-                        <li><a href="teacher_modify.html">修改老师</a>
-                        </li>
-                        <li><a href="teacher_query.html">查看老师</a>
-                        </li>
-                        </ul>
-                    </li>
+					</li>
+					<li><a href="index.html"><i class="fa fa-th-large"></i> <span
+							class="nav-label">课程管理</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="course_viewall.html">查看所有课程</a></li>
+							<li><a href="course_create.html">增加课程</a></li>
+							<li><a href="course_delete.html">删除课程</a></li>
+							<li><a href="course_modify.html">修改课程</a></li>
+							<li><a href="course_query.html">查询课程</a></li>
+						</ul></li>
 
-                    <li>
-                      <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">学生管理</span> <span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level">
-                        <li><a href="student_viewall.html">查看所有学生</a>
-                        </li>
-                        <li><a href="student_create.html">增加学生</a>
-                        </li>
-                        <li><a href="student_delete.html">删除学生</a>
-                        </li>
-                        <li><a href="student_modify.html">修改学生</a>
-                        </li>
-                        <li><a href="student_query.html">查看学生</a>
-                        </li>
-                        </ul>
-                    </li>
+					<li><a href="index.html"><i class="fa fa-th-large"></i> <span
+							class="nav-label">老师管理</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="teacher_viewall.html">查看所有老师</a></li>
+							<li><a href="teacher_create.html">增加老师</a></li>
+							<li><a href="teacher_delete.html">删除老师</a></li>
+							<li><a href="teacher_modify.html">修改老师</a></li>
+							<li><a href="teacher_query.html">查看老师</a></li>
+						</ul></li>
 
-                    <li>
-                      <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">试卷管理</span> <span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level">
-                        <li><a href="paper_viewall.html">查看所有试卷</a>
-                        </li>
-                        <li><a href="paper_create.html">创建试卷</a>
-                        </li>
-                        <li><a href="paper_delete.html">删除试卷</a>
-                        </li>
-                        <li><a href="paper_modify.html">修改试卷</a>
-                        </li>
-                        <li><a href="paper_query.html">查看试卷</a>
-                        </li>
-                        </ul>
-                    </li>
+					<li><a href="index.html"><i class="fa fa-th-large"></i> <span
+							class="nav-label">学生管理</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="student_viewall.html">查看所有学生</a></li>
+							<li><a href="student_create.html">增加学生</a></li>
+							<li><a href="student_delete.html">删除学生</a></li>
+							<li><a href="student_modify.html">修改学生</a></li>
+							<li><a href="student_query.html">查看学生</a></li>
+						</ul></li>
 
-                    <li class="active">
-                      <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">成绩分析</span> <span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level">
-                        <li><a href="score_viewall.html">查看所有成绩</a>
-                        </li>
-                        <li><a href="score_create.html">上传成绩</a>
-                        </li>
-                        <li><a href="score_delete.html">删除成绩</a>
-                        </li>
-                        <li><a href="score_modify.html">修改成绩</a>
-                        </li>
-                        <li><a href="score_query.html">查询成绩</a>
-                        </li>
-                        <li class="active"><a href="score_analysis.html">成绩分析</a>
-                        </li>
-                      </ul>
-                    </li>
+					<li><a href="index.html"><i class="fa fa-th-large"></i> <span
+							class="nav-label">试卷管理</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="paper_viewall.html">查看所有试卷</a></li>
+							<li><a href="paper_create.html">创建试卷</a></li>
+							<li><a href="paper_delete.html">删除试卷</a></li>
+							<li><a href="paper_modify.html">修改试卷</a></li>
+							<li><a href="paper_query.html">查看试卷</a></li>
+						</ul></li>
 
-                </ul>
+					<li class="active"><a href="index.html"><i
+							class="fa fa-th-large"></i> <span class="nav-label">成绩分析</span> <span
+							class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="score_viewall.html">查看所有成绩</a></li>
+							<li><a href="score_create.html">上传成绩</a></li>
+							<li><a href="score_delete.html">删除成绩</a></li>
+							<li><a href="score_modify.html">修改成绩</a></li>
+							<li><a href="score_query.html">查询成绩</a></li>
+							<li class="active"><a href="score_analysis.html">成绩分析</a></li>
+						</ul></li>
 
-            </div>
-        </nav>
+				</ul>
 
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+			</div>
+		</nav>
 
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用</span>
-                        </li>
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+			<div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation"
+					style="margin-bottom: 0">
 
-                        <li>
-                            <a href="login.html">
-                                <i class="fa fa-sign-out"></i> 退出
-                            </a>
-                        </li>
-                    </ul>
+					<ul class="nav navbar-top-links navbar-right">
+						<li><span class="m-r-sm text-muted welcome-message"><a
+								href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用</span>
+						</li>
 
-                </nav>
-            </div>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>成绩分析</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">考试成绩评估分析系统</a>
-                        </li>
-                        <li>
-                            <a>成绩分析</a>
-                        </li>
-                        <li>
-                            <strong>成绩分析</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
-                </div>
-            </div>
-            <div class="wrapper wrapper-content animated fadeInRight">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>成绩数据 <small>浏览</small></h5>
-                                <div class="ibox-tools">
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
-                                    </a>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
-                                        <i class="fa fa-wrench"></i>
-                                    </a>
-                                    <a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="ibox-content">
+						<li><a href="login.html"> <i class="fa fa-sign-out"></i>
+								退出
+						</a></li>
+					</ul>
 
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
-                                    <thead>
-                                        <tr>
+				</nav>
+			</div>
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-10">
+					<h2>成绩分析</h2>
+					<ol class="breadcrumb">
+						<li><a href="index.html">考试成绩评估分析系统</a></li>
+						<li><a>成绩分析</a></li>
+						<li><strong>成绩分析</strong></li>
+					</ol>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<div class="wrapper wrapper-content animated fadeInRight">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>
+									成绩数据 <small>浏览</small>
+								</h5>
+								<div class="ibox-tools">
+									<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+									</a> <a class="dropdown-toggle" data-toggle="dropdown"
+										href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
+									</a> <a class="close-link"> <i class="fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+							<div class="ibox-content">
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+								<div class="form-group draggable ui-draggable">
+									<div class="col-sm-2">
+										<button id="paper-load" class="btn btn-primary btn-block">
+											<i class="glyphicon"></i>开始分析成绩
+										</button>
+									</div>
+									<div class="col-sm-2">
+										<button id="paper-load" class="btn btn-primary btn-block">
+											<i class="glyphicon glyphicon-cloud-download"></i>分析成绩并下载结果
+										</button>
+									</div>
+								</div>
 
-                                    </tbody>
-                                </table>
+                                <div class="hr-line-dashed"></div>
+                                <div class="hr-line-dashed"></div>
+                                
+								<div class="row">
+									<div class="col-md-2">
+										<select id="search-select" name="" style="font-size: 10px;"
+											class="form-control input-sm">
+											<option value="1">按学生名</option>
+											<option value="2">按老师</option>
+											<option value="3">按试卷</option>
+										</select>
+									</div>
+									<div class="col-md-4">
+										<input id="search-input" type="search"
+											class="form-control input-sm">
+									</div>
+									<div class="col-md-2">
+										<button type="button" class="btn btn-primary"
+											onclick="search()">搜索</button>
+									</div>
+								</div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <div class="pull-right">
-                </div>
-                <div>
-                </div>
-            </div>
+								<table
+									class="table table-striped table-bordered table-hover dataTables-example">
+									<thead>
+										<tr>
 
-        </div>
-    </div>
+										</tr>
+									</thead>
+									<tbody>
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js?v=3.4.0"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+									</tbody>
+								</table>
 
-    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="pull-right"></div>
+				<div></div>
+			</div>
 
-    <!-- Data Tables -->
-    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+		</div>
+	</div>
 
-    <!-- Custom and plugin javascript -->
-    <script src="js/hplus.js?v=2.2.0"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+	<!-- Mainly scripts -->
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js?v=3.4.0"></script>
+	<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Page-Level Scripts -->
-    <script>
+	<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
 
-     $(document).ready(function () {
+	<!-- Data Tables -->
+	<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
-       $.ajax({
-         type: "post",
-         url: "api/json.do",
-         dataType: "text",
+	<!-- Custom and plugin javascript -->
+	<script src="js/hplus.js?v=2.2.0"></script>
+	<script src="js/plugins/pace/pace.min.js"></script>
 
-         data: {
-           func: "score",
-           param1: "viewall"
-         },
-         timeout: 50000,
+	<!-- Page-Level Scripts -->
+	<script>
+		$(document).ready(
+				function() {
 
-         success: function (data) {
-           //alert(data);
-           var json = eval("("+data+")");
+					$.ajax({
+						type : "post",
+						url : "api/json.do",
+						dataType : "text",
 
-           var table = $(".ibox-content").children("table");
-           var table0 = table.eq(0);
-           /* thead */
-           var thead = table0.children("thead");
-           var thead_tr = thead.children("tr");
+						data : {
+							func : "score",
+							param1 : "viewall"
+						},
+						timeout : 50000,
 
-           var thead_tr_html = "";
-           
-           var spec_index = -1;
-           $.each(json.detailTHead, function(i, item) {
-        	 if ("成绩描述" == item) {
-        		 spec_index = i;
-        	 } else {
-                 thead_tr_html += "<th>" + item + "</th>";
-        	 }
-           });
-           thead_tr.html(thead_tr_html);
+						success : function(data) {
+							//alert(data);
+							var json = eval("(" + data + ")");
 
-           /* tbody */
-           var tbody = table0.children("tbody");
-           var tbody_html = "";
-           $.each(json.items, function(i, item) {
-             tbody_html += "<tr class=\"gradeX\">";
-             $.each(json.thead, function(i, thead_item) {
-               if (spec_index != -1 && spec_index == i) {
-            	   ;
-               } else {
-               		tbody_html += "<td>" + item[thead_item] + "</td>"
-               }
-             });
-             tbody_html += "</tr>";
-           });
-           tbody.html(tbody_html);
-         },
-         error: function() {
-           alert("网络异常，请稍后重试");
-         }
-       });
-     });
+							var table = $(".ibox-content").children("table");
+							var table0 = table.eq(0);
+							/* thead */
+							var thead = table0.children("thead");
+							var thead_tr = thead.children("tr");
 
-    </script>
+							var thead_tr_html = "";
+
+							var spec_index = -1;
+							$.each(json.detailTHead, function(i, item) {
+								if ("成绩描述" == item) {
+									spec_index = i;
+								} else {
+									thead_tr_html += "<th>" + item + "</th>";
+								}
+							});
+							thead_tr.html(thead_tr_html);
+
+							/* tbody */
+							var tbody = table0.children("tbody");
+							var tbody_html = "";
+							$.each(json.items, function(i, item) {
+								tbody_html += "<tr class=\"gradeX\">";
+								$.each(json.thead, function(i, thead_item) {
+									if (spec_index != -1 && spec_index == i) {
+										;
+									} else {
+										tbody_html += "<td>" + item[thead_item]
+												+ "</td>"
+									}
+								});
+								tbody_html += "</tr>";
+							});
+							tbody.html(tbody_html);
+						},
+						error : function() {
+							alert("网络异常，请稍后重试");
+						}
+					});
+					
+
+				     $("#search-input").bind('input propertychange', function() {
+				       search();
+				     });
+
+				     function search()
+				     {
+				       var search_select = $("#search-select option:selected").val();
+				       var search_input = $("#search-input").val();
+
+				       var table = $(".ibox-content").children("table");
+				       var table0 = table.eq(0);
+
+				       $.each(table0.find('tbody tr'), function(i, item) {
+				         var id = item.children[0].innerText;
+				         var student = item.children[1].innerText;
+				         var teacher = item.children[2].innerText;
+				         var paper = item.children[3].innerText;
+
+				         var target;
+				         switch(search_select) {
+				           case "1": target = student; break;
+				           case "2": target = teacher; break;
+				           case "3": target = paper; break;
+				         }
+				         var result = target.indexOf(search_input);
+				         if (result < 0) {
+				           /* hidden */
+				           item.style.display = 'none';
+				         } else {
+				           item.style.display = '';
+				         }
+				       });
+				     }
+				});
+	</script>
 
 </body>
 
