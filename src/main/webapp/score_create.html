@@ -368,7 +368,40 @@
            data: {
              func: "score",
              param1: "create",
-             param2: $("form").serialize()+"&creater=1",
+             param2: (function() {
+
+            	 var detail = {
+            			 student_id: $("input[name='student_id']").val(),
+		    	 		 teacher_id: $("input[name='teacher_id']").val(),
+		    			 paper_id: $("input[name='paper_id']").val(),
+    			 		 paper_name: $("#paper-id").val(),
+            	 		 paper_total_score: $("#paper-total-score").val(),
+            			 data:[]
+            	 };
+            	 
+            	 trs = $('#tbody-data tr');
+            	 $.each(trs, function(i, tr) {
+            		 var _type = tr.children[0].innerText;
+	           		 var _level_str = tr.children[1].innerText;
+	        		 var _level_index = tr.children[2].innerText;
+	        		 var _score_total = tr.children[3].innerText;
+	        		 var _score_real = tr.children[4].children[0].value
+	        		 var _comments = tr.children[5].children[0].value;
+	        		 
+	        		 detail.data.push({
+	        			 type: _type,
+	        			 level_str: _level_str,
+	        			 level_index: _level_index,
+	        			 score_total: _score_total,
+	        			 score_real: _score_real,
+	        			 comments: _comments
+	        		 });
+	             });
+            	 
+            	 var detail_str = JSON.stringify(detail);
+            	 var ret = $("form").serialize()+"&creater=1" + "&detail=" + detail_str;
+            	 return ret;
+             })(),
            },
            success: function(data) {
              //alert(data);

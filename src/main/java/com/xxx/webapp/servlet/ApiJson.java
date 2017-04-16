@@ -782,12 +782,12 @@ public class ApiJson extends HttpServlet {
 			String student_id = params.get("student_id");
 			String teacher_id = params.get("teacher_id");
 			String paper_id = params.get("paper_id");
-			String desc = params.get("desc");
-			if (student_id != null && teacher_id != null && paper_id != null && desc != null) {
+			String detail = params.get("detail");
+			if (student_id != null && teacher_id != null && paper_id != null && detail != null) {
 				tScoreResult.setStudentId(Integer.parseInt(student_id));
 				tScoreResult.setTeacherId(Integer.parseInt(teacher_id));
 				tScoreResult.setTestPaperId(Integer.parseInt(paper_id));
-				tScoreResult.setDetail(desc);
+				tScoreResult.setDetail(detail);
 	
 				int ret = tScoreResultImpl.insert(tScoreResult);
 				if (ret > 0) {
