@@ -40,6 +40,8 @@ public class ExportDoc {
 		}
 		// 输出文档路径及名称
 		File outFile = new File(fileName);
+		String absolutePath = outFile.getAbsolutePath();
+		System.out.println(absolutePath);
 		Writer out = null;
 		FileOutputStream fos = null;
 		try {

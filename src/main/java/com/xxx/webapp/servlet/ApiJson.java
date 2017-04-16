@@ -96,21 +96,33 @@ public class ApiJson extends HttpServlet {
     }
     
     protected void AnalysisMothod1(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
-    	String course = "";
-    	int number_all = 10;
-    	AnalysisService tAnalysis = new AnalysisService(course, number_all);
-    	data.put("result", tAnalysis.getResult());
+    	String param2 = request.getParameter("param2");
+		JSONObject obj = (JSONObject) JSON.parse(param2);
+    	// 参考应有人数
+		int number_all = obj.getIntValue("number_all");
+		int paper_id = obj.getIntValue("paper_id");
+		String paper_name = obj.getString("paper_name");
+		
+    	AnalysisService tAnalysis = new AnalysisService(paper_name, number_all);
+    	AnalysisService.Result tResult =  tAnalysis.getResult();
+    	data.put("result", tResult);
     }
     
     protected void AnalysisMothod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String realPath = this.getServletConfig().getServletContext().getRealPath("/");
     	
-    	String course = "";
-    	int number_all = 10;
-    	AnalysisService tAnalysis = new AnalysisService(course, number_all);
+    	String param2 = request.getParameter("param2");
+		JSONObject obj = (JSONObject) JSON.parse(param2);
+    	// 参考应有人数
+		int number_all = obj.getIntValue("number_all");
+		int paper_id = obj.getIntValue("paper_id");
+		String paper_name = obj.getString("paper_name");
+		
+    	AnalysisService tAnalysis = new AnalysisService(paper_name, number_all);
         AnalysisService.Result tResult =  tAnalysis.getResult();
     	
     	Map<String, Object> dataMap = new HashMap<String, Object>();
-        String fileName = "Result" + "" + ".doc";
+        String fileName = realPath + paper_name + "-Result" + "" + ".doc";
         String template = "Result.doc.ftl";
         
         dataMap.put("v_kechongmingcheng", tResult.course_name);

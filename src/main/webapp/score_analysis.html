@@ -152,21 +152,32 @@
 							</div>
 							<div class="ibox-content">
 
-								<div class="form-group draggable ui-draggable">
-									<div class="col-sm-2">
-										<button id="score-analysis-mothed1" class="btn btn-primary btn-block">
-											<i class="glyphicon"></i>开始分析成绩
-										</button>
-									</div>
-									<div class="col-sm-2">
-										<button id="score-analysis-mothed2" class="btn btn-primary btn-block">
-											<i class="glyphicon glyphicon-cloud-download"></i>分析成绩并下载结果
-										</button>
+								<div class="row">
+									<div class="form-group draggable ui-draggable">
+									
+										<div class="col-md-2">
+											<select id="paper-list" style="font-size: 10px;"
+												class="form-control input-sm">
+												<option value="1">选择需要分析的试卷</option>
+											</select>
+										</div>
+										
+										<div class="col-md-2">
+											<input id="number-all" type="search" class="form-control input-sm" placeholder="请输入参考人数">
+										</div>
+										
+										<div class="col-sm-2">
+											<button id="score-analysis-mothed1" class="btn btn-primary btn-block">
+												<i class="glyphicon"></i>开始分析成绩
+											</button>
+										</div>
+										<div class="col-sm-2">
+											<button id="score-analysis-mothed2" class="btn btn-primary btn-block">
+												<i class="glyphicon glyphicon-cloud-download"></i>分析成绩并下载结果
+											</button>
+										</div>
 									</div>
 								</div>
-
-                                <div class="hr-line-dashed"></div>
-                                <div class="hr-line-dashed"></div>
                                 
 								<div class="row">
 									<div class="col-md-2">
@@ -230,23 +241,30 @@
 
 	<!-- Page-Level Scripts -->
 	<script>
+	
 		$(document).ready(
 				function() {
 					
 					$('#score-analysis-mothed1').click(function(){
+						
+						var _param2 = {
+								number_all: $('#number-all').val(),
+								paper_id: $('#paper-list option:selected').val(),
+								paper_name: $('#paper-list option:selected').text(),
+						};
+						
 						$.ajax({
 							type : "post",
 							url : "api/json.do",
 							dataType : "text",
-
 							data : {
 								func : "analysis",
-								param1 : "mothod1"
+								param1 : "mothod1",
+								param2 : JSON.stringify(_param2)
 							},
 							timeout : 50000,
-
 							success : function(data) {
-								//alert(data);
+								alert(data);
 								var json = eval("(" + data + ")");
 							},
 							error : function() {
@@ -255,8 +273,53 @@
 						});
 					});
 					$('#score-analysis-mothed2').click(function(){
-						;
+						var _param2 = {
+								number_all: $('#number-all').val(),
+								paper_id: $('#paper-list option:selected').val(),
+								paper_name: $('#paper-list option:selected').text(),
+						};
+						
+						$.ajax({
+							type : "post",
+							url : "api/json.do",
+							dataType : "text",
+							data : {
+								func : "analysis",
+								param1 : "mothod2",
+								param2 : JSON.stringify(_param2)
+							},
+							timeout : 50000,
+							success : function(data) {
+								alert(data);
+								var json = eval("(" + data + ")");
+							},
+							error : function() {
+								alert("网络异常，请稍后重试");
+							}
+						});
 					});
+					
+					// 获取试卷列表
+				       $.ajax({
+				       url: 'api/json.do',
+				       type: "POST" ,
+				       contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				       //dataType:'json',
+				       data: {
+				         func: "paper",
+				         param1: "viewall",
+				         param2: $("form").serialize()+"&creater=1",
+				       },
+				       success: function(data) {
+				         //alert(data);
+				         var json = eval("("+data+")");
+				         for (item in json.items) {
+				        	 value = json.items[item].id;
+				        	 text = json.items[item].name;
+				         	$("#paper-list").append("<option value='"+value+"'>"+text+"</option>");
+				         }
+				       }
+				    });
 
 					$.ajax({
 						type : "post",
