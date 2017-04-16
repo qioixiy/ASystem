@@ -28,7 +28,7 @@ public class DownLoadServlet extends HttpServlet {
         //通过文件名找出文件的所在目录
         String path = findFileSavePathByFileName(fileName,fileSaveRootPath);
         //得到要下载的文件
-        File file = new File(path + "\\" + fileName);
+        File file = new File(path + "/" + fileName);
         //如果文件不存在
         if(!file.exists()){
             request.setAttribute("message", "您要下载的资源已被删除！！");
@@ -40,7 +40,7 @@ public class DownLoadServlet extends HttpServlet {
         //设置响应头，控制浏览器下载该文件
         response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realname, "UTF-8"));
         //读取要下载的文件，保存到文件输入流
-        FileInputStream in = new FileInputStream(path + "\\" + fileName);
+        FileInputStream in = new FileInputStream(path + "/" + fileName);
         //创建输出流
         OutputStream out = response.getOutputStream();
         //创建缓冲区
@@ -69,7 +69,7 @@ public class DownLoadServlet extends HttpServlet {
         int hashcode = filename.hashCode();
         int dir1 = hashcode&0xf;  //0--15
         int dir2 = (hashcode&0xf0)>>4;  //0-15
-        String dir = saveRootPath + "\\" + dir1 + "\\" + dir2;  //upload\2\3  upload\3\5
+        String dir = saveRootPath + "/" + dir1 + "/" + dir2;  //upload\2\3  upload\3\5
         File file = new File(dir);
         if(!file.exists()){
             //创建目录
