@@ -211,11 +211,34 @@
                                         	<button id="paper-load" class="btn btn-white btn-block"><i class="glyphicon glyphicon-cloud-download"></i>加载试卷信息</button>
                                     	</div>
                                     </div>
+                                    
+                                    <div class="hr-line-dashed"></div>
+                                    
                                     <div class="form-group draggable ui-draggable">
                                         <label class="col-sm-1 control-label"></label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="desc" class="form-control" placeholder="描述内容"></input>
-                                        </div>
+											<table
+												class="table table-striped table-bordered table-hover dataTables-example">
+												<thead>
+													<tr>
+														<th>序号</th>
+														<th>学生</th>
+														<th>老师</th>
+														<th>试卷ID</th>
+														<th>成绩描述</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>10</td>
+														<td>小天</td>
+														<td>蔡元培</td>
+														<td>2017数学期末考试</td>
+														<td>{{}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="draggable ui-draggable">
@@ -280,6 +303,7 @@
     <script>
 
     function make_paper_templete(paper_detail) {
+    	paper_detail.items.detail = eval("(" + paper_detail.items.detail + ")");
     	alert(paper_detail);
     }
     function load_paper_by_id(_id) {
