@@ -847,9 +847,9 @@ public class ApiJson extends HttpServlet {
 			
 			ScoreResult tScoreResult = tScoreResultImpl.selectByPrimaryKey(id);
 			if (tScoreResult != null) {
-				tScoreResult.setStudentId(Integer.parseInt(obj.getString("student_id")));
-				tScoreResult.setTeacherId(Integer.parseInt(obj.getString("teacher_id")));
-				tScoreResult.setTestPaperId(Integer.parseInt(obj.getString("paper_id")));
+				//tScoreResult.setStudentId(Integer.parseInt(obj.getString("student_id")));
+				//tScoreResult.setTeacherId(Integer.parseInt(obj.getString("teacher_id")));
+				//tScoreResult.setTestPaperId(Integer.parseInt(obj.getString("paper_id")));
 				tScoreResult.setDetail(obj.getString("desc"));
 
 				int ret = tScoreResultImpl.updateByPrimaryKey(tScoreResult);

@@ -279,6 +279,9 @@
     <!-- Page-Level Scripts -->
     <script>
 
+    function make_paper_templete(paper_detail) {
+    	alert(paper_detail);
+    }
     function load_paper_by_id(_id) {
     	$.ajax({
             url: 'api/json.do',
@@ -292,6 +295,7 @@
             success: function(data) {
               //alert(data);
               var json = eval("("+data+")");
+              make_paper_templete(json);
             }
           });
     }
