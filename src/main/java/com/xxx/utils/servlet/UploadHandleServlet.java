@@ -18,6 +18,8 @@ import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.xxx.misc.json.ResponseJsonUtils;
+
 /**
 * @ClassName: UploadHandleServlet
 * @Description: TODO(这里用一句话描述这个类的作用)
@@ -134,20 +136,24 @@ public class UploadHandleServlet extends HttpServlet {
                     }
                 }catch (FileUploadBase.FileSizeLimitExceededException e) {
                     e.printStackTrace();
-                    request.setAttribute("message", "单个文件超出最大值！！！");
-                    request.getRequestDispatcher("/message.jsp").forward(request, response);
-                    return;
+                    message = "单个文件超出最大值！！！";
+                    //request.setAttribute("message", message);
+                    //request.getRequestDispatcher("/message.jsp").forward(request, response);
+                    //return;
                 }catch (FileUploadBase.SizeLimitExceededException e) {
                     e.printStackTrace();
-                    request.setAttribute("message", "上传文件的总的大小超出限制的最大值！！！");
-                    request.getRequestDispatcher("/message.jsp").forward(request, response);
+                    message = "上传文件的总的大小超出限制的最大值！！！";
+                    //request.setAttribute("message", message);
+                    //request.getRequestDispatcher("/message.jsp").forward(request, response);
                     return;
                 }catch (Exception e) {
                     message= "文件上传失败！";
                     e.printStackTrace();
                 }
-                request.setAttribute("message",message);
-                request.getRequestDispatcher("/message.jsp").forward(request, response);
+                //request.setAttribute("message",message);
+                //request.getRequestDispatcher("/message.jsp").forward(request, response);
+                
+                ResponseJsonUtils.json(response, message);
     }
     
     /**
