@@ -86,16 +86,16 @@ public class ApiJson extends HttpServlet {
 
     protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	switch(request.getParameter("param1")) {
-    	case "mothod1":
-    		AnalysisMothod1(request, response, data);
+    	case "method1":
+    		AnalysisMethod1(request, response, data);
     		break;
-    	case "mothod2":
-    		AnalysisMothod2(request, response, data);
+    	case "method2":
+    		AnalysisMethod2(request, response, data);
     		break;
     	}
     }
     
-    protected void AnalysisMothod1(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void AnalysisMethod1(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String param2 = request.getParameter("param2");
 		JSONObject obj = (JSONObject) JSON.parse(param2);
     	// 参考应有人数
@@ -108,7 +108,7 @@ public class ApiJson extends HttpServlet {
     	data.put("result", tResult);
     }
     
-    protected void AnalysisMothod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    protected void AnalysisMethod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String realPath = this.getServletConfig().getServletContext().getRealPath("/");
     	
     	String param2 = request.getParameter("param2");

@@ -158,7 +158,7 @@
 										<div class="col-md-2">
 											<select id="paper-list" style="font-size: 10px;"
 												class="form-control input-sm">
-												<option value="1">选择需要分析的试卷</option>
+												<option value="0">选择需要分析的试卷</option>
 											</select>
 										</div>
 										
@@ -244,13 +244,25 @@
 	
 		$(document).ready(
 				function() {
-					
-					$('#score-analysis-mothed1').click(function(){
+					function analysis_method_common(method) {
+
+						_number_all = $('#number-all').val();
+						_paper_id = $('#paper-list option:selected').val();
+						_paper_name = $('#paper-list option:selected').text();
+						
+						if (0 == _paper_id) {
+							alert(_paper_name);
+							return;
+						}
+						if ("" == _number_all) {
+							alert("请输入参考人数");
+							return;
+						}
 						
 						var _param2 = {
-								number_all: $('#number-all').val(),
-								paper_id: $('#paper-list option:selected').val(),
-								paper_name: $('#paper-list option:selected').text(),
+								number_all: _number_all,
+								paper_id: _paper_id,
+								paper_name: _paper_name,
 						};
 						
 						$.ajax({
@@ -259,7 +271,7 @@
 							dataType : "text",
 							data : {
 								func : "analysis",
-								param1 : "mothod1",
+								param1 : method,
 								param2 : JSON.stringify(_param2)
 							},
 							timeout : 50000,
@@ -271,32 +283,12 @@
 								alert("网络异常，请稍后重试");
 							}
 						});
+					}
+					$('#score-analysis-mothed1').click(function(){
+						analysis_method_common("method1");
 					});
 					$('#score-analysis-mothed2').click(function(){
-						var _param2 = {
-								number_all: $('#number-all').val(),
-								paper_id: $('#paper-list option:selected').val(),
-								paper_name: $('#paper-list option:selected').text(),
-						};
-						
-						$.ajax({
-							type : "post",
-							url : "api/json.do",
-							dataType : "text",
-							data : {
-								func : "analysis",
-								param1 : "mothod2",
-								param2 : JSON.stringify(_param2)
-							},
-							timeout : 50000,
-							success : function(data) {
-								alert(data);
-								var json = eval("(" + data + ")");
-							},
-							error : function() {
-								alert("网络异常，请稍后重试");
-							}
-						});
+						analysis_method_common("method2");
 					});
 					
 					// 获取试卷列表
