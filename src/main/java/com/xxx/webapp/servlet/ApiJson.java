@@ -1,5 +1,6 @@
 package com.xxx.webapp.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -41,6 +42,20 @@ public class ApiJson extends HttpServlet {
     private static final TeacherImpl tTeacherImpl = new TeacherImpl();
     private static final TestPaperImpl tTestPaperImpl = new TestPaperImpl();
     private static final ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
+    
+    public static final Map<String, Object> implMap = new HashMap<String, Object>() {
+    	/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		{
+            put("CourseImpl", tCourseImpl);
+            put("StudentImpl", tStudentImpl);
+            put("TeacherImpl", tTeacherImpl);
+            put("TestPaperImpl", tTestPaperImpl);
+            put("ScoreResultImpl", tScoreResultImpl);
+        }
+    };
 
     /**
      * 返回json格式数据
@@ -103,13 +118,12 @@ public class ApiJson extends HttpServlet {
 		int paper_id = obj.getIntValue("paper_id");
 		String paper_name = obj.getString("paper_name");
 		
-    	AnalysisService tAnalysis = new AnalysisService(paper_name, number_all);
+    	AnalysisService tAnalysis = new AnalysisService(implMap, paper_id, number_all);
     	AnalysisService.Result tResult =  tAnalysis.getResult();
     	data.put("result", tResult);
     }
     
     protected void AnalysisMethod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
-    	String realPath = this.getServletConfig().getServletContext().getRealPath("/");
     	
     	String param2 = request.getParameter("param2");
 		JSONObject obj = (JSONObject) JSON.parse(param2);
@@ -118,11 +132,18 @@ public class ApiJson extends HttpServlet {
 		int paper_id = obj.getIntValue("paper_id");
 		String paper_name = obj.getString("paper_name");
 		
-    	AnalysisService tAnalysis = new AnalysisService(paper_name, number_all);
+    	AnalysisService tAnalysis = new AnalysisService(implMap, paper_id, number_all);
         AnalysisService.Result tResult =  tAnalysis.getResult();
     	
     	Map<String, Object> dataMap = new HashMap<String, Object>();
-        String fileName = realPath + paper_name + "-Result" + "" + ".doc";
+    	String tempPath = this.getServletContext().getRealPath("/WEB-INF/temp/");
+        File tmpFile = new File(tempPath);
+        if (!tmpFile.exists()) {
+            //创建临时目录
+            tmpFile.mkdir();
+        }
+    	
+        String fileName = tempPath + paper_name + "-Result" + "" + ".doc";
         String template = "Result.doc.ftl";
         
         dataMap.put("v_kechongmingcheng", tResult.course_name);
