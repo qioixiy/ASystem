@@ -203,6 +203,8 @@ public class AnalysisService  {
 	
 	// 通过pass1拿到的数值信息，决策分析得到最终的文字描述
 	private void analysisPass2(List<ScoreResult> tScoreResults, Result ret) {
+		boolean tongji_tixing = true;
+		Map<String, Integer> tongji_tixing_Map = new HashMap<>();
 		for (ScoreResult tScoreResult : tScoreResults) {
 			// 一个学生的考试成绩
 			String detail = tScoreResult.getDetail();
@@ -219,13 +221,26 @@ public class AnalysisService  {
 				String score_total = item.getString("score_total");
 				String score_real = item.getString("score_real");
 				String comments = item.getString("comments");
+				
+				// 统计基础题型的得分情况
+				// 123 基础　中等　有难度
+				if (tongji_tixing) {
+					Integer v = tongji_tixing_Map.get(level_index);
+					if (v == null) {
+						v = 0;
+					}
+					tongji_tixing_Map.put(level_index, v+1);
+				}
 			}
-						
+			tongji_tixing = false;
+
 			System.out.println(obj);
 		}
 		ret.Score_situation_base = "基本上那个全部学员能答对，1名答对50%";
 		ret.Score_situation_low = "基本上那个全部学员能答对，1名答对25%";
 		ret.Score_situation_high = "基本上那个全部学员能答对，1名没对分";
+		
+		// 1. 分析题型百分比分布情况，大于50%认为占比过大，正常比率
 		ret.comprehensive_analysis = "总体看该课程的主要知识点。试题结构较合理，强调基础知识、基本理论的掌握，学生考试情况基本反映了学生的学习情况和知识的掌握程度。";
 	}
 
