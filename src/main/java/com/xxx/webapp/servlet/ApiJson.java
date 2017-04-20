@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -142,8 +143,11 @@ public class ApiJson extends HttpServlet {
             //创建临时目录
             tmpFile.mkdir();
         }
-    	
-        String fileName = tempPath + paper_name + "-Result" + "" + ".doc";
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+        String date_str = sdf.format(new java.util.Date());
+        
+        String fileName = tempPath + paper_name + "_" + date_str + "_分析结果" + "" + ".doc";
         String template = "Result.doc.ftl";
         
         dataMap.put("v_kechongmingcheng", tResult.course_name);

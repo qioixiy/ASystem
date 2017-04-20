@@ -239,7 +239,11 @@ public class AnalysisService  {
 		ret.course_name = tTestPaper.getName();
 		ret.teaching_team = "2009级、2010级";
 		ret.number_all = number_all;
-		ret.number_abond = tScoreResults.size() - number_all;
+		ret.number_abond = number_all - tScoreResults.size();
+		if (tScoreResults.size() > number_all) {
+			ret.number_all = tScoreResults.size();
+			ret.number_abond = 0;
+		}
 
 		analysisPass1(tScoreResults, ret);
 		analysisPass2(tScoreResults, ret);
