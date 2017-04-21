@@ -22,8 +22,15 @@ public class DownLoadServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			String requestEncoding = request.getCharacterEncoding();
+			String responseEncoding = response.getCharacterEncoding();
+			if (requestEncoding == null) {
+				requestEncoding = "UTF-8";
+			}
+			requestEncoding = "ISO8859-1";
 			String fileName = request.getParameter("filename");
-			fileName = new String(fileName.getBytes("iso8859-1"), "UTF-8");
+			// ISO8859-1 ? UTF-8
+			fileName = new String(fileName.getBytes(requestEncoding), "UTF-8");
 			String fileSaveRootPath = this.getServletContext().getRealPath("/WEB-INF");
 			String path = fileSaveRootPath + "/upload";
 			path = fileSaveRootPath + "/result";
@@ -40,8 +47,8 @@ public class DownLoadServlet extends HttpServlet {
 			realname = fileName;
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("");
-			//response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realname, "UTF-8"));
-			response.setHeader( "Content-Disposition", "attachment;filename=" + new String( realname.getBytes("UTF-8"), "ISO8859-1" ) ); 
+			//response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(realname, "UTF-8"));
+			response.setHeader( "Content-Disposition", "attachment;filename=" + new String( realname.getBytes("UTF-8"), responseEncoding)); 
 			FileInputStream in = new FileInputStream(path + "/" + fileName);
 			OutputStream out = response.getOutputStream();
 			byte buffer[] = new byte[1024];
