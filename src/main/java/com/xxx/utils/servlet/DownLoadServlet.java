@@ -5,11 +5,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.xxx.misc.json.ResponseJsonUtils;
 
 @WebServlet("/utils/DownLoad")
 public class DownLoadServlet extends HttpServlet {
@@ -21,18 +26,19 @@ public class DownLoadServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //得到要下载的文件名
-        String fileName = request.getParameter("filename");  //23239283-92489-阿凡达.avi
+        String fileName = request.getParameter("filename");
         fileName = new String(fileName.getBytes("iso8859-1"),"UTF-8");
         //上传的文件都是保存在/WEB-INF/upload目录下的子目录当中
         String fileSaveRootPath=this.getServletContext().getRealPath("/WEB-INF/upload");
         //通过文件名找出文件的所在目录
-        String path = findFileSavePathByFileName(fileName,fileSaveRootPath);
+        String path = findFileSavePathByFileNameDiret(fileName,fileSaveRootPath);
         //得到要下载的文件
         File file = new File(path + "/" + fileName);
         //如果文件不存在
         if(!file.exists()){
-            request.setAttribute("message", "您要下载的资源已被删除！！");
-            request.getRequestDispatcher("/message.jsp").forward(request, response);
+        	Map<String, Object> data = new HashMap<String, Object>();
+        	data.put("message", "资源不存在");
+        	ResponseJsonUtils.json(response, data);
             return;
         }
         //处理文件名
@@ -76,6 +82,10 @@ public class DownLoadServlet extends HttpServlet {
             file.mkdirs();
         }
         return dir;
+    }
+    
+    public String findFileSavePathByFileNameDiret(String filename,String saveRootPath){
+        return saveRootPath + "/" + filename;
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)
