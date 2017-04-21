@@ -26,6 +26,7 @@ public class DownLoadServlet extends HttpServlet {
 			fileName = new String(fileName.getBytes("iso8859-1"), "UTF-8");
 			String fileSaveRootPath = this.getServletContext().getRealPath("/WEB-INF");
 			String path = fileSaveRootPath + "/upload";
+			path = fileSaveRootPath + "/result";
 			String filepath = path + "/" + fileName;
 			File file = new File(filepath);
 			System.out.println(filepath);
@@ -36,7 +37,11 @@ public class DownLoadServlet extends HttpServlet {
 				return;
 			}
 			String realname = fileName.substring(fileName.indexOf("_") + 1);
-			response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realname, "UTF-8"));
+			realname = fileName;
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("");
+			//response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realname, "UTF-8"));
+			response.setHeader( "Content-Disposition", "attachment;filename=" + new String( realname.getBytes("UTF-8"), "ISO8859-1" ) ); 
 			FileInputStream in = new FileInputStream(path + "/" + fileName);
 			OutputStream out = response.getOutputStream();
 			byte buffer[] = new byte[1024];

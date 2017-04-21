@@ -219,7 +219,7 @@
 				<div class="pull-right"></div>
 				<div></div>
 			</div>
-
+			<a download="" href="" target="blank" id="down_file"></a>
 		</div>
 	</div>
 
@@ -241,7 +241,68 @@
 
 	<!-- Page-Level Scripts -->
 	<script>
+	jQuery.download = function(url, data, method){    // 获得url和data
+	    if( url && data ){ 
+	        // data 是 string 或者 array/object
+	        data = typeof data == 'string' ? data : jQuery.param(data);        // 把参数组装成 form的  input
+	        var inputs = '';
+	        jQuery.each(data.split('&'), function(){ 
+	            var pair = this.split('=');
+	            inputs+='<input type="hidden" name="'+ pair[0] +'" value="'+ pair[1] +'" />'; 
+	        });        // request发送请求
+	        jQuery('<form action="'+ url +'" method="'+ (method||'post') +'">'+inputs+'</form>')
+	        .appendTo('body').submit().remove();
+	    };
+	};
 	
+	  function download_file(url) {
+		  return;
+		  $.post(url, function(data){
+		        if(data.code==0){  
+		            try{   
+		                var a = document.getElementById("down_file");  
+		                a.href=data.url;  
+		                a.download=data.fileName;  
+		                a.click();  
+		            }catch(e){   
+		            }   
+		        }else{  
+		            alert(data.errorMsg);  
+		        }                                 
+		    });
+	  }
+	  
+	  function ajax_download(url, data) {
+		    var $iframe,
+		        iframe_doc,
+		        iframe_html;
+
+		    if (($iframe = $('#download_iframe')).length === 0) {
+		        $iframe = $("<iframe id='download_iframe'" +
+		                    " style='display: none' src='about:blank'></iframe>"
+		                   ).appendTo("body");
+		    }
+
+		    iframe_doc = $iframe[0].contentWindow || $iframe[0].contentDocument;
+		    if (iframe_doc.document) {
+		        iframe_doc = iframe_doc.document;
+		    }
+
+		    iframe_html = "<html><head></head><body><form method='POST' action='" +
+		                  url +"'>" 
+
+		    Object.keys(data).forEach(function(key){
+		        iframe_html += "<input type='hidden' name='"+key+"' value='"+data[key]+"'>";
+
+		    });
+
+		        iframe_html +="</form></body></html>";
+
+		    iframe_doc.open();
+		    iframe_doc.write(iframe_html);
+		    $(iframe_doc).find('form').submit();
+		}
+	  
 		$(document).ready(
 				function() {
 					function analysis_method_common(method) {
@@ -276,8 +337,16 @@
 							},
 							timeout : 50000,
 							success : function(data) {
-								alert(data);
 								var json = eval("(" + data + ")");
+								if (json["param1"] == "method2") {
+									var url = "/asystem/utils/DownLoad?filename=" + json["filename"];
+
+									//$.download('/asystem/utils/DownLoad', encodeURI("filename=" + json["filename"]), 'post' );
+									//download_file(url);
+									ajax_download('/asystem/utils/DownLoad', {'filename': json["filename"]});
+									return;
+								}
+								alert(data);
 							},
 							error : function() {
 								alert("网络异常，请稍后重试");

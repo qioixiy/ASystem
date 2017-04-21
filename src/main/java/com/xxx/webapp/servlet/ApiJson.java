@@ -101,7 +101,8 @@ public class ApiJson extends HttpServlet {
     }
 
     protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
-    	switch(request.getParameter("param1")) {
+    	String param1 = request.getParameter("param1");
+    	switch(param1) {
     	case "method1":
     		AnalysisMethod1(request, response, data);
     		break;
@@ -109,6 +110,7 @@ public class ApiJson extends HttpServlet {
     		AnalysisMethod2(request, response, data);
     		break;
     	}
+    	data.put("param1", param1);
     }
     
     protected void AnalysisMethod1(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
@@ -137,7 +139,7 @@ public class ApiJson extends HttpServlet {
         AnalysisService.Result tResult =  tAnalysis.getResult();
     	
     	Map<String, Object> dataMap = new HashMap<String, Object>();
-    	String tempPath = this.getServletContext().getRealPath("/WEB-INF/temp/");
+    	String tempPath = this.getServletContext().getRealPath("/WEB-INF/result/");
         File tmpFile = new File(tempPath);
         if (!tmpFile.exists()) {
             //创建临时目录
@@ -147,7 +149,8 @@ public class ApiJson extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
         String date_str = sdf.format(new java.util.Date());
         
-        String fileName = tempPath + paper_name + "_" + date_str + "_分析结果" + "" + ".doc";
+        String fileName = paper_name + "_" + date_str + "_分析结果" + "" + ".doc";
+        String filePath = tempPath + fileName;
         String template = "Result.doc.ftl";
         
         dataMap.put("v_kechongmingcheng", tResult.course_name);
@@ -183,7 +186,9 @@ public class ApiJson extends HttpServlet {
 
         try {
             ExportDoc tExportDoc = new ExportDoc();
-            tExportDoc.createDoc(dataMap, fileName, template);
+            tExportDoc.createDoc(dataMap, filePath, template);
+            
+            data.put("filename", fileName);
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
