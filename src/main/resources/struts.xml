@@ -3,6 +3,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+	<constant name="struts.action.extension" value="action"/>
 	<package name="default" extends="struts-default">
 		<action name="login" class="com.xxx.webapp.struts2.action.LoginAction">
 			<result name="success">success.jsp</result>

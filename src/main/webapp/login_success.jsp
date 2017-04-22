@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Welcome</title>
-<meta http-equiv="refresh" content="1;url=index.html">
+<meta http-equiv="refresh" content="0;url=index.html">
 <s:head />
 </head>
 <body>
