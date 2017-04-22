@@ -203,15 +203,26 @@ public class AnalysisService  {
 	
 	// 通过pass1拿到的数值信息，决策分析得到最终的文字描述
 	private void analysisPass2(List<ScoreResult> tScoreResults, Result ret) {
+		// 获取类型只做一次
 		boolean tongji_tixing = true;
+		
+		// 题型分布统计:基础，中等，高级题型个数
 		Map<String, Integer> tongji_tixing_Map = new HashMap<>();
+		// 通过类型对每个学生的分数做分类统计，基础得多少分，中等得多少分，有难度的多少分
+		class LevelScore {
+			Integer score_total;
+			Integer score_real;
+		};
+		Map<String, LevelScore> level_Map = new HashMap<>();
+		ArrayList score_level = new ArrayList();
+		
 		for (ScoreResult tScoreResult : tScoreResults) {
 			// 一个学生的考试成绩
 			String detail = tScoreResult.getDetail();
 			JSONObject obj = (JSONObject) JSON.parse(detail);
 			JSONArray data = (JSONArray)obj.get("data");
 			
-			// 获取分数
+			// 获取分数数据
 			for (int i = 0; i < data.size(); i++) {
 				JSONObject item = data.getJSONObject(i);
 				//"type":"选择题1","level_str":"基础题目","level_index":"1","score_total":"5","score_real":"1","comments":""
@@ -220,22 +231,40 @@ public class AnalysisService  {
 				String level_index = item.getString("level_index");
 				String score_total = item.getString("score_total");
 				String score_real = item.getString("score_real");
-				String comments = item.getString("comments");
 				
 				// 统计基础题型的得分情况
-				// 123 基础　中等　有难度
+				// 1基础　2中等　3有难度
 				if (tongji_tixing) {
 					Integer v = tongji_tixing_Map.get(level_index);
 					if (v == null) {
 						v = 0;
 					}
-					tongji_tixing_Map.put(level_index, v+1);
+					v += 1;
+					
+					tongji_tixing_Map.put(level_index, v);
+				}
+				
+				// 按题型统计所有分数
+				{
+					LevelScore score = level_Map.get(level_index);
+					if (score == null) {
+						score = new LevelScore();
+						score.score_total = 0;
+						score.score_real = 0;
+					}
+					score.score_total += Integer.parseInt(score_total);
+					score.score_real += Integer.parseInt(score_real);
+					
+					level_Map.put(level_index, score);
 				}
 			}
 			tongji_tixing = false;
+			score_level.add(level_Map);
 
 			System.out.println(obj);
 		}
+		
+		// 题型所占比重，是否有全答对的?是否有没有得分的?
 		ret.Score_situation_base = "基本上那个全部学员能答对，1名答对50%";
 		ret.Score_situation_low = "基本上那个全部学员能答对，1名答对25%";
 		ret.Score_situation_high = "基本上那个全部学员能答对，1名没对分";
