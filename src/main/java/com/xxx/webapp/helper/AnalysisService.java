@@ -327,37 +327,39 @@ public class AnalysisService  {
 			}
 		}
 		if (Score_situation_base_score_0 != 0) {
-			ret.Score_situation_base += Score_situation_base_score_0 + "个没得分，";
+			ret.Score_situation_base += Score_situation_base_score_0 + "个没得分 ";
 		}
 		if (Score_situation_base_score_full != 0) {
-			ret.Score_situation_base += Score_situation_base_score_full + "个满分，";
+			ret.Score_situation_base += Score_situation_base_score_full + "个满分 ";
 		}
 		if (Score_situation_base_score_part_50 != 0) {
 			ret.Score_situation_base += Score_situation_base_score_part_50 + "个部分得分";
 		}
 		
 		if (Score_situation_low_score_0 != 0) {
-			ret.Score_situation_low += Score_situation_low_score_0 + "个没得分，";
+			ret.Score_situation_low += Score_situation_low_score_0 + "个没得分 ";
 		}
 		if (Score_situation_low_score_full != 0) {
-			ret.Score_situation_low += Score_situation_low_score_full + "个满分，";
+			ret.Score_situation_low += Score_situation_low_score_full + "个满分 ";
 		}
 		if (Score_situation_low_score_part_50 != 0) {
 			ret.Score_situation_low += Score_situation_low_score_part_50 + "个部分得分";
 		}
 		
 		if (Score_situation_high_score_0 != 0) {
-			ret.Score_situation_high += Score_situation_high_score_0 + "个没得分，";
+			ret.Score_situation_high += Score_situation_high_score_0 + "个没得分 ";
 		}
 		if (Score_situation_high_score_full != 0) {
-			ret.Score_situation_high += Score_situation_high_score_full + "个满分，";
+			ret.Score_situation_high += Score_situation_high_score_full + "个满分 ";
 		}
 		if (Score_situation_high_score_part_50 != 0) {
 			ret.Score_situation_high += Score_situation_high_score_part_50 + "个部分得分";
 		}
 		
+		// 综合分析
 		// 1. 分析题型百分比分布情况，大于50%认为占比过大，正常比率
-		ret.comprehensive_analysis = "总体看该课程的主要知识点。试题结构较合理，强调基础知识、基本理论的掌握，学生考试情况基本反映了学生的学习情况和知识的掌握程度。";
+		ret.comprehensive_analysis = "试卷题型分析：\n";
+		ret.comprehensive_analysis += "总体看该课程的主要知识点。试题结构较合理，强调基础知识、基本理论的掌握，学生考试情况基本反映了学生的学习情况和知识的掌握程度。";
 	}
 
 	public Result getResult() {
