@@ -4,7 +4,11 @@
 
 <struts>
 	<package name="default" extends="struts-default">
-		<action name="login.action" class="com.xxx.webapp.struts2.action.LoginAction">
+		<action name="login" class="com.xxx.webapp.struts2.action.LoginAction">
+			<result name="success">success.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<action name="loginAsystem" class="com.xxx.webapp.struts2.action.LoginAction">
 			<result name="success">success.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
