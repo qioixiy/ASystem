@@ -13,5 +13,9 @@
 			<result name="success">login_success.jsp</result>
 			<result name="error">login_error.jsp</result>
 		</action>
+		<action name="registerAsystem" class="com.xxx.webapp.struts2.action.RegisterActionAsystem">
+			<result name="success">register_success.jsp</result>
+			<result name="error">register_error.jsp</result>
+		</action>
 	</package>
 </struts>
