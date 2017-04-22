@@ -1,5 +1,9 @@
 package com.xxx.webapp.struts2.action;
 
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
+
 public class LoginActionAsystem {
 
 	private final ValidateService tValidateService = new ValidateService();
@@ -7,8 +11,12 @@ public class LoginActionAsystem {
 	private String password;
 
 	public String execute() {
+		ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		System.out.println(session.get("userName"));
 		if (!userName.isEmpty() && !password.isEmpty()
 				&& tValidateService.validateUserAndPassword(userName, password)) {
+			session.put("userName", userName);
 			return "success";
 		} else {
 			return "error";
