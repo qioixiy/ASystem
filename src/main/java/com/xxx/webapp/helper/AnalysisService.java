@@ -280,6 +280,81 @@ public class AnalysisService  {
 		ret.Score_situation_base = "基本上那个全部学员能答对，1名答对50%";
 		ret.Score_situation_low = "基本上那个全部学员能答对，1名答对25%";
 		ret.Score_situation_high = "基本上那个全部学员能答对，1名没对分";
+		ret.Score_situation_base = "";
+		ret.Score_situation_low = "";
+		ret.Score_situation_high = "";
+		
+		int Score_situation_base_score_0 = 0;// 得分为0
+		int Score_situation_base_score_full = 0;// 满分
+		int Score_situation_base_score_part_50 = 0;// 部分得分
+		int Score_situation_low_score_0 = 0;// 得分为0
+		int Score_situation_low_score_full = 0;// 满分
+		int Score_situation_low_score_part_50 = 0;// 部分得分
+		int Score_situation_high_score_0 = 0;// 得分为0
+		int Score_situation_high_score_full = 0;// 满分
+		int Score_situation_high_score_part_50 = 0;// 部分得分
+		for (Map<String, LevelScore> item_score_level : score_level) {
+			for ( Entry<String, LevelScore> entry : item_score_level.entrySet() ) {
+				System.out.println("Key = " + entry.getKey() + ", Value = score_total:" + entry.getValue().score_total + ", score_real:" + entry.getValue().score_real);
+
+				int total = entry.getValue().score_total;
+				int real = entry.getValue().score_real;
+				if (real == 0) {
+					switch(entry.getKey()) {
+					case "1": Score_situation_base_score_0++; break;
+					case "2": Score_situation_low_score_0++; break;
+					case "3": Score_situation_high_score_0++; break;
+					}
+					System.out.println("没有得分");
+				}
+				if (real == total) {
+					switch(entry.getKey()) {
+					case "1": Score_situation_base_score_full++; break;
+					case "2": Score_situation_low_score_full++; break;
+					case "3": Score_situation_high_score_full++; break;
+					}
+					System.out.println("满分");
+				} else {
+					if (real/(float)total >= 0.5) {
+						switch(entry.getKey()) {
+						case "1": Score_situation_base_score_part_50++; break;
+						case "2": Score_situation_low_score_part_50++; break;
+						case "3": Score_situation_high_score_part_50++; break;
+						}
+						System.out.println("部分得分");
+					}
+				}
+			}
+		}
+		if (Score_situation_base_score_0 != 0) {
+			ret.Score_situation_base += Score_situation_base_score_0 + "个没得分，";
+		}
+		if (Score_situation_base_score_full != 0) {
+			ret.Score_situation_base += Score_situation_base_score_full + "个满分，";
+		}
+		if (Score_situation_base_score_part_50 != 0) {
+			ret.Score_situation_base += Score_situation_base_score_part_50 + "个部分得分";
+		}
+		
+		if (Score_situation_low_score_0 != 0) {
+			ret.Score_situation_low += Score_situation_low_score_0 + "个没得分，";
+		}
+		if (Score_situation_low_score_full != 0) {
+			ret.Score_situation_low += Score_situation_low_score_full + "个满分，";
+		}
+		if (Score_situation_low_score_part_50 != 0) {
+			ret.Score_situation_low += Score_situation_low_score_part_50 + "个部分得分";
+		}
+		
+		if (Score_situation_high_score_0 != 0) {
+			ret.Score_situation_high += Score_situation_high_score_0 + "个没得分，";
+		}
+		if (Score_situation_high_score_full != 0) {
+			ret.Score_situation_high += Score_situation_high_score_full + "个满分，";
+		}
+		if (Score_situation_high_score_part_50 != 0) {
+			ret.Score_situation_high += Score_situation_high_score_part_50 + "个部分得分";
+		}
 		
 		// 1. 分析题型百分比分布情况，大于50%认为占比过大，正常比率
 		ret.comprehensive_analysis = "总体看该课程的主要知识点。试题结构较合理，强调基础知识、基本理论的掌握，学生考试情况基本反映了学生的学习情况和知识的掌握程度。";
