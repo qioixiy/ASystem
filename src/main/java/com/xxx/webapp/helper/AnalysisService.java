@@ -364,6 +364,11 @@ public class AnalysisService  {
 		} else {
 			ret.comprehensive_analysis += "这套试题的难度偏大，";
 		}
+		if (ret.course_per_base + ret.course_per_mid > 0.7) {
+			ret.comprehensive_analysis += "总体分布情况比较合理合理，";
+		} else {
+			ret.comprehensive_analysis += "总体分布情况比较不很合理，";
+		}
 		// 评价分数差距
 		if (ret.score_highest - ret.score_lowest > 60) {
 			ret.comprehensive_analysis += "最高分和最低分差距较大；";
