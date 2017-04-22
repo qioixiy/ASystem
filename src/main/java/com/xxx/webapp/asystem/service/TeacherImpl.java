@@ -37,4 +37,8 @@ public class TeacherImpl implements TeacherMapper {
     public List<Teacher> selectAll() {
     	return mTeacherDao.selectAll();
 	}
+    
+    public boolean validate(String name, String password) {
+    	return mTeacherDao.validate(name, password);
+	}
 }

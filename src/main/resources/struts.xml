@@ -8,9 +8,9 @@
 			<result name="success">success.jsp</result>
 			<result name="error">error.jsp</result>
 		</action>
-		<action name="loginAsystem" class="com.xxx.webapp.struts2.action.LoginAction">
-			<result name="success">success.jsp</result>
-			<result name="error">error.jsp</result>
+		<action name="loginAsystem" class="com.xxx.webapp.struts2.action.LoginActionAsystem">
+			<result name="success">login_success.jsp</result>
+			<result name="error">login_error.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -40,5 +40,19 @@ public class TeacherDao extends MyBatisDao {
 		TeacherDaoCustom tTeacherDaoCustom = getSqlSession().getMapper(TeacherDaoCustom.class);
 		return tTeacherDaoCustom.selectAll();
 	}
+	
+	public boolean validate(String name, String password) {
+		boolean ret = false;
+		try {
+			TeacherDaoCustom tTeacherDaoCustom = getSqlSession().getMapper(TeacherDaoCustom.class);
+			List<Teacher> tTeachers = tTeacherDaoCustom.validate(name, password);
+			if (tTeachers.size() > 0) {
+				ret = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return ret;
+	}
 
 }

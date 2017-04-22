@@ -1,15 +1,18 @@
 package com.xxx.webapp.struts2.action;
 
-public class LoginAction {
+public class LoginActionAsystem {
 
+	private final ValidateService tValidateService = new ValidateService();
 	private String userName;
 	private String password;
 
 	public String execute() {
-		if (userName.isEmpty() || password.isEmpty())
-			return "error";
-		else
+		if (!userName.isEmpty() && !password.isEmpty()
+				&& tValidateService.validateUserAndPassword(userName, password)) {
 			return "success";
+		} else {
+			return "error";
+		}
 	}
 
 	public String getUserName() {
