@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.Servlet;
 
@@ -213,8 +214,7 @@ public class AnalysisService  {
 			Integer score_total;
 			Integer score_real;
 		};
-		Map<String, LevelScore> level_Map = new HashMap<>();
-		ArrayList score_level = new ArrayList();
+		ArrayList<Map<String, LevelScore>> score_level = new ArrayList<Map<String, LevelScore>>();
 		
 		for (ScoreResult tScoreResult : tScoreResults) {
 			// 一个学生的考试成绩
@@ -223,6 +223,7 @@ public class AnalysisService  {
 			JSONArray data = (JSONArray)obj.get("data");
 			
 			// 获取分数数据
+			Map<String, LevelScore> level_Map = new HashMap<>();
 			for (int i = 0; i < data.size(); i++) {
 				JSONObject item = data.getJSONObject(i);
 				//"type":"选择题1","level_str":"基础题目","level_index":"1","score_total":"5","score_real":"1","comments":""
@@ -260,8 +261,20 @@ public class AnalysisService  {
 			}
 			tongji_tixing = false;
 			score_level.add(level_Map);
-
+			
 			System.out.println(obj);
+		}
+		System.out.println("tongji_tixing_Map");
+		for ( Entry<String, Integer> entry : tongji_tixing_Map.entrySet() ) {
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			System.out.println("--------------------------");
+		}
+		System.out.println("score_level");
+		for (Map<String, LevelScore> item_score_level : score_level) {
+			for ( Entry<String, LevelScore> entry : item_score_level.entrySet() ) {
+				System.out.println("Key = " + entry.getKey() + ", Value = score_total:" + entry.getValue().score_total + ", score_real:" + entry.getValue().score_real);
+			}
+			System.out.println("--------------------------");
 		}
 		
 		// 题型所占比重，是否有全答对的?是否有没有得分的?
