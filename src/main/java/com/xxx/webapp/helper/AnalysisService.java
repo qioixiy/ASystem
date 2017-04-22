@@ -267,14 +267,13 @@ public class AnalysisService  {
 		System.out.println("tongji_tixing_Map");
 		for ( Entry<String, Integer> entry : tongji_tixing_Map.entrySet() ) {
 			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			System.out.println("--------------------------");
 		}
 		System.out.println("score_level");
 		for (Map<String, LevelScore> item_score_level : score_level) {
+			System.out.println("--------------------------");
 			for ( Entry<String, LevelScore> entry : item_score_level.entrySet() ) {
 				System.out.println("Key = " + entry.getKey() + ", Value = score_total:" + entry.getValue().score_total + ", score_real:" + entry.getValue().score_real);
 			}
-			System.out.println("--------------------------");
 		}
 		
 		// 题型所占比重，是否有全答对的?是否有没有得分的?
