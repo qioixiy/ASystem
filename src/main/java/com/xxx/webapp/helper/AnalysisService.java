@@ -357,9 +357,31 @@ public class AnalysisService  {
 		}
 		
 		// 综合分析
-		// 1. 分析题型百分比分布情况，大于50%认为占比过大，正常比率
-		ret.comprehensive_analysis = "试卷题型分析：\n";
-		ret.comprehensive_analysis += "总体看该课程的主要知识点。试题结构较合理，强调基础知识、基本理论的掌握，学生考试情况基本反映了学生的学习情况和知识的掌握程度。";
+		// 评价试题难度
+		ret.comprehensive_analysis ="";
+		if (ret.course_per_high < 0.30) {
+			ret.comprehensive_analysis += "这套试题的难度不大，";
+		} else {
+			ret.comprehensive_analysis += "这套试题的难度偏大，";
+		}
+		// 评价分数差距
+		if (ret.score_highest - ret.score_lowest > 60) {
+			ret.comprehensive_analysis += "最高分和最低分差距较大；";
+		} else {
+			ret.comprehensive_analysis += "最高分和最低分差距不很大；";
+		}
+		// 分数段分析
+		if (ret.score_90_100_per > 20) {
+			ret.comprehensive_analysis += "高分段所占比率较大，";
+		}
+		if (ret.score_l_60_per < 10) {
+			ret.comprehensive_analysis += "及格率较高，";
+		}
+		if (ret.score_lowest < 40) {
+			ret.comprehensive_analysis += "最低分较突出,只有" + ret.score_lowest + "分，";
+		}
+		
+		ret.comprehensive_analysis += "面对成绩，面对不足，我们学会了思考。在课堂教学改革的路上，还有许多工作要做，许多困难要解决。我要更加认真学习——提升自我，不断总结——完善自我";
 	}
 
 	public Result getResult() {
