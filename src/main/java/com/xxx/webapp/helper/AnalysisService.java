@@ -127,14 +127,14 @@ public class AnalysisService  {
 
 		// 保存难易程度的map
 		Map<String, Integer> levelMap = new HashMap<>();
-		
+
+		boolean isFist = true;
 		for (ScoreResult tScoreResult : tScoreResults) {
 			// 一个学生的考试成绩
 			String detail = tScoreResult.getDetail();
 			JSONObject obj = (JSONObject) JSON.parse(detail);
 			JSONArray data = (JSONArray)obj.get("data");
 			
-			boolean isFist = true;
 			int score = 0;
 			// 获取分数
 			for (int i = 0; i < data.size(); i++) {
@@ -149,12 +149,15 @@ public class AnalysisService  {
 				score += Integer.parseInt(score_real);
 				
 				// 因为，每一个数据里面都包含了题目的难易程度，所以第一次就分析出来吧
-				Integer v = levelMap.get(level_index);
-				if (v == null) {
-					v = 0;
+				if (isFist) {
+					Integer v = levelMap.get(level_index);
+					if (v == null) {
+						v = 0;
+					}
+					levelMap.put(level_index, v+1);
 				}
-				levelMap.put(level_index, v+1);
 			}
+			isFist = false;
 			
 			if(score > 89.9) {
 				person_num_score_90_100++;
@@ -179,14 +182,11 @@ public class AnalysisService  {
 			System.out.println(obj);
 		}
 		
-		ret.course_per_base = 62.50f; 
-		ret.course_per_mid = 22.50f;
-		ret.course_per_high = 15;
-		
 		ret.score_avg = score_all/(float)cankao_renshu;
-		ret.course_per_base = levelMap.get("1")/cankao_renshu;
-		ret.course_per_mid = levelMap.get("2")/cankao_renshu;
-		ret.course_per_high = levelMap.get("3")/cankao_renshu;
+		int count = levelMap.get("3") + levelMap.get("2") + levelMap.get("1");
+		ret.course_per_base = levelMap.get("1")/(float)count;
+		ret.course_per_mid = levelMap.get("2")/(float)count;
+		ret.course_per_high = levelMap.get("3")/(float)count;
 		ret.score_90_100 = person_num_score_90_100;
 		ret.score_90_100_per = person_num_score_90_100/(float)cankao_renshu;
 		ret.score_80_89 = person_num_score_80_89;
