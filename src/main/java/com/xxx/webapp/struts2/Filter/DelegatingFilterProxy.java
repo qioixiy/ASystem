@@ -2,6 +2,7 @@ package com.xxx.webapp.struts2.Filter;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -45,6 +46,9 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 		} else {
 			FreeMarkerRender tFreeMarkerRender = new FreeMarkerRender(servletContext);
 			String path = request.getServletPath();
+			
+			Map<String, Object> dataMap = new HashMap<String, Object>();
+			dataMap.put("userName", userName);
 			if (!tFreeMarkerRender.render(path.substring(1), null, response.getWriter())) {
 				super.doFilter(req, res, chain);	
 			}
