@@ -49,7 +49,7 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 			
 			Map<String, Object> dataMap = new HashMap<String, Object>();
 			dataMap.put("userName", userName);
-			if (!tFreeMarkerRender.render(path.substring(1), null, response.getWriter())) {
+			if (!tFreeMarkerRender.render(path.substring(1), dataMap, response.getWriter())) {
 				super.doFilter(req, res, chain);	
 			}
 		}
