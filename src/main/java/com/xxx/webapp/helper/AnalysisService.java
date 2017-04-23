@@ -56,11 +56,13 @@ public class AnalysisService  {
 	
 	int paper_id;// 试卷id
 	int number_all;// 考试人数
+	String input_class; // 年级
 	
-	public AnalysisService(Map<String, Object> implMap, int paper_id, int number_all) {
+	public AnalysisService(Map<String, Object> implMap, int paper_id, int number_all, String input_class) {
 		this.implMap = implMap;
 		this.paper_id = paper_id;
 		this.number_all = number_all;
+		this.input_class = input_class;
 	}
 	
 	private List<ScoreResult> getAllScore() {
@@ -82,7 +84,7 @@ public class AnalysisService  {
 		Result ret = new Result();
 		
 		ret.course_name = "计算机应用基础";
-		ret.teaching_team = "2009级、2010级";
+		ret.teaching_team = input_class;//"2009级、2010级";
 		ret.number_all = 534;
 		ret.number_abond = 0;
 		
@@ -397,7 +399,7 @@ public class AnalysisService  {
 		Result ret = new Result();
 		
 		ret.course_name = tTestPaper.getName();
-		ret.teaching_team = "2009级、2010级";
+		ret.teaching_team = input_class;//"2009级、2010级";
 		ret.number_all = number_all;
 		ret.number_abond = number_all - tScoreResults.size();
 		if (tScoreResults.size() > number_all) {

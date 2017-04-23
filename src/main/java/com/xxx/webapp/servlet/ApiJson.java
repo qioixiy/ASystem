@@ -120,8 +120,9 @@ public class ApiJson extends HttpServlet {
 		int number_all = obj.getIntValue("number_all");
 		int paper_id = obj.getIntValue("paper_id");
 		String paper_name = obj.getString("paper_name");
+		String input_class = obj.getString("input_class");
 		
-    	AnalysisService tAnalysis = new AnalysisService(implMap, paper_id, number_all);
+    	AnalysisService tAnalysis = new AnalysisService(implMap, paper_id, number_all, input_class);
     	AnalysisService.Result tResult =  tAnalysis.getResult();
     	data.put("result", tResult);
     }
@@ -134,8 +135,9 @@ public class ApiJson extends HttpServlet {
 		int number_all = obj.getIntValue("number_all");
 		int paper_id = obj.getIntValue("paper_id");
 		String paper_name = obj.getString("paper_name");
+		String input_class = obj.getString("input_class");
 		
-    	AnalysisService tAnalysis = new AnalysisService(implMap, paper_id, number_all);
+    	AnalysisService tAnalysis = new AnalysisService(implMap, paper_id, number_all, input_class);
         AnalysisService.Result tResult =  tAnalysis.getResult();
     	
     	Map<String, Object> dataMap = new HashMap<String, Object>();
