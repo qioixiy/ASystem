@@ -852,7 +852,7 @@ public class ApiJson extends HttpServlet {
 		detailTHead.add("学生");
 		detailTHead.add("老师");
 		detailTHead.add("试卷ID");
-		detailTHead.add("成绩描述");
+		detailTHead.add("描述");
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
