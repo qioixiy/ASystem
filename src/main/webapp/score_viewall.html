@@ -225,7 +225,15 @@
                     <div class="row">
                       <div class="col-sm-10">
                         <div class="form-group">
-                          序号<input type="text" class="form-control" id="modify-id" readonly="readonly">
+                          <table class="table table-hover" id="table-view-detail">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th><th>题型</th><th>难度</th><th>总分</th><th>得分</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
@@ -309,8 +317,39 @@
            tbody.html(tbody_html);
 
            $(".view_detail").click(function() {
-        	   var id = this.parentNode.parentNode.firstChild.innerText;
-        	   $('#myModal-view-score-detail').modal('show');
+        	 var global_id = this.parentNode.parentNode.firstChild.innerText;
+             $.ajax({
+               type: "post",
+               url: "api/json.do",
+               dataType: "text",
+               data: {
+        	 func: "score",
+        	 param1: "viewall"
+               },
+               timeout: 50000,
+               success: function (data) {
+            	   var json = eval("("+data+")");
+		           var tb = $('#table-view-detail tbody');
+		           tb.html("");
+		           
+		           $.each(json.items, function(i, item) {
+		        	   if (global_id == item.id) {
+		        		   json = eval("("+item.desc+")");
+		        		   $.each(json.data, function(j, item2) {
+				        	   v1=item2.type;
+				        	   v2=item2.level_str;
+				        	   v3=item2.score_total;
+				        	   v4=item2.score_real;
+					           tb.append("<tr><td>"+j+"</td><td>"+v1+"</td><td>"+v2+"</td><td>"+v3+"</td><td>"+v4+"</td></tr>");
+		        		   });
+		        	   }
+		           });
+        	       
+		           $('#myModal-view-score-detail').modal('show');
+               },
+               error: function() {
+                 alert("网络异常，请稍后重试");
+               }});
            });
          },
          error: function() {
