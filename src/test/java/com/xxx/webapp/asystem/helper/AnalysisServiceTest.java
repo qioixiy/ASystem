@@ -20,7 +20,7 @@ public class AnalysisServiceTest {
 
     @Test
     public void AnalysisServiceTester() {
-        AnalysisService tAnalysis = new AnalysisService(null, 0, 10);
+        AnalysisService tAnalysis = new AnalysisService(null, 0, 10, "");
         AnalysisService.Result tResult =  tAnalysis.getResultTest();
 
         Map<String, Object> dataMap = new HashMap<String, Object>();
