@@ -152,7 +152,7 @@ public class ApiJson extends HttpServlet {
         String date_str = sdf.format(new java.util.Date());
         
         String fileName = paper_name + "_" + date_str + "_分析结果" + "" + ".doc";
-        String filePath = tempPath + fileName;
+        String filePath = tempPath + "/" + fileName;
         String template = "Result.doc.ftl";
         
         dataMap.put("v_kechongmingcheng", tResult.course_name);
