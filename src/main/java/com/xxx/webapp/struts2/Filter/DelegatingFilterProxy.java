@@ -48,7 +48,17 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 			String path = request.getServletPath();
 			
 			Map<String, Object> dataMap = new HashMap<String, Object>();
+			Map<String, String> userTypeMap = new HashMap<String, String>();
+			userTypeMap.put("manager", "管理员");
+			userTypeMap.put("teacher", "老师");
+			userTypeMap.put("student", "学生");
+			
 			dataMap.put("userName", userName);
+			String userTypeString = userTypeMap.get(session.getAttribute("userType"));
+			if (userTypeString != null) {
+				dataMap.put("userName", userTypeString + ":" + userName);
+			}
+			
 			if (!tFreeMarkerRender.render(path.substring(1), dataMap, response.getWriter())) {
 				super.doFilter(req, res, chain);	
 			}
