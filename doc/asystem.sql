@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 2017-04-16 18:53:58
--- 服务器版本： 5.7.17-0ubuntu1
+-- Generation Time: 2017-05-02 22:36:56
+-- 服务器版本： 5.7.18-0ubuntu0.17.04.1
 -- PHP Version: 7.0.15-1ubuntu4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -64,7 +64,15 @@ CREATE TABLE `score_result` (
 
 INSERT INTO `score_result` (`id`, `student_id`, `teacher_id`, `test_paper_id`, `detail`) VALUES
 (13, 2, 2, 2, '{\"student_id\":\"2\",\"teacher_id\":\"2\",\"paper_id\":\"2\",\"paper_name\":\"2017物理期末试卷\",\"paper_total_score\":\"100\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"20\",\"score_real\":\"10\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题1\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"20\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"}]}'),
-(12, 1, 1, 1, '{\"student_id\":\"1\",\"teacher_id\":\"1\",\"paper_id\":\"1\",\"paper_total_score\":\"120\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题3\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题4\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"15\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题5\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题2\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"}]}');
+(12, 1, 1, 1, '{\"student_id\":\"1\",\"teacher_id\":\"1\",\"paper_id\":\"1\",\"paper_total_score\":\"120\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题3\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题4\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"15\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题5\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题2\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"}]}'),
+(14, 2, 2, 2, '{\"student_id\":\"2\",\"teacher_id\":\"2\",\"paper_id\":\"2\",\"paper_name\":\"2017物理期末试卷\",\"paper_total_score\":\"100\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"20\",\"score_real\":\"10\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题1\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"20\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"}]}'),
+(15, 2, 2, 2, '{\"student_id\":\"2\",\"teacher_id\":\"2\",\"paper_id\":\"2\",\"paper_name\":\"2017物理期末试卷\",\"paper_total_score\":\"100\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"20\",\"score_real\":\"10\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题1\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"20\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"}]}'),
+(16, 2, 2, 2, '{\"student_id\":\"2\",\"teacher_id\":\"2\",\"paper_id\":\"2\",\"paper_name\":\"2017物理期末试卷\",\"paper_total_score\":\"100\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"20\",\"score_real\":\"10\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题1\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"20\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"}]}'),
+(17, 2, 2, 2, '{\"student_id\":\"2\",\"teacher_id\":\"2\",\"paper_id\":\"2\",\"paper_name\":\"2017物理期末试卷\",\"paper_total_score\":\"100\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"20\",\"score_real\":\"10\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题1\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"20\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"}]}'),
+(18, 2, 2, 2, '{\"student_id\":\"2\",\"teacher_id\":\"2\",\"paper_id\":\"2\",\"paper_name\":\"2017物理期末试卷\",\"paper_total_score\":\"100\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"20\",\"score_real\":\"10\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题1\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"20\",\"score_real\":\"20\",\"comments\":\"\"},{\"type\":\"计算题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"30\",\"score_real\":\"20\",\"comments\":\"\"}]}'),
+(19, 1, 1, 1, '{\"student_id\":\"1\",\"teacher_id\":\"1\",\"paper_id\":\"1\",\"paper_total_score\":\"120\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题3\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题4\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"15\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题5\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题2\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"}]}'),
+(20, 1, 1, 1, '{\"student_id\":\"1\",\"teacher_id\":\"1\",\"paper_id\":\"1\",\"paper_total_score\":\"120\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题3\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题4\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"15\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题5\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题2\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"}]}'),
+(21, 1, 1, 1, '{\"student_id\":\"1\",\"teacher_id\":\"1\",\"paper_id\":\"1\",\"paper_total_score\":\"120\",\"data\":[{\"type\":\"选择题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题2\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题3\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"5\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题4\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"15\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"选择题5\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"填空题2\",\"level_str\":\"中等难度\",\"level_index\":\"2\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题1\",\"level_str\":\"基础题目\",\"level_index\":\"1\",\"score_total\":\"10\",\"score_real\":\"1\",\"comments\":\"\"},{\"type\":\"简答题2\",\"level_str\":\"高难度题目\",\"level_index\":\"3\",\"score_total\":\"20\",\"score_real\":\"1\",\"comments\":\"\"}]}');
 
 -- --------------------------------------------------------
 
@@ -102,9 +110,9 @@ CREATE TABLE `teacher` (
   `id` int(11) NOT NULL COMMENT '用户id',
   `name` varchar(100) NOT NULL COMMENT '用户名',
   `password` varchar(1024) DEFAULT NULL COMMENT '密码',
-  `number` varchar(40) NOT NULL COMMENT '编号：老师的编号',
-  `email` varchar(40) NOT NULL DEFAULT 'a@b.com' COMMENT '联系方式:email',
-  `telphone` varchar(20) NOT NULL COMMENT '联系方式:telphone'
+  `number` varchar(40) DEFAULT NULL COMMENT '编号：老师的编号',
+  `email` varchar(40) DEFAULT 'a@b.com' COMMENT '联系方式:email',
+  `telphone` varchar(20) DEFAULT NULL COMMENT '联系方式:telphone'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表包括老师、学生、及其他';
 
 --
@@ -115,7 +123,8 @@ INSERT INTO `teacher` (`id`, `name`, `password`, `number`, `email`, `telphone`) 
 (1, '蔡元培', '', '20170301', '1@sch.edu', '1800000001'),
 (2, '周树人', '', '20170302', '2@sch.edu', '1800000002'),
 (3, '王老师', 'password', '20170303', '3@sch.edu', '1800000003'),
-(4, '李老师', NULL, '20170304', '4@sch.edu', '1800000004');
+(4, '李老师', NULL, '20170304', '4@sch.edu', '1800000004'),
+(5, 'admin', 'pw', '20170305', '', '');
 
 -- --------------------------------------------------------
 
@@ -186,7 +195,7 @@ ALTER TABLE `course`
 -- 使用表AUTO_INCREMENT `score_result`
 --
 ALTER TABLE `score_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=22;
 --
 -- 使用表AUTO_INCREMENT `student`
 --
@@ -196,7 +205,7 @@ ALTER TABLE `student`
 -- 使用表AUTO_INCREMENT `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id', AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id', AUTO_INCREMENT=9;
 --
 -- 使用表AUTO_INCREMENT `test_paper`
 --
