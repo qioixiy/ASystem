@@ -40,5 +40,19 @@ public class ManagerDao extends MyBatisDao {
 		ManagerDaoCustom tManagerDaoCustom = getSqlSession().getMapper(ManagerDaoCustom.class);
 		return tManagerDaoCustom.selectAll();
 	}
+	
+	public boolean validate(String name, String password) {
+		boolean ret = false;
+		try {
+			ManagerDaoCustom tManagerDaoCustom = getSqlSession().getMapper(ManagerDaoCustom.class);
+			List<Manager> tManagers = tManagerDaoCustom.validate(name, password);
+			if (tManagers.size() > 0) {
+				ret = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return ret;
+	}
 
 }

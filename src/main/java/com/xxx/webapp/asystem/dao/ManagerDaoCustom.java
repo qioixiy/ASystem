@@ -11,4 +11,6 @@ public interface ManagerDaoCustom {
 	@Select("select * from manager")
 	public List<Manager> selectAll();
 
+	@Select("select * from manager where name = #{0} and password = #{1}")
+	public List<Manager> validate(String name, String password);
 }

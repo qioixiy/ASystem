@@ -37,4 +37,8 @@ public class ManagerImpl implements ManagerMapper {
     public List<Manager> selectAll() {
     	return mManagerDao.selectAll();
 	}
+
+    public boolean validate(String name, String password) {
+    	return mManagerDao.validate(name, password);
+	}
 }

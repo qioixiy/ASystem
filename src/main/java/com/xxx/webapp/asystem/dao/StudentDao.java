@@ -3,6 +3,7 @@ package com.xxx.webapp.asystem.dao;
 import java.util.List;
 
 import com.xxx.utils.mybatis.MyBatisDao;
+import com.xxx.webapp.asystem.pojo.Manager;
 import com.xxx.webapp.asystem.pojo.Student;
 
 public class StudentDao extends MyBatisDao {
@@ -39,6 +40,20 @@ public class StudentDao extends MyBatisDao {
 	public List<Student> selectAll() {
 		StudentDaoCustom tStudentDaoCustom = getSqlSession().getMapper(StudentDaoCustom.class);
 		return tStudentDaoCustom.selectAll();
+	}
+
+	public boolean validate(String name, String password) {
+		boolean ret = false;
+		try {
+			StudentDaoCustom tStudentDaoCustom = getSqlSession().getMapper(StudentDaoCustom.class);
+			List<Student> tStudents = tStudentDaoCustom.validate(name, password);
+			if (tStudents.size() > 0) {
+				ret = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return ret;
 	}
 
 }

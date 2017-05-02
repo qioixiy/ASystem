@@ -17,6 +17,8 @@ public class LoginActionAsystem {
 		if (!userName.isEmpty() && !password.isEmpty()
 				&& tValidateService.validateUserAndPassword(userName, password)) {
 			session.put("userName", userName);
+			session.put("userType", tValidateService.getUserType());
+			
 			return "success";
 		} else {
 			return "error";

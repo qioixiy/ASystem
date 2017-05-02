@@ -37,4 +37,8 @@ public class StudentImpl implements StudentMapper {
     public List<Student> selectAll() {
     	return mStudentDao.selectAll();
 	}
+
+    public boolean validate(String name, String password) {
+    	return mStudentDao.validate(name, password);
+	}
 }
