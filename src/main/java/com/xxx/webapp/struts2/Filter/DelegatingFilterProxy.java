@@ -1,6 +1,7 @@
 package com.xxx.webapp.struts2.Filter;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,31 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 	private org.slf4j.Logger logger = LoggerFactory.getLogger(DelegatingFilterProxy.class);
 	final static private List<String> IGNORE_SESSION_CHECKING_LIST = Arrays.asList("/login.html");
  
+	private boolean customFilter(HttpSession session, Map<String, Object> dataMap) {
+		Object userName = session.getAttribute("userName");
+		if (userName == null) {
+			return false;
+		}
+		Map<String, String> userTypeMap = new HashMap<String, String>();
+		userTypeMap.put("manager", "管理员");
+		userTypeMap.put("teacher", "老师");
+		userTypeMap.put("student", "学生");
+
+		String userTypeString = userTypeMap.get(session.getAttribute("userType"));
+		if (userTypeString != null) {
+			dataMap.put("userName", userTypeString + ":" + userName);
+		}
+		
+		try {
+			userName = new String(((String) dataMap.get("userName")).getBytes("utf-8"), "iso-8859-1");
+			dataMap.put("userName", userName);
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return true;
+	}
+	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
@@ -48,16 +74,9 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 			String path = request.getServletPath();
 			
 			Map<String, Object> dataMap = new HashMap<String, Object>();
-			Map<String, String> userTypeMap = new HashMap<String, String>();
-			userTypeMap.put("manager", "管理员");
-			userTypeMap.put("teacher", "老师");
-			userTypeMap.put("student", "学生");
 			
 			dataMap.put("userName", userName);
-			String userTypeString = userTypeMap.get(session.getAttribute("userType"));
-			if (userTypeString != null) {
-				dataMap.put("userName", userTypeString + ":" + userName);
-			}
+			customFilter(session, dataMap);
 			
 			if (!tFreeMarkerRender.render(path.substring(1), dataMap, response.getWriter())) {
 				super.doFilter(req, res, chain);	

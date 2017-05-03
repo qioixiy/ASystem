@@ -23,14 +23,7 @@ public class FreeMarkerRender {
 	}
 	
 	public boolean render(String filename, Map<String, Object> dataMap, Writer out) {
-		
-		try {
-			String userName = new String(((String) dataMap.get("userName")).getBytes("utf-8"), "iso-8859-1");
-			dataMap.put("userName", userName);
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		
 		try {
 			Template t = configuration.getTemplate(filename);
