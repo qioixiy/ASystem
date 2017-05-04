@@ -698,15 +698,15 @@ public class ApiJson extends HttpServlet {
     	ArrayList<Object> detailTHead = new ArrayList<Object>();
     	arrayTHead.add("id");
     	arrayTHead.add("name");
-    	arrayTHead.add("desc");
     	arrayTHead.add("course_id");
     	arrayTHead.add("course_str");
+    	arrayTHead.add("desc");
 		data.put("thead", arrayTHead);
 		detailTHead.add("序号");
 		detailTHead.add("试卷名");
-		detailTHead.add("描述");
 		detailTHead.add("课程编号");
 		detailTHead.add("课程名称");
+		detailTHead.add("描述");
 		data.put("detailTHead", detailTHead);
 	    
         ArrayList<Object> arrayList=new ArrayList<Object>();
@@ -714,9 +714,9 @@ public class ApiJson extends HttpServlet {
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put("id", tTestPaper.getId());
 			item.put("name", tTestPaper.getName());
-			item.put("desc", tTestPaper.getDetail());
 			item.put("course_id", tTestPaper.getCourseId());
 			item.put("course_str", "unkown");
+			item.put("desc", tTestPaper.getDetail());
 			Course tCourse = tCourseImpl.selectByPrimaryKey(tTestPaper.getCourseId());
 			if (tCourse != null) {
 				item.put("course_str", tCourse.getName());
