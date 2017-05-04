@@ -193,9 +193,9 @@
                               <div class="row">
                                 <div class="col-md-2">
                                   <select id="search-select" name="" class="form-control input-sm">
-                                    <option value="1">按名字</option>
-                                    <option value="2">按描述</option>
-                                    <option value="3">按课程</option>
+                                    <option value="1">按试卷名</option>
+                                    <option value="2">课程编号</option>
+                                    <option value="3">课程名称</option>
                                   </select>
                                 </div>
                                 <div class="col-md-4">
@@ -275,8 +275,13 @@
            var thead_tr = thead.children("tr");
 
            var thead_tr_html = "";
+           var spec_index = -1;
            $.each(json.detailTHead, function(i, item) {
-             thead_tr_html += "<th>" + item + "</th>";
+        	   if ("描述" == item) {
+        		   spec_index = i;
+        		} else {
+        		   thead_tr_html += "<th>" + item + "</th>";
+        		}
            });
            thead_tr.html(thead_tr_html);
 
@@ -286,7 +291,11 @@
            $.each(json.items, function(i, item) {
              tbody_html += "<tr class=\"gradeX\">";
              $.each(json.thead, function(i, thead_item) {
-               tbody_html += "<td>" + item[thead_item] + "</td>"
+            	 if (spec_index != -1 && spec_index == i) {
+            		 ;
+            	 } else {
+            		tbody_html += "<td>" + item[thead_item] + "</td>"
+            	}
              });
              tbody_html += "</tr>";
            });
@@ -313,14 +322,14 @@
        $.each(table0.find('tbody tr'), function(i, item) {
          var id = item.children[0].innerText;
          var name = item.children[1].innerText;
-         var desc = item.children[2].innerText;
-         var course_id = item.children[3].innerText;
+         var number = item.children[2].innerText;
+         var course_name = item.children[3].innerText;
 
          var target;
          switch(search_select) {
            case "1": target = name; break;
-           case "2": target = desc; break;
-           case "3": target = course_id; break;
+           case "2": target = number; break;
+           case "3": target = course_name; break;
          }
          var result = target.indexOf(search_input);
          if (result < 0) {
