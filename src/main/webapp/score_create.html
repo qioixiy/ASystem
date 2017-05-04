@@ -115,18 +115,12 @@
                     <li class="active" id="li-score">
                       <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">成绩分析</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level">
-                        <li><a href="score_viewall.html">查看所有成绩</a>
-                        </li>
-                        <li class="active"><a href="score_create.html">上传成绩</a>
-                        </li>
-                        <li><a href="score_delete.html">删除成绩</a>
-                        </li>
-                        <li><a href="score_modify.html">修改成绩</a>
-                        </li>
-                        <li><a href="score_query.html">查询成绩</a>
-                        </li>
-                        <li><a href="score_analysis.html">成绩分析</a>
-                        </li>
+                       <li id="li-score-viewall"><a href="score_viewall.html">查看所有成绩</a></li>
+							<li id="li-score-create" class="active"><a href="score_create.html">上传成绩</a></li>
+							<li id="li-score-delete"><a href="score_delete.html">删除成绩</a></li>
+							<li id="li-score-modify"><a href="score_modify.html">修改成绩</a></li>
+							<li id="li-score-query"><a href="score_query.html">查询成绩</a></li>
+							<li id="li-score-analysis"><a href="score_analysis.html">成绩分析</a></li>
                       </ul>
                     </li>
 
@@ -419,7 +413,13 @@
      });
 
     </script>
-
+	<script>
+        $(document).ready(function () {
+        });
+        var g_user_type = "${userType}";
+    </script>
+    
+    <script src="js/private.js"></script>
 </body>
 
 </html>

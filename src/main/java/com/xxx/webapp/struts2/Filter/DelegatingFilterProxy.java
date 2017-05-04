@@ -40,6 +40,7 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 
 		String userTypeString = userTypeMap.get(session.getAttribute("userType"));
 		if (userTypeString != null) {
+			dataMap.put("userType", session.getAttribute("userType"));
 			dataMap.put("userName", userTypeString + ":" + userName);
 		}
 		
