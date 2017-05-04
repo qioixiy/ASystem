@@ -18,4 +18,11 @@ $(document).ready(function () {
     $("#li-score-analysis").remove();
     //$("li-score").remove();
   }
+
+  $("#search-select").css("padding-top", "0px");
+  $("#search-select").css("padding-bottom", "0px");
+  $("#paper-list").css("padding-top", "0px");
+  $("#paper-list").css("padding-bottom", "0px");
+  $("#search-select").css("padding-top", "0px");
+  $("#search-select").css("padding-bottom", "0px");
 });
