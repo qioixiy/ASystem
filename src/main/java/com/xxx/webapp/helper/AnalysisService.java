@@ -361,6 +361,7 @@ public class AnalysisService  {
 		// 综合分析
 		// 评价试题难度
 		ret.comprehensive_analysis ="";
+		ret.comprehensive_analysis += "从整套试题来看：";
 		if (ret.course_per_high < 0.30) {
 			ret.comprehensive_analysis += "这套试题的难度不大，";
 		} else {
@@ -371,7 +372,24 @@ public class AnalysisService  {
 		} else {
 			ret.comprehensive_analysis += "总体分布情况比较不很合理，";
 		}
+		// 对平均分做分析
+		if (ret.score_avg > 90) {
+			ret.comprehensive_analysis += "从班级的平均分来看，是相当的优秀，望再接再厉，保持水平，继续发挥最好的水平;";
+		} else if (ret.score_avg > 80) {
+			ret.comprehensive_analysis += "从班级的平均分来看，较优秀，望同学们继续努力，希望能改发挥更好的水平;";
+		} else if (ret.score_avg > 70) {
+			ret.comprehensive_analysis += "从班级的平均分来看，成绩良好，但还有很多的提升控件，望同学们能再认真努力一点，一定能取得更好的成绩;";
+		} else if (ret.score_avg > 60) {
+			ret.comprehensive_analysis += "从班级的平均分来看，刚刚超过及格线，处于比较危险的水平，要引起老师重视，多督促同学;";
+		} else if (ret.score_avg > 50) {
+			ret.comprehensive_analysis += "从班级的平均分来看，还没有达到及格水平，老师应该多鼓励学生的学习热情;";
+		} else {
+			ret.comprehensive_analysis += "从班级的平均分来看，整个班级的平均分不容乐观，应该是出现了很大的学习方向问题，老师和学生必须花更多的时间用来提高学习上来;";
+		}
 		// 评价分数差距
+		ret.comprehensive_analysis += "从分数段来看：";
+		ret.comprehensive_analysis += "最高分" + ret.score_highest;
+		ret.comprehensive_analysis += "，最低分" + ret.score_lowest + ",";
 		if (ret.score_highest - ret.score_lowest > 60) {
 			ret.comprehensive_analysis += "最高分和最低分差距较大；";
 		} else {
@@ -388,7 +406,14 @@ public class AnalysisService  {
 			ret.comprehensive_analysis += "最低分较突出,只有" + ret.score_lowest + "分，";
 		}
 		
-		ret.comprehensive_analysis += "面对成绩，面对不足，我们学会了思考。在课堂教学改革的路上，还有许多工作要做，许多困难要解决。我要更加认真学习——提升自我，不断总结——完善自我";
+		// 整体分析
+		ret.comprehensive_analysis += "总体来说，我们班的成绩";
+		if (ret.score_avg > 60) {
+			ret.comprehensive_analysis += "还不错";
+		} else {
+			ret.comprehensive_analysis += "不理想";
+		}
+		ret.comprehensive_analysis += ";面对成绩，面对不足; 对于老师，还有许多工作要做，许多困难要解决。学生要更加认真学习提升自我，不断总结完善自我";
 	}
 
 	public Result getResult() {
