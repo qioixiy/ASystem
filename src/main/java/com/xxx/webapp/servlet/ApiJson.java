@@ -808,7 +808,7 @@ public class ApiJson extends HttpServlet {
 				
 				tTestPaper.setName(obj.getString("name"));
 				tTestPaper.setDetail(obj.getString("desc"));
-				tTestPaper.setCourseId(Integer.parseInt(obj.getString("course_id")));
+				//tTestPaper.setCourseId(Integer.parseInt(obj.getString("course_id")));
 
 				int ret = tTestPaperImpl.updateByPrimaryKey(tTestPaper);
 				if (ret > 0) {

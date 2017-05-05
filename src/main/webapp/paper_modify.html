@@ -223,12 +223,12 @@
                                                 <input type="text" class="form-control" id="modify-name">
                                               </div>
                                               <div class="form-group">
-                                                <label>试卷描述</label>
-                                                <input type="text" class="form-control" id="modify-desc">
+                                                <label>课程名</label>
+                                                <input type="text" class="form-control" id="modify-course-name" readonly="readonly">
                                               </div>
                                               <div class="form-group">
-                                                <label>课程</label>
-                                                <input type="text" class="form-control" id="modify-course-id" readonly="readonly">
+                                                <label>试卷描述</label>
+                                                <textarea class="form-control" rows="5" id="modify-desc"></textarea>
                                               </div>
                                             </div>
                                           </div>
@@ -315,7 +315,12 @@
            var thead_tr = thead.children("tr");
 
            var thead_tr_html = "<th class=\"check-header hidden-xs\"></th>";
+           
+           var spec_index = -1;
            $.each(json.detailTHead, function(i, item) {
+        	   if ("描述" == item) {
+        		   spec_index = i;
+        		}
              thead_tr_html += "<th>" + item + "</th>";
            });
            thead_tr.html(thead_tr_html);
@@ -327,7 +332,13 @@
              tbody_html += "<tr class=\"gradeX\">";
              tbody_html += "<td> <button class=\"btn btn-xs\" data-toggle=\"modal\" data-target=\"#modifyForm\" onclick=\"modify_item(this)\">修改</button> </td>";
              $.each(json.thead, function(i, thead_item) {
-               tbody_html += "<td>" + item[thead_item] + "</td>"
+            	 if (spec_index != -1 && spec_index == i) {
+            		 tbody_html += "<td><button class=\"btn btn-xs view_detail\" data-toggle=\"modal\" data-target=\"#view_detail_Form\" "
+            		 	+ "data-value='" + item[thead_item] + "'"
+            		 	+ "onclick=\"view_item(this)\">#</button></td>";
+            	 } else {
+            		tbody_html += "<td>" + item[thead_item] + "</td>"
+            	}
              });
              tbody_html += "</tr>";
            });
@@ -382,13 +393,16 @@
      {
        var id = obj.parentNode.parentNode.cells[1].textContent;
        var name = obj.parentNode.parentNode.cells[2].textContent;
-       var desc = obj.parentNode.parentNode.cells[3].textContent;
-       var course_id = obj.parentNode.parentNode.cells[4].textContent;
+       var course_id = obj.parentNode.parentNode.cells[3].textContent;
+       var course_name = obj.parentNode.parentNode.cells[4].textContent;
+       var desc = obj.parentNode.parentNode.cells[5].textContent;
+       desc = obj.parentNode.parentNode.cells[5].childNodes[0].dataset.value;
 
        $("#modify-id").val(id);
        $("#modify-name").val(name);
-       $("#modify-desc").val(desc);
        $("#modify-course-id").val(course_id);
+       $("#modify-course-name").val(course_name);
+       $("#modify-desc").val(desc);
        $('#myModal-modify').modal('show');
        return;
      }
