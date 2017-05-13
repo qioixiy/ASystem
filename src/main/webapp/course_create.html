@@ -287,6 +287,7 @@
            },
            success: function(data) {
              //alert(data);
+             // 修改功能是通过一个对话框完成的
              var json = eval("("+data+")");
              $("#myModal-result-p").text(json.result);
              $('#myModal-result').modal('show');

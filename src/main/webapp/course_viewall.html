@@ -237,7 +237,8 @@
     <script>
 
      $(document).ready(function () {
-
+    	 // 页面加载完成后的动作。
+		// 请求数据
        $.ajax({
          type: "post",
          url: "api/json.do",
@@ -247,12 +248,16 @@
            func: "course",
            param1: "viewall"
          },
+         
+         // 超时设置
          timeout: 50000,
 
+         // 得到数据后的动作
          success: function (data) {
            //alert(data);
            var json = eval("("+data+")");
-
+			
+           // 根据得到的数据创建html 元素，是
            var table = $(".ibox-content").children("table");
            var table0 = table.eq(0);
            /* thead */

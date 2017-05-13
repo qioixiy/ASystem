@@ -304,9 +304,12 @@
 
      function search()
      {
+    	 
+    	 // 条件查询实现
        var search_select = $("#search-select option:selected").val();
        var search_input = $("#search-input").val();
 
+       // 获取到对应的表格
        var table = $(".ibox-content").children("table");
        var table0 = table.eq(0);
 
@@ -322,6 +325,7 @@
            case "2": target = title; break;
            case "3": target = detail; break;
          }
+         // 查询，查到显示，否则隐藏起来
          var result = target.indexOf(search_input);
          if (result < 0) {
            /* hidden */

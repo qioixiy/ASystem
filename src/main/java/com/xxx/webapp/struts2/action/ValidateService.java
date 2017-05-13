@@ -14,6 +14,7 @@ public class ValidateService {
 	public boolean validateUserAndPassword(String name, String password) {
 		boolean ret = true;
 		
+		// 先到管理员进行验证，再看老师，最后才是学生用户，
 		if (fManagerImpl.validate(name, password)) {
 			userType = "manager";
 		} else if (fTeacherImpl.validate(name, password)) {

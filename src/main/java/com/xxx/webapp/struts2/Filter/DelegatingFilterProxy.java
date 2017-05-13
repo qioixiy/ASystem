@@ -57,6 +57,7 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
+		// 页面入口位置
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)res;
 		
@@ -66,19 +67,24 @@ public class DelegatingFilterProxy extends FilterDispatcher {
 		logger.debug("doFilter: {},{}", servletPath,
 				IGNORE_SESSION_CHECKING_LIST.indexOf(servletPath));
   
+		// 判断是否有用户登录
 		HttpSession session = request.getSession();
 		Object userName = session.getAttribute("userName");
 		if( userName == null && IGNORE_SESSION_CHECKING_LIST.indexOf(servletPath) == -1 ){
+			// 如果没有找到就调转到登录页面
 			response.sendRedirect("login.html");
 		} else {
+			// 已经登录就进入需要的页面
 			FreeMarkerRender tFreeMarkerRender = new FreeMarkerRender(servletContext);
 			String path = request.getServletPath();
 			
 			Map<String, Object> dataMap = new HashMap<String, Object>();
 			
+			// 修改页面中的用户名为登录的用户
 			dataMap.put("userName", userName);
 			customFilter(session, dataMap);
 			
+			// 生成页面
 			if (!tFreeMarkerRender.render(path.substring(1), dataMap, response.getWriter())) {
 				super.doFilter(req, res, chain);	
 			}

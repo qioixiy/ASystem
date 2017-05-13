@@ -62,35 +62,35 @@ public class ApiJson extends HttpServlet {
      * 返回json格式数据
      */
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    	// 请求处理入口
         request.setCharacterEncoding("UTF-8");
         dispatcher(request, response);
     }
     
     protected void dispatcher(HttpServletRequest request, HttpServletResponse response) {
-
+    	// 分发实现
     	Map<String, Object> data = new HashMap<String, Object>();
     	
     	String func = request.getParameter("func");
         data.put("func", func);
         
         switch(func) {
-        case "course":
+        case "course"://课程相关
         	Course(request, response, data);
         	break;
-        case "student":
+        case "student"://学生
         	Student(request, response, data);
         	break;
-        case "teacher":
+        case "teacher"://老师
         	Teacher(request, response, data);
         	break;
-        case "paper":
+        case "paper"://试卷数据
         	Paper(request, response, data);
         	break;
-        case "score":
+        case "score"://成绩数据
         	Score(request, response, data);
         	break;
-        case "analysis":
+        case "analysis"://分析请求
         	Analysis(request, response, data);
         	break;
         default:
@@ -129,6 +129,7 @@ public class ApiJson extends HttpServlet {
     
     protected void AnalysisMethod2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	
+    	// 成绩分析 api入口
     	String param2 = request.getParameter("param2");
 		JSONObject obj = (JSONObject) JSON.parse(param2);
     	// 参考应有人数
@@ -199,19 +200,19 @@ public class ApiJson extends HttpServlet {
     
     protected void Course(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	switch(request.getParameter("param1")) {
-    	case "viewall":
+    	case "viewall": // 查看
     		CourseViewAll(request, response, data);
     		break;
-    	case "create":
+    	case "create": // 创建
     		CourseCreate(request, response, data);
     		break;
-    	case "delete":
+    	case "delete": // 删除
     		CourseDelete(request, response, data);
     		break;
-    	case "modify":
+    	case "modify": // 修改
     		CourseModify(request, response, data);
     		break;
-    	case "get_list":
+    	case "get_list": // 获取数据
     		CourseGetList(request, response, data);
     	}
     }
@@ -237,6 +238,7 @@ public class ApiJson extends HttpServlet {
     }
     protected void CourseViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
 
+    	// 组装表头
     	ArrayList<Object> arrayTHead = new ArrayList<Object>();
     	ArrayList<Object> detailTHead = new ArrayList<Object>();
     	arrayTHead.add("id");
@@ -254,6 +256,7 @@ public class ApiJson extends HttpServlet {
 		detailTHead.add("创建时间");
 		data.put("detailTHead", detailTHead);
     	
+		// 查询数据库得到数据，
         ArrayList<Object> arrayList=new ArrayList<Object>();
 		for(Course tCourse : tCourseImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
@@ -274,8 +277,12 @@ public class ApiJson extends HttpServlet {
     }
 
     protected void CourseCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	// 创建课程
+    	
+    	// 获取请求参数
     	String param2 = request.getParameter("param2");
 		try {
+			// 转换字符编码为UTF-8
 			param2 = URLDecoder.decode(param2, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
@@ -284,18 +291,20 @@ public class ApiJson extends HttpServlet {
         Map<String, String> params = UrlUtils.toMap(param2);
 
 		String result = "error";
-		Course tCourse = new Course();
+		Course tCourse = new Course();// 创建课程对象
 		try {
 			String name = params.get("name");
 			String title = params.get("title");
 			String detail = params.get("detail");
 			if (name != null && title != null && detail != null) {
+				// 填入对应的数据
 				tCourse.setName(name);
 				tCourse.setTitle(title);
 				tCourse.setDetail(detail);
 				tCourse.setCreater(Integer.parseInt(params.get("creater")));
 				tCourse.setCreateTimestamp(new Date());
 	
+				// 插入数据库
 				int ret = tCourseImpl.insert(tCourse);
 				if (ret > 0) {
 					result = "ok";
@@ -311,6 +320,7 @@ public class ApiJson extends HttpServlet {
     }
 
     protected void CourseDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	// 删除课程实现
     	String param2 = request.getParameter("param2");
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
@@ -324,6 +334,7 @@ public class ApiJson extends HttpServlet {
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
 			for (Object i : objs.toArray()) {
+				// 通过ID删除课程数据
 				int ret = tCourseImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
 					result = "ok";
@@ -339,6 +350,7 @@ public class ApiJson extends HttpServlet {
     	data.put("result", result);
     }
     protected void CourseModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	// 修改课程数据
     	String param2 = request.getParameter("param2");
 		try {
 			param2 = URLDecoder.decode(param2, "UTF-8");
@@ -348,16 +360,18 @@ public class ApiJson extends HttpServlet {
 
 		String result = "error";
 		try {
-
+			// 获取到请求上传的数据
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
 			Course tCourse = tCourseImpl.selectByPrimaryKey(id);
 			if (tCourse != null) {
+				// 填入需要修改的数据
 				tCourse.setName(obj.getString("name"));
 				tCourse.setTitle(obj.getString("title"));
 				tCourse.setDetail(obj.getString("detail"));
 
+				// 更新数据到数据库
 				int ret = tCourseImpl.updateByPrimaryKey(tCourse);
 				if (ret > 0) {
 					result = "ok";

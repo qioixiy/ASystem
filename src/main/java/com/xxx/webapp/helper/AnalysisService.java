@@ -160,7 +160,7 @@ public class AnalysisService  {
 				}
 			}
 			isFist = false;
-			
+			// 分数段统计
 			if(score > 89.9) {
 				person_num_score_90_100++;
 			} else if (score > 89.9) {
@@ -173,9 +173,11 @@ public class AnalysisService  {
 				person_num_score_l_60++;
 			}
 			
+			// 最低分
 			if (person_num_score_lowest > score) {
 				person_num_score_lowest = score;
 			}
+			// 最高分统计
 			if (person_num_score_highest < score) {
 				person_num_score_highest = score;
 			}
@@ -184,6 +186,7 @@ public class AnalysisService  {
 			System.out.println(obj);
 		}
 		
+		// 平均分
 		ret.score_avg = score_all/(float)cankao_renshu;
 		int count = levelMap.get("3") + levelMap.get("2") + levelMap.get("1");
 		ret.course_per_base = levelMap.get("1")/(float)count;
@@ -328,6 +331,7 @@ public class AnalysisService  {
 				}
 			}
 		}
+		// 得分情况分析
 		if (Score_situation_base_score_0 != 0) {
 			ret.Score_situation_base += Score_situation_base_score_0 + "个没得分 ";
 		}
@@ -417,10 +421,13 @@ public class AnalysisService  {
 	}
 
 	public Result getResult() {
+		
+		// 获取成绩数据
 		TestPaperImpl tTestPaperImpl = (TestPaperImpl)implMap.get("TestPaperImpl");
 		TestPaper tTestPaper = tTestPaperImpl.selectByPrimaryKey(paper_id);
 		List<ScoreResult> tScoreResults = getAllScore();
 		
+		// 准备分析
 		Result ret = new Result();
 		
 		ret.course_name = tTestPaper.getName();
@@ -432,7 +439,9 @@ public class AnalysisService  {
 			ret.number_abond = 0;
 		}
 
+		// 分析第一步
 		analysisPass1(tScoreResults, ret);
+		// 分析第二步
 		analysisPass2(tScoreResults, ret);
 				
 		return ret;

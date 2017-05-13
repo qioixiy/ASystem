@@ -11,8 +11,11 @@ public class LoginActionAsystem {
 	private String password;
 
 	public String execute() {
+		// 入口位置
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
+		
+		// 判断用户名密码是否匹配
 		System.out.println(session.get("userName"));
 		if (!userName.isEmpty() && !password.isEmpty()
 				&& tValidateService.validateUserAndPassword(userName, password)) {

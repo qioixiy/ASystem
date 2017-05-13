@@ -306,6 +306,8 @@
 
      function del_item()
      {
+    	 
+    	 // 删除功能实现
        var table = $(".ibox-content").children("table");
        var table0 = table.eq(0);
 
@@ -324,6 +326,7 @@
        }).get().join(", ");
        //alert(str);
 
+       // 提交删除请求到服务器
        /* do delete */
        $.ajax({
          type: "post",
