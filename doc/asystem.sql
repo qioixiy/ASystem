@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 13, 2017 at 02:54 PM
+-- Generation Time: May 21, 2017 at 07:39 AM
 -- Server version: 5.7.18-0ubuntu0.17.04.1
 -- PHP Version: 7.0.18-0ubuntu0.17.04.1
 
@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `course` (
   `id` int(11) NOT NULL COMMENT '键值',
-  `name` varchar(50) DEFAULT NULL COMMENT '课程名称',
+  `name` varchar(10) DEFAULT NULL COMMENT '课程名称',
   `title` varchar(50) DEFAULT NULL COMMENT '课程对应的学科',
-  `detail` varchar(10240) DEFAULT NULL COMMENT '课程详细描述',
+  `detail` varchar(1024) DEFAULT NULL COMMENT '课程详细描述',
   `creater` int(11) DEFAULT NULL COMMENT '添加人id',
   `create_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='课程管理表';
@@ -50,11 +50,11 @@ INSERT INTO `course` (`id`, `name`, `title`, `detail`, `creater`, `create_timest
 
 CREATE TABLE `manager` (
   `id` int(11) NOT NULL COMMENT 'id',
-  `name` varchar(100) NOT NULL COMMENT '用户名',
-  `password` varchar(1024) DEFAULT NULL COMMENT '密码',
-  `number` varchar(40) NOT NULL COMMENT '编号：管理员的编号',
-  `email` varchar(40) NOT NULL DEFAULT 'a@b.com' COMMENT '联系方式:email',
-  `telphone` varchar(20) NOT NULL COMMENT '联系方式:telphone'
+  `name` varchar(10) NOT NULL COMMENT '用户名',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `number` varchar(10) NOT NULL COMMENT '编号：管理员的编号',
+  `email` varchar(20) NOT NULL DEFAULT 'a@b.com' COMMENT '联系方式:email',
+  `telphone` varchar(11) NOT NULL COMMENT '联系方式:telphone'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='管理员对应的表';
 
 --
@@ -86,11 +86,11 @@ CREATE TABLE `score_result` (
 
 CREATE TABLE `student` (
   `id` int(11) NOT NULL COMMENT 'id',
-  `name` varchar(100) NOT NULL COMMENT '用户名',
-  `password` varchar(1024) DEFAULT NULL COMMENT '密码',
-  `number` varchar(40) NOT NULL COMMENT '编号：学生的学号',
-  `email` varchar(40) NOT NULL DEFAULT 'a@b.com' COMMENT '联系方式:email',
-  `telphone` varchar(20) NOT NULL COMMENT '联系方式:telphone'
+  `name` varchar(10) NOT NULL COMMENT '用户名',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `number` varchar(20) NOT NULL COMMENT '编号：学生的学号',
+  `email` varchar(20) NOT NULL DEFAULT 'a@b.com' COMMENT '联系方式:email',
+  `telphone` varchar(11) NOT NULL COMMENT '联系方式:telphone'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表包括老师、学生、及其他';
 
 --
@@ -147,11 +147,11 @@ INSERT INTO `student` (`id`, `name`, `password`, `number`, `email`, `telphone`) 
 
 CREATE TABLE `teacher` (
   `id` int(11) NOT NULL COMMENT '用户id',
-  `name` varchar(100) NOT NULL COMMENT '用户名',
-  `password` varchar(1024) DEFAULT NULL COMMENT '密码',
-  `number` varchar(40) DEFAULT NULL COMMENT '编号：老师的编号',
-  `email` varchar(40) DEFAULT 'a@b.com' COMMENT '联系方式:email',
-  `telphone` varchar(20) DEFAULT NULL COMMENT '联系方式:telphone'
+  `name` varchar(10) NOT NULL COMMENT '用户名',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `number` varchar(20) DEFAULT NULL COMMENT '编号：老师的编号',
+  `email` varchar(20) DEFAULT 'a@b.com' COMMENT '联系方式:email',
+  `telphone` varchar(11) DEFAULT NULL COMMENT '联系方式:telphone'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表包括老师、学生、及其他';
 
 --
@@ -171,7 +171,7 @@ INSERT INTO `teacher` (`id`, `name`, `password`, `number`, `email`, `telphone`) 
 
 CREATE TABLE `test_paper` (
   `id` int(11) NOT NULL COMMENT '试卷对应的ID',
-  `name` varchar(100) NOT NULL COMMENT '试卷名称，比如：计算机应用基础，期中考试卷1',
+  `name` varchar(20) NOT NULL COMMENT '试卷名称，比如：计算机应用基础，期中考试卷1',
   `detail` varchar(10240) NOT NULL DEFAULT '{}' COMMENT '试卷内容的详细描述',
   `course_id` int(11) NOT NULL COMMENT '试卷对应的课程id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='试卷定义';
