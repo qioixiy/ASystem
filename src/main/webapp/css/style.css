@@ -37,7 +37,7 @@ h5 {
   font-weight: 600;
 }
 .nav > li > a {
-  color: #000;
+  color: #fff;
   font-weight: 600;
   padding: 14px 20px 14px 25px;
 }
@@ -49,7 +49,7 @@ h5 {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
-  background-color: #293846;
+  background-color: #287db6;
   color: white;
 }
 .nav .open > a,
@@ -167,7 +167,7 @@ body.body-small .navbar-top-links li:last-child {
 }
 .nav > li.active {
   border-left: 4px solid #19aa8d;
-  background: #293846;
+  background: #2fa0ce;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -319,7 +319,12 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 }
 .navbar-fixed-top,
 .navbar-static-top {
+  height:100%;
   background: #f3f3f4;
+  background-size:cover;
+}
+.wrapper-content {
+  background-size:cover;
 }
 .fixed-nav #wrapper {
   margin-top: 60px;
@@ -2869,7 +2874,7 @@ a.forum-item-title:hover {
 }
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #2685F9;
+  background-color: #2f85bf;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;
