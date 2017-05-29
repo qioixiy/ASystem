@@ -33,7 +33,29 @@
             }
             .loginscreen {
             background-size:cover;
+		    }
+            #loginscreen-id {
+		    filter:alpha(opacity=80);  /*支持 IE 浏览器*/
+		    -moz-opacity:0.80; /*支持 FireFox 浏览器*/
+		    opacity:0.80;  /*支持 Chrome, Opera, Safari 等浏览器*/
             }
+            #login-frame {
+            filter:alpha(opacity=80);  /*支持 IE 浏览器*/
+		    -moz-opacity:0.80; /*支持 FireFox 浏览器*/
+		    opacity:0.80;  /*支持 Chrome, Opera, Safari 等浏览器*/
+		    }
+		    #login-frame-context{
+            filter:alpha(opacity=100);  /*支持 IE 浏览器*/
+		    -moz-opacity:1.0; /*支持 FireFox 浏览器*/
+		    opacity:1.0;  /*支持 Chrome, Opera, Safari 等浏览器*/
+		    }
+		    .logo-name {
+			  color: #44464a;
+			  font-size: 45px;
+			  margin-top: 10px;
+			  font-family:"微软雅黑";
+			  padding-left: 300px;
+			  }
 	</style>
 </head>
 
@@ -41,12 +63,13 @@
 	<div class="container" style="width: 1000px; padding-top: 20px">
 		<div class="loginscreen animated fadeInDown">
 			<p style="text-align: center">
-				<img src="img/top-1.jpg">
+				<img src="img/top-1.jpg" id="loginscreen-id">
 			</p>
 		</div>
 		<div id="login-frame">
+		    <div id="login-frame-context">
 			<div class="col-md-8">
-				<h4 class="logo-name">成绩分析系统</h4>
+				<h6 class="logo-name">成绩分析系统</h6>
 			</div>
 
 			<div class="col-md-4">
@@ -67,6 +90,7 @@
 							href="register.html">注册一个新账号</a>
 					</p>
 				</form>
+			</div>
 			</div>
 		</div>
 	</div>
