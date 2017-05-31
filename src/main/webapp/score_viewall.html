@@ -216,6 +216,8 @@
                     <h4 class="modal-title">详细描述</h4>
                   </div>
                   <div class="modal-body">
+                  	<h3>总分:<span id="score_total_all">100</span></h3>
+                  	<h3>得分:<span id="score_get">90</span></h3>
                     <div class="row">
                       <div class="col-sm-10">
                         <div class="form-group">
@@ -326,6 +328,8 @@
 		           var tb = $('#table-view-detail tbody');
 		           tb.html("");
 		           
+		           var score_total_all = 0;
+		           var score_get = 0;
 		           $.each(json.items, function(i, item) {
 		        	   if (global_id == item.id) {
 		        		   json = eval("("+item.desc+")");
@@ -335,9 +339,13 @@
 				        	   v3=item2.score_total;
 				        	   v4=item2.score_real;
 					           tb.append("<tr><td>"+j+"</td><td>"+v1+"</td><td>"+v2+"</td><td>"+v3+"</td><td>"+v4+"</td></tr>");
+					           score_total_all += Number(v3);
+					           score_get += Number(v4);
 		        		   });
 		        	   }
 		           });
+		           $('#score_total_all').text(score_total_all);
+		           $('#score_get').text(score_get);
         	       
 		           $('#myModal-view-score-detail').modal('show');
                },
