@@ -152,9 +152,7 @@ public class ApiJson extends HttpServlet {
 			}
 		}
 		
-		if (find) {
-			
-		}
+		data.put("result", result);
 	}
 
 	protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {

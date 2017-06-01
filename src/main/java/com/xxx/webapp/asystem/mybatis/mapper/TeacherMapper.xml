@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.xxx.webapp.asystem.pojo.Teacher">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="telphone" jdbcType="VARCHAR" property="telphone" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, number, email, telphone
+    id, name, password, number, email, telphone
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,10 +23,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xxx.webapp.asystem.pojo.Teacher">
-    insert into teacher (id, name, number, 
-      email, telphone)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR})
+    insert into teacher (id, name, password, 
+      number, email, telphone
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{number,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxx.webapp.asystem.pojo.Teacher">
     insert into teacher
@@ -35,6 +38,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="password != null">
+        password,
       </if>
       <if test="number != null">
         number,
@@ -53,6 +59,9 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
       <if test="number != null">
         #{number,jdbcType=VARCHAR},
       </if>
@@ -70,6 +79,9 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
       <if test="number != null">
         number = #{number,jdbcType=VARCHAR},
       </if>
@@ -85,6 +97,7 @@
   <update id="updateByPrimaryKey" parameterType="com.xxx.webapp.asystem.pojo.Teacher">
     update teacher
     set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       telphone = #{telphone,jdbcType=VARCHAR}
