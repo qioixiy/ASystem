@@ -28,11 +28,13 @@ import com.xxx.webapp.asystem.pojo.Student;
 import com.xxx.webapp.asystem.pojo.Teacher;
 import com.xxx.webapp.asystem.pojo.TestPaper;
 import com.xxx.webapp.asystem.service.CourseImpl;
+import com.xxx.webapp.asystem.service.ManagerImpl;
 import com.xxx.webapp.asystem.service.ScoreResultImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
 import com.xxx.webapp.asystem.service.TeacherImpl;
 import com.xxx.webapp.asystem.service.TestPaperImpl;
 import com.xxx.webapp.helper.AnalysisService;
+import com.xxx.webapp.asystem.pojo.Manager;
 
 @WebServlet("/api/json.do")
 public class ApiJson extends HttpServlet {
@@ -41,6 +43,7 @@ public class ApiJson extends HttpServlet {
     private static final CourseImpl tCourseImpl = new CourseImpl();
     private static final StudentImpl tStudentImpl = new StudentImpl();
     private static final TeacherImpl tTeacherImpl = new TeacherImpl();
+    private static final ManagerImpl tManagerImpl = new ManagerImpl();
     private static final TestPaperImpl tTestPaperImpl = new TestPaperImpl();
     private static final ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
     
@@ -93,6 +96,8 @@ public class ApiJson extends HttpServlet {
         case "analysis"://分析请求
         	Analysis(request, response, data);
         	break;
+        case "manager":
+        	Manager(request, response, data);
         default:
         	break;
         }
@@ -100,7 +105,59 @@ public class ApiJson extends HttpServlet {
         ResponseJsonUtils.json(response, data);
     }
 
-    protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    private void Manager(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param1 = request.getParameter("param1");
+    	String param2 = request.getParameter("param2");
+		JSONObject obj = (JSONObject) JSON.parse(param2);
+
+		String username = obj.get("username").toString();
+		String oldpass = obj.get("oldpass").toString();
+		String newpass = obj.get("newpass").toString();
+		
+		boolean result = false;
+		boolean find = false;
+		for (Manager manager : tManagerImpl.selectAll()) {
+			if (manager.getName().equals(username)) {
+				find = true;
+				if(manager.getPassword().equals(oldpass)) {
+					result = true;
+					manager.setPassword(newpass);
+					tManagerImpl.updateByPrimaryKey(manager);
+				}
+			}
+		}
+		
+		if (!find) {
+			for (Teacher teacher : tTeacherImpl.selectAll()) {
+				if (teacher.getName().equals(username)) {
+					find = true;
+					if(teacher.getPassword().equals(oldpass)) {
+						result = true;
+						teacher.setPassword(newpass);
+						tTeacherImpl.updateByPrimaryKey(teacher);
+					}
+				}
+			}
+		}
+		if (!find) {
+			for (Student student : tStudentImpl.selectAll()) {
+				if (student.getName().equals(username)) {
+					find = true;
+					if(student.getPassword().equals(oldpass)) {
+						result = true;
+						student.setPassword(newpass);
+						tStudentImpl.updateByPrimaryKey(student);
+					}
+				}
+			}
+		}
+		
+		if (find) {
+			
+		}
+	}
+
+	protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String param1 = request.getParameter("param1");
     	switch(param1) {
     	case "method1":

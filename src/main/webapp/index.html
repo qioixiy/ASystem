@@ -135,7 +135,7 @@
 
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>${userName}&nbsp欢迎使用</span>
+                            <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>${userName}&nbsp<a id="show_profile_modal">修改个人资料</a></span>
                         </li>
 
                         <li>
@@ -173,6 +173,51 @@
 
         </div>
     </div>
+    
+    <!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">个人信息</h4>
+            </div>
+            <div class="modal-body">
+		<form class="form-horizontal" role="form">
+	  <div class="form-group">
+	    <label for="username" class="col-sm-2 control-label">账户</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" style="width:250px;" id="username" placeholder="Username"><span id="usernameTip" style="display:none;color:red;"></span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="oldpass" class="col-sm-2 control-label">旧密码</label>
+	    <div class="col-sm-10">
+	      <input type="password" class="form-control" style="width:250px;" id="oldpass" placeholder="Old Password"><span id="oldpassTip" style="display:none;color:red;"></span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="newpass" class="col-sm-2 control-label">新密码</label>
+	    <div class="col-sm-10">
+	      <input type="password" class="form-control" style="width:250px;" id="newpass" placeholder="New Password"><span id="newpassTip" style="display:none;color:red;"></span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="newpassAgain" class="col-sm-2 control-label">确认密码</label>
+	    <div class="col-sm-10">
+	      <input type="password" class="form-control" style="width:250px;" id="newpassAgain" placeholder="Again New Password"><span id="newpassAgainTip" style="display:none;color:red;"></span>
+	    </div>
+	  </div>
+	</form>
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="submit">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
     <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.min.js"></script>
@@ -193,6 +238,41 @@
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {
+        	$("#show_profile_modal").click(function(){
+        		$('#myModal').modal({
+        	        keyboard: true
+        	    })
+        	});
+        	
+        	$("#submit").click(function(event){
+    			var username = $("#username").val();
+    			var oldpass = $("#oldpass").val();
+    			var newpass = $("#newpass").val();
+    			var newpassAgain = $("#newpassAgain").val();
+
+    			var user_info = {
+    					username: username,
+    					oldpass: oldpass,
+    					newpass: newpass,
+    					newpassAgain: newpassAgain
+    			};
+    			
+    			$.ajax({
+    		           url: 'api/json.do',
+    		           type: "POST" ,
+    		           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+    		           //dataType:'json',
+    		           data: {
+    		             func: "manager",
+    		             param1: "modify_password",
+    		             param2: JSON.stringify(user_info)
+    		           },
+    		           success: function(data) {
+    		             alert(data);
+    		           }
+    		         });
+    			return false;
+    		});
         });
         var g_user_type = "${userType}";
     </script>
