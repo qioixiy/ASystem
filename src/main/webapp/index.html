@@ -268,7 +268,12 @@
     		             param2: JSON.stringify(user_info)
     		           },
     		           success: function(data) {
-    		             alert(data);
+    		             var obj = eval("("+data+")");
+    		             if (obj.result) {
+    		            	 alert("修改密码成功");
+    		             } else {
+    		            	 alert("修改密码失败:" + obj.err_string);
+    		             }
     		           }
     		         });
     			return false;

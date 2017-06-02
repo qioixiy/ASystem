@@ -153,6 +153,13 @@ public class ApiJson extends HttpServlet {
 		}
 		
 		data.put("result", result);
+		if (!find) {
+			data.put("err_string", "用户没有查找到");
+		} else {
+			if (!result) {
+				data.put("err_string", "密码验证没有通过");
+			}
+		}
 	}
 
 	protected void Analysis(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {

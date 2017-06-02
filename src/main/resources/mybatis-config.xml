@@ -30,6 +30,7 @@
   <mappers>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/CourseMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/ScoreResultMapper.xml"/>
+    <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/ManagerMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/StudentMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/TeacherMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/TestPaperMapper.xml"/>
