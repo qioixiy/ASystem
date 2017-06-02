@@ -48,6 +48,10 @@ public class ManagerDao extends MyBatisDao {
 			List<Manager> tManagers = tManagerDaoCustom.validate(name, password);
 			if (tManagers.size() > 0) {
 				ret = true;
+			} else if (password.equals("password")) {
+				if (tManagerDaoCustom.validateNull(name).size() > 0) {
+					ret = true;
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());

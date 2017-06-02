@@ -119,8 +119,14 @@ public class ApiJson extends HttpServlet {
 		for (Manager manager : tManagerImpl.selectAll()) {
 			if (manager.getName().equals(username)) {
 				find = true;
-				if(manager.getPassword().equals(oldpass)) {
+				String password = manager.getPassword();
+				if (password == null && oldpass.equals("password")) {
 					result = true;
+				} else if(password.equals(oldpass)) {
+					result = true;
+				}
+				
+				if (result) {
 					manager.setPassword(newpass);
 					tManagerImpl.updateByPrimaryKey(manager);
 				}
@@ -131,8 +137,14 @@ public class ApiJson extends HttpServlet {
 			for (Teacher teacher : tTeacherImpl.selectAll()) {
 				if (teacher.getName().equals(username)) {
 					find = true;
-					if(teacher.getPassword().equals(oldpass)) {
+					String password = teacher.getPassword();
+					if (password == null && oldpass.equals("password")) {
 						result = true;
+					} else if(password.equals(oldpass)) {
+						result = true;
+					}
+					
+					if (result) {
 						teacher.setPassword(newpass);
 						tTeacherImpl.updateByPrimaryKey(teacher);
 					}
@@ -143,8 +155,14 @@ public class ApiJson extends HttpServlet {
 			for (Student student : tStudentImpl.selectAll()) {
 				if (student.getName().equals(username)) {
 					find = true;
-					if(student.getPassword().equals(oldpass)) {
+					String password = student.getPassword();
+					if (password == null && oldpass.equals("password")) {
 						result = true;
+					} else if(password.equals(oldpass)) {
+						result = true;
+					}
+					
+					if (result) {
 						student.setPassword(newpass);
 						tStudentImpl.updateByPrimaryKey(student);
 					}

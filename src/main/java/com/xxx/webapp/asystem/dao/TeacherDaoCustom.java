@@ -13,4 +13,7 @@ public interface TeacherDaoCustom {
 	
 	@Select("select * from teacher where name = #{0} and password = #{1}")
 	public List<Teacher> validate(String name, String password);
+	
+	@Select("select * from teacher where name = #{0} and password is null")
+	public List<Teacher> validateNull(String name);
 }

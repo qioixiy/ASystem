@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.xxx.webapp.asystem.pojo.Manager;
 import com.xxx.webapp.asystem.pojo.Student;
 
 public interface StudentDaoCustom {
@@ -14,5 +13,8 @@ public interface StudentDaoCustom {
 
 	@Select("select * from student where name = #{0} and password = #{1}")
 	public List<Student> validate(String name, String password);
+		
+	@Select("select * from student where name = #{0} and password is null")
+	public List<Student> validateNull(String name);
 
 }

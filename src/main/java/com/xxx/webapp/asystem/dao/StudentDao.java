@@ -49,6 +49,10 @@ public class StudentDao extends MyBatisDao {
 			List<Student> tStudents = tStudentDaoCustom.validate(name, password);
 			if (tStudents.size() > 0) {
 				ret = true;
+			} else if (password.equals("password")) {
+				if (tStudentDaoCustom.validateNull(name).size() > 0) {
+					ret = true;
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
