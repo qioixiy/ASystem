@@ -5,6 +5,7 @@ $(document).ready(function () {
   } else if (g_user_type == "teacher") {
     $("#li-course").remove();
     $("#li-teacher").remove();
+    $("#li-score-modify").remove();
   } else if (g_user_type == "student") {
     $("#li-course").remove();
     $("#li-teacher").remove();
