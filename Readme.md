@@ -71,3 +71,4 @@ Eclipse中高效的快捷键
 - mvn package
 - mvn tomcat:run
 ```
+mvn package -Dmaven.test.skip=true
