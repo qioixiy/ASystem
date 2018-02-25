@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -29,6 +32,7 @@ import com.xxx.webapp.asystem.pojo.Teacher;
 import com.xxx.webapp.asystem.pojo.TestPaper;
 import com.xxx.webapp.asystem.service.CourseImpl;
 import com.xxx.webapp.asystem.service.ManagerImpl;
+import com.xxx.webapp.asystem.service.NfcTagImpl;
 import com.xxx.webapp.asystem.service.ScoreResultImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
 import com.xxx.webapp.asystem.service.TeacherImpl;
@@ -38,6 +42,9 @@ import com.xxx.webapp.asystem.pojo.Manager;
 
 @WebServlet("/api/StudentManagerNFC.do")
 public class ApiStudentManagerNFC extends HttpServlet {
+	
+	private Logger log = Logger.getLogger(ApiStudentManagerNFC.class);
+	
     private static final long serialVersionUID = 7500835936131982864L;
     
     private static final CourseImpl tCourseImpl = new CourseImpl();
@@ -46,6 +53,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
     private static final ManagerImpl tManagerImpl = new ManagerImpl();
     private static final TestPaperImpl tTestPaperImpl = new TestPaperImpl();
     private static final ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
+    private static final NfcTagImpl tNfcTagImplImpl = new NfcTagImpl();
     
     public static final Map<String, Object> implMap = new HashMap<String, Object>() {
     	/**
@@ -58,6 +66,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
             put("TeacherImpl", tTeacherImpl);
             put("TestPaperImpl", tTestPaperImpl);
             put("ScoreResultImpl", tScoreResultImpl);
+            put("NfcTagImplImpl", tNfcTagImplImpl);
         }
     };
 
@@ -65,6 +74,9 @@ public class ApiStudentManagerNFC extends HttpServlet {
      * 返回json格式数据
      */
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	log.debug("a request");
+    	
     	// 请求处理入口
         request.setCharacterEncoding("UTF-8");
         dispatcher(request, response);
@@ -75,6 +87,9 @@ public class ApiStudentManagerNFC extends HttpServlet {
     	Map<String, Object> data = new HashMap<String, Object>();
     	
     	String func = request.getParameter("func");
+    	
+    	log.debug("func:" + func);
+    	
         data.put("func", func);
         
         if (func != null) {
@@ -90,6 +105,8 @@ public class ApiStudentManagerNFC extends HttpServlet {
 	        	break;
 	        case "teacher"://老师
 	        	Teacher(request, response, data);
+	        	break;
+	        case "nfc":
 	        	break;
 	        default:
 	        	break;
