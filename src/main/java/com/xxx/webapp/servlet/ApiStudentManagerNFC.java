@@ -405,15 +405,15 @@ public class ApiStudentManagerNFC extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-        Map<String, String> params = UrlUtils.toMap(param2);
-
+		JSONObject obj = (JSONObject) JSON.parse(param2);
+		
 		String result = "error";
 		Student tStudent = new Student();
 		try {
-			String name = params.get("name");
-			String number = params.get("number");
-			String email = params.get("email");
-			String telphone = params.get("telphone");
+			String name = obj. getString("name");
+			String number = obj. getString("number");
+			String email = obj. getString("email");
+			String telphone = obj. getString("telphone");
 			if (name != null && number != null && email != null && telphone != null) {
 				tStudent.setName(name);
 				tStudent.setNumber(number);
