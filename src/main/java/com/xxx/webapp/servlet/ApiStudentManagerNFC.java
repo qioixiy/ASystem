@@ -39,6 +39,7 @@ import com.xxx.webapp.asystem.service.TeacherImpl;
 import com.xxx.webapp.asystem.service.TestPaperImpl;
 import com.xxx.webapp.helper.AnalysisService;
 import com.xxx.webapp.asystem.pojo.Manager;
+import com.xxx.webapp.asystem.pojo.NfcTag;
 
 @WebServlet("/api/StudentManagerNFC.do")
 public class ApiStudentManagerNFC extends HttpServlet {
@@ -53,7 +54,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
     private static final ManagerImpl tManagerImpl = new ManagerImpl();
     private static final TestPaperImpl tTestPaperImpl = new TestPaperImpl();
     private static final ScoreResultImpl tScoreResultImpl = new ScoreResultImpl();
-    private static final NfcTagImpl tNfcTagImplImpl = new NfcTagImpl();
+    private static final NfcTagImpl tNfcTagImpl = new NfcTagImpl();
     
     public static final Map<String, Object> implMap = new HashMap<String, Object>() {
     	/**
@@ -66,7 +67,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
             put("TeacherImpl", tTeacherImpl);
             put("TestPaperImpl", tTestPaperImpl);
             put("ScoreResultImpl", tScoreResultImpl);
-            put("NfcTagImplImpl", tNfcTagImplImpl);
+            put("NfcTagImplImpl", tNfcTagImpl);
         }
     };
 
@@ -107,6 +108,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
 	        	Teacher(request, response, data);
 	        	break;
 	        case "nfc":
+	        	Nfc(request, response, data);
 	        	break;
 	        default:
 	        	break;
@@ -514,4 +516,147 @@ public class ApiStudentManagerNFC extends HttpServlet {
     	data.put("result", result);
     }
     
+    protected void Nfc(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param1 = request.getParameter("param1");
+    	
+    	switch(param1) {
+    	case "viewall":
+    		NfcViewAll(request, response, data);
+    		break;
+    	case "create":
+    		NfcCreate(request, response, data);
+    		break;
+    	case "delete":
+    		NfcDelete(request, response, data);
+    		break;
+    	case "modify":
+    		NfcModify(request, response, data);
+    		break;
+    	}
+    }
+    protected void NfcViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+
+    	ArrayList<Object> arrayTHead = new ArrayList<Object>();
+    	ArrayList<Object> detailTHead = new ArrayList<Object>();
+    	arrayTHead.add("id");
+    	arrayTHead.add("name");
+    	arrayTHead.add("number");
+    	arrayTHead.add("email");
+    	arrayTHead.add("telphone");
+		data.put("thead", arrayTHead);
+		detailTHead.add("序号");
+		detailTHead.add("名字");
+		detailTHead.add("学号");
+		detailTHead.add("邮箱");
+		detailTHead.add("联系方式");
+		data.put("detailTHead", detailTHead);
+	    
+        ArrayList<Object> arrayList=new ArrayList<Object>();
+		for(Student tStudent : tStudentImpl.selectAll()) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("id", tStudent.getId());
+			item.put("name", tStudent.getName());
+			item.put("number", tStudent.getNumber());
+			item.put("email", tStudent.getEmail());
+			item.put("telphone", tStudent.getTelphone());
+			arrayList.add(item);
+		}
+		data.put("items", arrayList);
+    }
+
+    protected void NfcCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		JSONObject obj = (JSONObject) JSON.parse(param2);
+		
+		String result = "error";
+		NfcTag tNfcTag = new NfcTag();
+		try {
+			String tag = obj. getString("tag");
+			String define = obj. getString("define");
+			if (define != null && tag != null) {
+				tNfcTag.setTag(tag);
+				tNfcTag.setDefine(define);
+	
+				int ret = tNfcTagImpl.insert(tNfcTag);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			log.error(e.toString());;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void NfcDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			for (Object i : objs.toArray()) {
+				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    protected void NfcModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONObject obj = (JSONObject) JSON.parse(param2);
+			int id = Integer.parseInt(obj.getString("id"));
+			
+			Student tStudent = tStudentImpl.selectByPrimaryKey(id);
+			if (tStudent != null) {
+				tStudent.setName(obj.getString("name"));
+				tStudent.setNumber(obj.getString("number"));
+				tStudent.setEmail(obj.getString("email"));
+				tStudent.setTelphone(obj.getString("telphone"));
+
+				int ret = tStudentImpl.updateByPrimaryKey(tStudent);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
 }

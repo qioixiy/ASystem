@@ -3,13 +3,9 @@ package com.xxx.webapp.asystem.pojo;
 public class NfcTag {
     private Integer id;
 
-    private Integer studentId;
-
-    private Integer teacherId;
-
-    private Integer testPaperId;
-
-    private String detail;
+    private String tag;
+    
+    private String define;
 
     public Integer getId() {
         return id;
@@ -19,35 +15,19 @@ public class NfcTag {
         this.id = id;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public String getTag() {
+        return tag;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setTag(String tag) {
+        this.tag = tag == null ? null : tag.trim();
+    }
+    
+    public String getDefine() {
+        return define;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public Integer getTestPaperId() {
-        return testPaperId;
-    }
-
-    public void setTestPaperId(Integer testPaperId) {
-        this.testPaperId = testPaperId;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
+    public void setDefine(String define) {
+        this.define = define == null ? null : define.trim();
     }
 }
