@@ -77,6 +77,11 @@ public class ApiJson extends HttpServlet {
     	String func = request.getParameter("func");
         data.put("func", func);
         
+        if (func == null) {
+        	func = "student";
+        	System.out.println("set func default as student");
+        }
+        
         switch(func) {
         case "course"://课程相关
         	Course(request, response, data);
@@ -613,7 +618,14 @@ public class ApiJson extends HttpServlet {
     }
 
     protected void Student(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
-    	switch(request.getParameter("param1")) {
+    	String param1 = request.getParameter("param1");
+    	
+        if (param1 == null) {
+        	param1 = "viewall";
+        	System.out.println("set param1 default as viewall");
+        }
+    	
+    	switch(param1) {
     	case "viewall":
     		StudentViewAll(request, response, data);
     		break;
