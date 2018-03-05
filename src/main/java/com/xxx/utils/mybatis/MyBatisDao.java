@@ -18,7 +18,10 @@ public class MyBatisDao {
 
 	protected int insert(String key, Object object) {
 		if (object != null) {
-			return getSqlSession().insert(createStatementName(key), object);
+			SqlSession session = getSqlSession();
+			int ret = session.insert(createStatementName(key), object);
+			session.commit();
+			return ret;
 		}
 		return 0;
 	}
