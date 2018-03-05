@@ -4,7 +4,7 @@ public class NfcTag {
     private Integer id;
 
     private String tag;
-    
+
     private String define;
 
     public Integer getId() {
@@ -22,7 +22,7 @@ public class NfcTag {
     public void setTag(String tag) {
         this.tag = tag == null ? null : tag.trim();
     }
-    
+
     public String getDefine() {
         return define;
     }

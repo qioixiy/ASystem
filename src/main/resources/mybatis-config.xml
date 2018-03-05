@@ -34,6 +34,8 @@
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/StudentMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/TeacherMapper.xml"/>
     <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/TestPaperMapper.xml"/>
+    <mapper resource="com/xxx/webapp/asystem/mybatis/mapper/NfcTagMapper.xml"/>
+
     <!-- <package name="com.xxx.webapp.asystem.mybatis.mapper"/> -->
     <mapper class="com.xxx.webapp.asystem.dao.CourseDaoCustom"/>
     <mapper class="com.xxx.webapp.asystem.dao.ScoreResultDaoCustom"/>
@@ -41,6 +43,7 @@
     <mapper class="com.xxx.webapp.asystem.dao.StudentDaoCustom"/>
     <mapper class="com.xxx.webapp.asystem.dao.TeacherDaoCustom"/>
     <mapper class="com.xxx.webapp.asystem.dao.TestPaperDaoCustom"/>
+    <mapper class="com.xxx.webapp.asystem.dao.NfcTagDaoCustom"/>
   </mappers>
 
 </configuration>
