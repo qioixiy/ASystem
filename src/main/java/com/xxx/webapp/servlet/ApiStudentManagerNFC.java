@@ -100,34 +100,38 @@ public class ApiStudentManagerNFC extends HttpServlet {
         ResponseJsonUtils.json(response, data);
     }
     
-    public boolean validateUserAndPassword(String name, String password) {
-		boolean ret = true;
+    class LoginResult {
+    	public boolean result;
+    	public String userType;
+    	
+    	public LoginResult() {
+    		result = true;
+    	}
+    }
+    public LoginResult validateUserAndPassword(String name, String password) {
+    	LoginResult loginResult = new LoginResult();
 		
-		// 先到管理员进行验证，再看老师，最后才是学生用户，
-		String userType = "unkown";
+		// 先到管理员进行验证，最后才是学生用户
 		if (tManagerImpl.validate(name, password)) {
-			userType = "manager";
+			loginResult.userType = "manager";
 		} else if (tTeacherImpl.validate(name, password)) {
-			userType = "teacher";
+			loginResult.userType = "teacher";
 		} else if (tStudentImpl.validate(name, password)) {
-			userType = "student";
+			loginResult.userType = "student";
 		} else {
-			ret = false;
+			loginResult.result = false;
 		}
 		
-		return ret;
+		return loginResult;
 	}
     
     private void Login(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
     	String account = request.getParameter("account");
     	String pwd = request.getParameter("pwd");
 
-    	boolean result = validateUserAndPassword(account, pwd);
-    	if (result) {
-    		
-    	}
+    	LoginResult loginResult = validateUserAndPassword(account, pwd);
 
-		data.put("result", result);
+		data.put("result", loginResult);
     }
 
     private void Manager(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
