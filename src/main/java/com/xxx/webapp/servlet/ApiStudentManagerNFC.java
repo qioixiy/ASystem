@@ -536,29 +536,13 @@ public class ApiStudentManagerNFC extends HttpServlet {
     }
     protected void NfcViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
 
-    	ArrayList<Object> arrayTHead = new ArrayList<Object>();
-    	ArrayList<Object> detailTHead = new ArrayList<Object>();
-    	arrayTHead.add("id");
-    	arrayTHead.add("name");
-    	arrayTHead.add("number");
-    	arrayTHead.add("email");
-    	arrayTHead.add("telphone");
-		data.put("thead", arrayTHead);
-		detailTHead.add("序号");
-		detailTHead.add("名字");
-		detailTHead.add("学号");
-		detailTHead.add("邮箱");
-		detailTHead.add("联系方式");
-		data.put("detailTHead", detailTHead);
-	    
-        ArrayList<Object> arrayList=new ArrayList<Object>();
-		for(Student tStudent : tStudentImpl.selectAll()) {
+    	ArrayList<Object> arrayList=new ArrayList<Object>();
+		for(NfcTag tNfcTag : tNfcTagImpl.selectAll()) {
 			Map<String, Object> item = new HashMap<String, Object>();
-			item.put("id", tStudent.getId());
-			item.put("name", tStudent.getName());
-			item.put("number", tStudent.getNumber());
-			item.put("email", tStudent.getEmail());
-			item.put("telphone", tStudent.getTelphone());
+			item.put("id", tNfcTag.getId());
+			item.put("tag", tNfcTag.getTag());
+			item.put("define", tNfcTag.getDefine());
+			
 			arrayList.add(item);
 		}
 		data.put("items", arrayList);
@@ -611,7 +595,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
 			JSONArray objs = (JSONArray) JSON.parse(param2);
 
 			for (Object i : objs.toArray()) {
-				int ret = tStudentImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				int ret = tNfcTagImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
 				if (ret > 0) {
 					result = "ok";
 				} else {
@@ -639,14 +623,12 @@ public class ApiStudentManagerNFC extends HttpServlet {
 			JSONObject obj = (JSONObject) JSON.parse(param2);
 			int id = Integer.parseInt(obj.getString("id"));
 			
-			Student tStudent = tStudentImpl.selectByPrimaryKey(id);
-			if (tStudent != null) {
-				tStudent.setName(obj.getString("name"));
-				tStudent.setNumber(obj.getString("number"));
-				tStudent.setEmail(obj.getString("email"));
-				tStudent.setTelphone(obj.getString("telphone"));
+			NfcTag tNfcTag = tNfcTagImpl.selectByPrimaryKey(id);
+			if (tNfcTag != null) {
+				tNfcTag.setDefine(obj.getString("define"));
+				tNfcTag.setTag(obj.getString("tag"));
 
-				int ret = tStudentImpl.updateByPrimaryKey(tStudent);
+				int ret = tNfcTagImpl.updateByPrimaryKey(tNfcTag);
 				if (ret > 0) {
 					result = "ok";
 				} else {

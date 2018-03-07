@@ -28,14 +28,20 @@ public class MyBatisDao {
 	
 	protected int delete(String key, Serializable id) {
 		if (id != null) {
-			return getSqlSession().delete(createStatementName(key), id);
+			SqlSession session = getSqlSession();
+			int ret = session.delete(createStatementName(key), id);
+			session.commit();
+			return ret;
 		}
 		return 0;
 	}
 	
 	protected int update(String key, Object object) {
 		if (object != null) {
-			return getSqlSession().update(createStatementName(key), object);
+			SqlSession session = getSqlSession();
+			int ret = session.update(createStatementName(key), object);
+			session.commit();
+			return ret;
 		}
 		return 0;
 	}	
