@@ -71,3 +71,8 @@ Eclipse中高效的快捷键
 - mvn package
 - mvn tomcat:run
 ```
+
+# deploy
+```
+cp target/asystem.war /var/lib/tomcat8/webapps/asystem.war
+```

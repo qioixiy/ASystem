@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
-    <table tableName="test_paper" domainObjectName="TestPaper"
+    <table tableName="dyn_info" domainObjectName="DynInfo"
 	   enableCountByExample="false" enableUpdateByExample="false"
 	   enableDeleteByExample="false" enableSelectByExample="false"
 	   selectByExampleQueryId="false"></table>
