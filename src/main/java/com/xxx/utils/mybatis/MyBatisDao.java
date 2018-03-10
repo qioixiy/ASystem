@@ -15,6 +15,13 @@ public class MyBatisDao {
 	public MyBatisDao(String namespaceName) {
 		this.namespaceName = namespaceName;
 	}
+	
+	protected void finalize( )
+	{
+		// finalization code here
+		session.commit();
+		session.close();
+	}
 
 	protected int insert(String key, Object object) {
 		if (object != null) {
