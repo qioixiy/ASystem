@@ -9,6 +9,8 @@ public class DynInfo {
 
     private String nfcTag;
 
+    private String geo;
+
     private String type;
 
     private Date createTimestamp;
@@ -35,6 +37,14 @@ public class DynInfo {
 
     public void setNfcTag(String nfcTag) {
         this.nfcTag = nfcTag == null ? null : nfcTag.trim();
+    }
+
+    public String getGeo() {
+        return geo;
+    }
+
+    public void setGeo(String geo) {
+        this.geo = geo == null ? null : geo.trim();
     }
 
     public String getType() {

@@ -5,11 +5,12 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="nfc_tag" jdbcType="VARCHAR" property="nfcTag" />
+    <result column="geo" jdbcType="VARCHAR" property="geo" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, student_id, nfc_tag, type, create_timestamp
+    id, student_id, nfc_tag, geo, type, create_timestamp
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +24,11 @@
   </delete>
   <insert id="insert" parameterType="com.xxx.webapp.asystem.pojo.DynInfo">
     insert into dyn_info (id, student_id, nfc_tag, 
-      type, create_timestamp)
+      geo, type, create_timestamp
+      )
     values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{nfcTag,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{createTimestamp,jdbcType=TIMESTAMP})
+      #{geo,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{createTimestamp,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxx.webapp.asystem.pojo.DynInfo">
     insert into dyn_info
@@ -38,6 +41,9 @@
       </if>
       <if test="nfcTag != null">
         nfc_tag,
+      </if>
+      <if test="geo != null">
+        geo,
       </if>
       <if test="type != null">
         type,
@@ -56,6 +62,9 @@
       <if test="nfcTag != null">
         #{nfcTag,jdbcType=VARCHAR},
       </if>
+      <if test="geo != null">
+        #{geo,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
@@ -73,6 +82,9 @@
       <if test="nfcTag != null">
         nfc_tag = #{nfcTag,jdbcType=VARCHAR},
       </if>
+      <if test="geo != null">
+        geo = #{geo,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
@@ -86,6 +98,7 @@
     update dyn_info
     set student_id = #{studentId,jdbcType=INTEGER},
       nfc_tag = #{nfcTag,jdbcType=VARCHAR},
+      geo = #{geo,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       create_timestamp = #{createTimestamp,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

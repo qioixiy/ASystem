@@ -27,6 +27,7 @@ import com.xxx.webapp.asystem.service.ManagerImpl;
 import com.xxx.webapp.asystem.service.NfcTagImpl;
 import com.xxx.webapp.asystem.service.StudentImpl;
 import com.xxx.webapp.asystem.service.TeacherImpl;
+import com.xxx.webapp.asystem.pojo.DynInfo;
 import com.xxx.webapp.asystem.pojo.Manager;
 import com.xxx.webapp.asystem.pojo.NfcTag;
 
@@ -92,6 +93,8 @@ public class ApiStudentManagerNFC extends HttpServlet {
 	        case "nfc":
 	        	Nfc(request, response, data);
 	        	break;
+	        case "dyn_info":
+	        	DynInfo(request, response, data);
 	        default:
 	        	break;
 	        }
@@ -615,6 +618,129 @@ public class ApiStudentManagerNFC extends HttpServlet {
 				tNfcTag.setTag(obj.getString("tag"));
 
 				int ret = tNfcTagImpl.updateByPrimaryKey(tNfcTag);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void DynInfo(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param1 = request.getParameter("param1");
+    	
+    	switch(param1) {
+    	case "viewall":
+    		DynInfoViewAll(request, response, data);
+    		break;
+    	case "create":
+    		DynInfoCreate(request, response, data);
+    		break;
+    	case "delete":
+    		DynInfoDelete(request, response, data);
+    		break;
+    	case "modify":
+    		DynInfoModify(request, response, data);
+    		break;
+    	}
+    }
+
+    protected void DynInfoViewAll(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+		data.put("items", tDynInfoImpl.selectAll());
+    }
+
+    protected void DynInfoCreate(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		JSONObject obj = (JSONObject) JSON.parse(param2);
+		
+		String result = "error";
+		DynInfo tDynInfo = new DynInfo();
+		try {
+			String nfcTag = obj.getString("nfcTag");
+			int studentId = obj.getIntValue("studentId");
+			String type = obj.getString("type");
+			String geo = obj.getString("geo");
+			if (nfcTag != null && type != null && geo != null) {
+				tDynInfo.setNfcTag(nfcTag);
+				tDynInfo.setStudentId(studentId);
+				tDynInfo.setType(type);
+				tDynInfo.setGeo(geo);
+	
+				int ret = tDynInfoImpl.insert(tDynInfo);
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+				}
+			}
+		} catch(Exception e) {
+			log.error(e.toString());;
+		}
+
+    	data.put("result", result);
+    }
+
+    protected void DynInfoDelete(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONArray objs = (JSONArray) JSON.parse(param2);
+
+			for (Object i : objs.toArray()) {
+				int ret = tDynInfoImpl.deleteByPrimaryKey(Integer.parseInt((String)i));
+				if (ret > 0) {
+					result = "ok";
+				} else {
+					result = "error";
+					break;
+				}
+			}
+		} catch(Exception e) {
+			;
+		}
+
+    	data.put("result", result);
+    }
+    protected void DynInfoModify(HttpServletRequest request, HttpServletResponse response, Map<String, Object> data) {
+    	String param2 = request.getParameter("param2");
+		try {
+			param2 = URLDecoder.decode(param2, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+
+		String result = "error";
+		try {
+
+			JSONObject obj = (JSONObject) JSON.parse(param2);
+			int id = Integer.parseInt(obj.getString("id"));
+			
+			DynInfo tDynInfo = tDynInfoImpl.selectByPrimaryKey(id);
+			if (tDynInfo != null) {
+				tDynInfo.setNfcTag(obj.getString("define"));
+				tDynInfo.setStudentId(obj.getInteger("define"));
+				tDynInfo.setType(obj.getString("define"));
+				tDynInfo.setGeo(obj.getString("define"));
+
+				int ret = tDynInfoImpl.updateByPrimaryKey(tDynInfo);
 				if (ret > 0) {
 					result = "ok";
 				} else {
