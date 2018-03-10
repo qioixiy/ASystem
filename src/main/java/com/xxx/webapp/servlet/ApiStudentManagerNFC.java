@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -106,6 +107,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
     class LoginResult {
     	public boolean result;
     	public String userType;
+    	public Integer userId;
     	
     	public LoginResult() {
     		result = true;
@@ -113,14 +115,29 @@ public class ApiStudentManagerNFC extends HttpServlet {
     }
     public LoginResult validateUserAndPassword(String name, String password) {
     	LoginResult loginResult = new LoginResult();
-		
+
 		// 先到管理员进行验证，最后才是学生用户
 		if (tManagerImpl.validate(name, password)) {
 			loginResult.userType = "manager";
+			for (Manager manager : tManagerImpl.selectAll()) {
+				if (manager.getName().equals(name)) {
+					loginResult.userId = manager.getId();
+				}
+			}
 		} else if (tTeacherImpl.validate(name, password)) {
 			loginResult.userType = "teacher";
+			for (Teacher teacher : tTeacherImpl.selectAll()) {
+				if (teacher.getName().equals(name)) {
+					loginResult.userId = teacher.getId();
+				}
+			}
 		} else if (tStudentImpl.validate(name, password)) {
 			loginResult.userType = "student";
+			for (Student student : tStudentImpl.selectAll()) {
+				if (student.getName().equals(name)) {
+					loginResult.userId = student.getId();
+				}
+			}
 		} else {
 			loginResult.result = false;
 		}
@@ -133,7 +150,7 @@ public class ApiStudentManagerNFC extends HttpServlet {
     	String pwd = request.getParameter("pwd");
 
     	LoginResult loginResult = validateUserAndPassword(account, pwd);
-
+    	
 		data.put("result", loginResult);
     }
 
