@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 07, 2018 at 11:56 PM
+-- Generation Time: Mar 11, 2018 at 03:50 AM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.11-0ubuntu0.17.10.1
 
@@ -30,6 +30,7 @@ CREATE TABLE `dyn_info` (
   `id` int(11) NOT NULL COMMENT '键值',
   `student_id` int(11) NOT NULL COMMENT '地点',
   `nfc_tag` varchar(20) NOT NULL COMMENT 'nfc tag信息',
+  `geo` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL COMMENT '记录数据的类型',
   `create_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='课程管理表';
@@ -164,7 +165,7 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `dyn_info`
 --
 ALTER TABLE `dyn_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '键值', AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '键值', AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `manager`
 --
@@ -179,7 +180,7 @@ ALTER TABLE `nfc_tag`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `teacher`
 --
