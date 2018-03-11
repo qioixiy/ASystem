@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 11, 2018 at 03:50 AM
+-- Generation Time: Mar 11, 2018 at 08:17 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.11-0ubuntu0.17.10.1
 
@@ -34,6 +34,18 @@ CREATE TABLE `dyn_info` (
   `type` varchar(20) NOT NULL COMMENT '记录数据的类型',
   `create_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='课程管理表';
+
+--
+-- Dumping data for table `dyn_info`
+--
+
+INSERT INTO `dyn_info` (`id`, `student_id`, `nfc_tag`, `geo`, `type`, `create_timestamp`) VALUES
+(37, 60, 'BD1B5276', '31.1691263548,121.3780552284', 'check_in', '2018-03-11 12:15:06'),
+(38, 60, 'BD1B5276', '31.1691263548,121.3780552284', 'check_out', '2018-03-11 12:15:16'),
+(39, 58, '5DB25276', '31.1691263548,121.3780552284', 'check_in', '2018-03-11 12:15:18'),
+(40, 58, '5DB25276', '31.1691263548,121.3780552284', 'check_out', '2018-03-11 12:15:19'),
+(41, 59, '53F70A5A', '31.1691263548,121.3780552284', 'check_in', '2018-03-11 12:15:20'),
+(42, 59, '53F70A5A', '31.1691263548,121.3780552284', 'check_out', '2018-03-11 12:15:22');
 
 -- --------------------------------------------------------
 
@@ -74,9 +86,9 @@ CREATE TABLE `nfc_tag` (
 --
 
 INSERT INTO `nfc_tag` (`id`, `tag`, `define`) VALUES
-(12, 'BD1B5276', '图书馆'),
-(13, '5F5912A7', '教室'),
-(14, '5DB25276', '实验室');
+(15, 'BD1B5276', '实验室'),
+(16, '5DB25276', '教室'),
+(17, '53F70A5A', '宿舍');
 
 -- --------------------------------------------------------
 
@@ -98,7 +110,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `name`, `password`, `number`, `email`, `telphone`) VALUES
-(27, '李四', '123456', '03742013027', '３94842501@qq.com', '18074128086');
+(60, '小二', '123456', '003', 'c@b.com', '865346799'),
+(58, '张三', '123456', '001', 'a@b.com', '123456789'),
+(59, '李四', '123456', '002', 'b@b.com', '467788866');
 
 -- --------------------------------------------------------
 
@@ -165,22 +179,22 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `dyn_info`
 --
 ALTER TABLE `dyn_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '键值', AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '键值', AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `manager`
 --
 ALTER TABLE `manager`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `nfc_tag`
 --
 ALTER TABLE `nfc_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `teacher`
 --
